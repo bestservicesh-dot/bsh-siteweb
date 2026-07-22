@@ -1,17 +1,28 @@
 {
+  "instagram_url": "http://instagram.com/bshbj229",
+  "about_title": "Votre partenaire BTP de confiance au Bénin et en Afrique",
+  "tiktok_url": "http://tiktok.com/@bshbj229",
   "phone": "+229 01 48 52 45 90",
-  "email": "contact@bestservicesandhouse.site",
-  "address": "Abomey-Calavi, Bénin",
+  "linkedin_url": "http://www.linkedin.com/in/best-services-and-house-75745941b",
+  "about_features": [
+    "Équipe qualifiée",
+    "Matériaux et matériels de qualité",
+    "Respect des délais",
+    "Devis gratuit",
+    "Garantie travaux",
+    "Suivi personnalisé"
+  ],
+  "about_text_1": "BSH (Best Services and House) est une entreprise béninoise spécialisée dans le BTP et les services professionnels. Basés à Abomey-Calavi, nous intervenons dans tout le Bénin et dans toute l'Afrique de l'Ouest pour répondre à vos besoins en construction, rénovation, étanchéité, services professionnels et digitaux.",
   "whatsapp": "https://wa.me/2290148524590?text=Bonjour%20BSH,%20je%20souhaite%20avoir%20des%20informations%20sur%20vos%20services.",
-  "facebook_url": "https://facebook.com/bestservicesandhouse",
-  "linkedin_url": "https://linkedin.com/company/bestservicesandhouse",
-  "instagram_url": "https://instagram.com/bestservicesandhouse",
-  "tiktok_url": "https://tiktok.com/@bestservicesandhouse",
-  "logo_url": "",
-  "hero_title": "Nous construisons votre rêve",
-  "hero_subtitle": "BSH (Best Services and House) est votre partenaire de confiance pour tous vos projets de construction, rénovation, étanchéité et services professionnels à Cotonou et dans tout le Bénin.",
-  "rccm": "N° RCCM RB/COT/26 B 12345",
-  "ifu": "N° IFU 3202612345678",
+  "about_text_2": "Notre équipe de professionnels expérimentés utilise des matériaux + matériels de haute qualité et des techniques modernes pour garantir des résultats durables et esthétiques, que ce soit pour des projets résidentiels, commerciaux ou industriels.",
+  "hero_title": "Nous construisons pour vous",
+  "address": "Abomey-Calavi, Bénin",
+  "facebook_url": "https://www.facebook.com/profile.php?id=61590398091216",
+  "ifu": "N° IFU 0201710115389",
+  "logo_url": "/assets/images/uploads/logo-de-bsh.png",
+  "rccm": "N° RCCM RB/ABC/26 A 140817",
+  "email": "contact@bestservicesandhouse.site",
+  "hero_subtitle": "BSH (Best Services and House) est votre partenaire de confiance pour tous vos projets de construction, rénovation, étanchéité et services professionnels au Bénin et dans toute la sous-région Ouest africaine.",
   "stats": [
     {
       "value": "150+",
@@ -19,26 +30,15 @@
     },
     {
       "value": "14 ans",
-      "label": "D'expérience"
+      "label": "D'expérience dans la construction"
     },
     {
-      "value": "98%",
+      "value": "100%",
       "label": "Clients satisfaits"
     },
     {
       "value": "30+",
       "label": "Professionnels"
     }
-  ],
-  "about_title": "Votre partenaire BTP de confiance au Bénin",
-  "about_text_1": "BSH (Best Services and House) est une entreprise béninoise spécialisée dans le BTP et les services professionnels. Basés à Abomey-Calavi, nous intervenons à Cotonou et dans tout le Bénin pour répondre à vos besoins en construction, rénovation and entretien.",
-  "about_text_2": "Notre équipe de professionnels expérimentés utilise des matériaux de haute qualité et des techniques modernes pour garantir des résultats durables et esthétiques, que ce soit pour des projets résidentiels, commerciaux ou industriels.",
-  "about_features": [
-    "Équipe qualifiée",
-    "Matériaux de qualité",
-    "Respect des délais",
-    "Devis gratuit",
-    "Garantie travaux",
-    "Suivi personnalisé"
   ]
 }

@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
-   BSH (Best Services and House) - MAIN JAVASCRIPT
+   BSH (Best Services and House) - MAIN JAVASCRIPT (VERSION AUTO-RÉPARATRICE)
    -------------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.legal-ifu').forEach(el => el.textContent = data.ifu);
       }
 
-      // Mettre à jour les réseaux sociaux classique
+      // Mettre à jour les réseaux sociaux existants dans le HTML
       if (data.facebook_url) {
         document.querySelectorAll('.facebook-link').forEach(el => {
           el.href = data.facebook_url;
@@ -87,15 +87,48 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Mettre à jour le Logo BSH classique
+      // --- INJECTION AUTOMATIQUE DES RÉSEAUX SOCIAUX ---
+      // Si l'utilisateur utilise ses anciens modèles de pages sans bloc HTML .social-links,
+      // notre script détecte la zone de présentation de la marque dans le footer et l'injecte automatiquement !
+      if (!document.querySelector('.social-links')) {
+        const footerBrand = document.querySelector('.footer-brand, .footer-about');
+        if (footerBrand) {
+          const socialDiv = document.createElement('div');
+          socialDiv.className = 'social-links';
+          socialDiv.style.cssText = 'margin-top: 20px; display: flex; gap: 10px;';
+          
+          if (data.facebook_url) {
+            socialDiv.innerHTML += `<a href="${data.facebook_url}" class="facebook-link" target="_blank" rel="noopener" title="Facebook" style="font-weight: bold; font-family: sans-serif;">f</a>`;
+          }
+          if (data.linkedin_url) {
+            socialDiv.innerHTML += `<a href="${data.linkedin_url}" class="linkedin-link" target="_blank" rel="noopener" title="LinkedIn" style="font-weight: bold; font-family: sans-serif;">in</a>`;
+          }
+          if (data.instagram_url) {
+            socialDiv.innerHTML += `<a href="${data.instagram_url}" class="instagram-link" target="_blank" rel="noopener" title="Instagram" style="font-weight: bold; font-family: sans-serif;">ig</a>`;
+          }
+          if (data.tiktok_url) {
+            socialDiv.innerHTML += `<a href="${data.tiktok_url}" class="tiktok-link" target="_blank" rel="noopener" title="TikTok" style="font-weight: bold; font-family: sans-serif;">tk</a>`;
+          }
+          
+          footerBrand.appendChild(socialDiv);
+        }
+      }
+
+      // --- LIAISON DU LOGO BSH ---
+      // (Prend en charge les classes de l'ancien template '.logo' et du nouveau '.logo-container')
       if (data.logo_url) {
-        document.querySelectorAll('.logo-container').forEach(el => {
-          el.innerHTML = `<img src="${data.logo_url}" alt="BSH Logo" style="max-height: 45px; width: auto; object-fit: contain;">`;
+        document.querySelectorAll('.logo-container, .logo').forEach(el => {
+          if (el.tagName === 'A') {
+            el.innerHTML = `<img src="${data.logo_url}" alt="BSH Logo" style="max-height: 45px; width: auto; object-fit: contain;">`;
+          } else if (el.tagName === 'IMG') {
+            el.src = data.logo_url;
+          } else {
+            el.innerHTML = `<img src="${data.logo_url}" alt="BSH Logo" style="max-height: 45px; width: auto; object-fit: contain;">`;
+          }
         });
       }
 
       // --- LIAISON UNIVERSELLE PAR ATTRIBUT [data-field] ---
-      // (Pour garantir la compatibilité absolue avec tous vos fichiers HTML d'origine !)
       document.querySelectorAll('[data-field]').forEach(el => {
         const fieldName = el.getAttribute('data-field');
         

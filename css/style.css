@@ -822,3 +822,25 @@ img {
     text-align: center;
   }
 }
+
+/* Styles élégants pour les boutons de réseaux sociaux */
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background-color: #1e293b;
+  border-radius: 50%;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  background-color: var(--accent);
+  color: var(--primary) !important;
+  transform: translateY(-3px);
+}
+

@@ -5,6 +5,7 @@
   "main": "index.html",
   "dependencies": {
     "nodemailer": "^6.9.13",
-    "multiparty": "^4.2.3"
+    "multiparty": "^4.2.3",
+    "@vercel/analytics": "^2.0.1"
   }
 }

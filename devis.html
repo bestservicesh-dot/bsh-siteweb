@@ -185,41 +185,81 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Script d'envoi du formulaire par WhatsApp pour simplifier la vie de l'administrateur
+    // Script d'envoi du formulaire hybride (Email automatique + WhatsApp en direct)
     document.getElementById('devisForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
       const name = document.getElementById('fullName').value;
       const phone = document.getElementById('phoneNumber').value;
-      const email = document.getElementById('emailAddress').value || "Non spécifié";
+      const email = document.getElementById('emailAddress').value || "";
       const location = document.getElementById('cityLocation').value;
       const service = document.getElementById('serviceType').value;
       const description = document.getElementById('projectDescription').value;
 
-      // Construction du message WhatsApp
-      const message = `*NOUVELLE DEMANDE DE DEVIS BSH*\n\n` +
-                      `👤 *Nom :* ${name}\n` +
-                      `📞 *Téléphone :* ${phone}\n` +
-                      `📧 *Email :* ${email}\n` +
-                      `📍 *Lieu du projet :* ${location}\n` +
-                      `🏗️ *Service :* ${service}\n\n` +
-                      `📝 *Description du projet :*\n${description}`;
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "⌛ Envoi du devis par email en cours...";
 
-      const encodedMessage = encodeURIComponent(message);
-      
-      // Récupérer le numéro BSH depuis le fichier general.json (ou par défaut le +2290148524590)
-      fetch('data/general.json')
-        .then(res => res.json())
-        .then(data => {
-          const bshPhone = data.phone ? data.phone.replace(/[^0-9]/g, '') : '2290148524590';
-          const whatsappUrl = `https://wa.me/${bshPhone}?text=${encodedMessage}`;
-          window.open(whatsappUrl, '_blank');
-        })
-        .catch(() => {
-          // Fallback par défaut
-          const whatsappUrl = `https://wa.me/2290148524590?text=${encodedMessage}`;
-          window.open(whatsappUrl, '_blank');
-        });
+      // Données à envoyer à l'API de devis
+      const payload = {
+        fullName: name,
+        phoneNumber: phone,
+        emailAddress: email,
+        cityLocation: location,
+        serviceType: service,
+        projectDescription: description
+      };
+
+      // 1. Envoyer d'abord à l'API de messagerie par Email
+      fetch('/api/devis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          console.log("Devis archivé par email avec succès !");
+        } else {
+          console.warn("Erreur renvoyée par l'API : " + data.error);
+        }
+      })
+      .catch(err => {
+        console.warn("Erreur de connexion à l'API d'email, envoi direct par WhatsApp.");
+      })
+      .finally(() => {
+        // 2. Ouvrir systématiquement la redirection WhatsApp pour la discussion directe
+        const message = `*NOUVELLE DEMANDE DE DEVIS BSH*\n\n` +
+                        `👤 *Nom :* ${name}\n` +
+                        `📞 *Téléphone :* ${phone}\n` +
+                        `📧 *Email :* ${email || 'Non spécifié'}\n` +
+                        `📍 *Lieu du projet :* ${location}\n` +
+                        `🏗️ *Service :* ${service}\n\n` +
+                        `📝 *Description du projet :*\n${description}`;
+
+        const encodedMessage = encodeURIComponent(message);
+        
+        fetch('/data/general.json')
+          .then(res => res.json())
+          .then(data => {
+            const bshPhone = data.phone ? data.phone.replace(/[^0-9]/g, '') : '2290148524590';
+            const whatsappUrl = `https://wa.me/${bshPhone}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+          })
+          .catch(() => {
+            const whatsappUrl = `https://wa.me/2290148524590?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+          })
+          .finally(() => {
+            // Remettre le bouton en état
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            alert("Votre demande de devis a été traitée ! Elle a été transmise par email à devis@bestservicesandhouse.site et vous allez être redirigé vers WhatsApp pour échanger.");
+          });
+      });
     });
   </script>
 </body>

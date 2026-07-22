@@ -319,12 +319,16 @@
         });
       }
 
-      // Gestion de la soumission du formulaire candidat
+      // Gestion de la soumission du formulaire candidat (Email automatique avec pièce jointe)
       const form = document.getElementById('candidateForm');
       form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Récupérer les données du formulaire
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "⌛ Envoi de votre candidature par email...";
+
         const job = document.getElementById('selectedJobTitle').textContent;
         const nom = document.getElementById('candLastName').value;
         const prenom = document.getElementById('candFirstName').value;
@@ -335,13 +339,49 @@
         const tel = document.getElementById('candPhone').value;
         const email = document.getElementById('candEmail').value;
         const motivation = document.getElementById('candMotivation').value;
+        const cvInput = document.getElementById('candCV');
 
-        // Préparer un message WhatsApp ou simulation d'envoi
-        alert(`Félicitations ${prenom} ${nom} !\nVotre candidature pour le poste de [${job}] a été simulée avec succès.\n\nDans un environnement réel, le CV aurait été envoyé vers notre espace de stockage, et les recruteurs de BSH auraient reçu un email avec toutes vos coordonnées.`);
+        // Créer un objet FormData pour gérer l'envoi de fichier
+        const formData = new FormData();
+        formData.append('jobTitle', job);
+        formData.append('lastName', nom);
+        formData.append('firstName', prenom);
+        formData.append('address', adresse);
+        formData.append('nationality', nationalite);
+        formData.append('experience', exp);
+        formData.append('salary', salaire);
+        formData.append('phone', tel);
+        formData.append('email', email);
+        formData.append('motivation', motivation);
         
-        // Optionnel : on redirige les recruteurs ou on affiche un message de réussite esthétique
-        form.reset();
-        document.getElementById('applySection').classList.remove('active');
+        if (cvInput.files.length > 0) {
+          formData.append('cv', cvInput.files[0]);
+        }
+
+        // Envoyer la candidature à l'API de recrutement
+        fetch('/api/recrutement', {
+          method: 'POST',
+          body: formData
+        })
+        .then(res => {
+          if (!res.ok) {
+            return res.json().then(data => { throw new Error(data.error || "Erreur serveur"); });
+          }
+          return res.json();
+        })
+        .then(data => {
+          alert(`Félicitations ${prenom} ${nom} !\n\nVotre candidature pour le poste de [${job}] a été envoyée avec succès à recrutement@bestservicesandhouse.site.\n\nNotre équipe d'ingénierie et de recrutement l'examinera dans les plus brefs délais.`);
+          form.reset();
+          document.getElementById('applySection').classList.remove('active');
+        })
+        .catch(err => {
+          console.error("Erreur d'envoi :", err);
+          alert(`Désolé ${prenom}, une erreur technique est survenue :\n\n${err.message}\n\nVeuillez vérifier vos informations, vous assurer que votre CV est bien un fichier .pdf d'une taille raisonnable, et réessayer.`);
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        });
       });
     });
   </script>

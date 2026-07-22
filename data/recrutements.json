@@ -1,0 +1,30 @@
+{
+  "title": "Opportunités de Carrière chez BSH",
+  "subtitle": "Rejoignez une équipe de passionnés et participez à la construction du Bénin de demain.",
+  "items": [
+    {
+      "id": "conducteur-travaux",
+      "title": "Conducteur de Travaux Principal (H/F)",
+      "contract": "CDI",
+      "location": "Cotonou / Abomey-Calavi",
+      "deadline": "2026-08-15",
+      "description": "Nous recherchons un Conducteur de Travaux expérimenté pour superviser nos chantiers de construction résidentiels et commerciaux. Vous serez garant de la qualité des travaux, du respect des délais, du budget et des normes de sécurité."
+    },
+    {
+      "id": "specialiste-etancheite",
+      "title": "Technicien Applicateur en Étanchéité (H/F)",
+      "contract": "CDD",
+      "location": "Tout le Bénin",
+      "deadline": "2026-08-30",
+      "description": "Spécialiste de la protection des bâtiments, vous interviendrez sur nos chantiers pour réaliser l'étanchéité de toitures-terrasses, fondations et dalles. Maîtrise des membranes bitumineuses et résines liquides indispensable."
+    },
+    {
+      "id": "commercial-btp",
+      "title": "Chargé d'Affaires & Commercial BTP (H/F)",
+      "contract": "Prestation",
+      "location": "Cotonou",
+      "deadline": "2026-09-10",
+      "description": "Pour soutenir notre forte croissance, nous recrutons un commercial BTP indépendant pour prospecter, négocier et vendre nos services de construction et rénovation auprès des particuliers et des professionnels au Bénin."
+    }
+  ]
+}

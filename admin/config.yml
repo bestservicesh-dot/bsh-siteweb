@@ -1,0 +1,148 @@
+backend:
+  name: github
+  repo: bestservicesh-dot/bsh-siteweb # Votre dépôt GitHub réel
+  branch: main
+  base_url: https://bsh-siteweb.vercel.app # Remplacez par votre domaine final si vous le liez
+  auth_endpoint: api/auth
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "site_config"
+    label: "⚙️ Configuration Globale"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - file: "data/general.json"
+        label: "📞 Contact & Accueil"
+        name: "general"
+        fields:
+          - { label: "Téléphone", name: "phone", widget: "string" }
+          - { label: "Adresse Email", name: "email", widget: "string" }
+          - { label: "Adresse physique", name: "address", widget: "string" }
+          - { label: "Lien WhatsApp direct", name: "whatsapp", widget: "string" }
+          - { label: "Registre de Commerce (RCCM)", name: "rccm", widget: "string" }
+          - { label: "Identifiant Fiscal Unique (IFU)", name: "ifu", widget: "string" }
+          - { label: "Titre principal de l'accueil", name: "hero_title", widget: "string" }
+          - { label: "Sous-titre d'accueil", name: "hero_subtitle", widget: "text" }
+          - label: "Chiffres Clés (Statistiques)"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Valeur (ex: 150+)", name: "value", widget: "string" }
+              - { label: "Libellé (ex: Projets réalisés)", name: "label", widget: "string" }
+          - { label: "Titre de la section À propos", name: "about_title", widget: "string" }
+          - { label: "À propos - Paragraphe 1", name: "about_text_1", widget: "text" }
+          - { label: "À propos - Paragraphe 2", name: "about_text_2", widget: "text" }
+          - { label: "À propos - Atouts clés", name: "about_features", widget: "list" }
+
+      - file: "data/about.json"
+        label: "ℹ️ Page À Propos (Histoire & Valeurs)"
+        name: "about_page"
+        fields:
+          - { label: "Titre Histoire", name: "history_title", widget: "string" }
+          - { label: "Histoire - Paragraphe 1", name: "history_text_1", widget: "text" }
+          - { label: "Histoire - Paragraphe 2", name: "history_text_2", widget: "text" }
+          - { label: "Titre Mission", name: "mission_title", widget: "string" }
+          - { label: "Mission - Description", name: "mission_text", widget: "text" }
+          - { label: "Titre Vision", name: "vision_title", widget: "string" }
+          - { label: "Vision - Description", name: "vision_text", widget: "text" }
+          - { label: "Titre Nos Valeurs", name: "values_title", widget: "string" }
+          - { label: "Sous-titre Valeurs", name: "values_subtitle", widget: "string" }
+          - label: "Nos Valeurs (Liste)"
+            name: "values"
+            widget: "list"
+            fields:
+              - { label: "Icône / Émoji", name: "icon", widget: "string" }
+              - { label: "Nom de la valeur", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+      - file: "data/recrutements.json"
+        label: "💼 Offres d'Emploi & Recrutements"
+        name: "recrutement_page"
+        fields:
+          - { label: "Titre Section Recrutement", name: "title", widget: "string" }
+          - { label: "Sous-titre Section Recrutement", name: "subtitle", widget: "string" }
+          - label: "Liste des opportunités ouvertes"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID Unique (sans espace, ex: macon)", name: "id", widget: "string" }
+              - { label: "Intitulé du poste", name: "title", widget: "string" }
+              - { label: "Type de contrat", name: "contract", widget: "select", options: ["CDI", "CDD", "Stage", "Prestation", "Intérim"] }
+              - { label: "Lieu", name: "location", widget: "string", default: "Abomey-Calavi / Cotonou" }
+              - { label: "Date limite (AAAA-MM-JJ)", name: "deadline", widget: "string" }
+              - { label: "Description / Profil recherché", name: "description", widget: "text" }
+
+      - file: "data/services.json"
+        label: "🏗️ Gestion des Services"
+        name: "services"
+        fields:
+          - { label: "Titre Section Services Principaux", name: "primary_title", widget: "string" }
+          - { label: "Sous-titre Services Principaux", name: "primary_subtitle", widget: "text" }
+          - label: "Liste des Services BTP Principaux"
+            name: "primary_services"
+            widget: "list"
+            fields:
+              - { label: "ID Unique (sans espace)", name: "id", widget: "string" }
+              - { label: "Icône (Émoji ou SVG)", name: "icon", widget: "string" }
+              - { label: "Nom du Service", name: "title", widget: "string" }
+              - { label: "Description courte", name: "description", widget: "text" }
+              - { label: "Lien interne (page de détails)", name: "link", widget: "string" }
+          - { label: "Titre Section Services Secondaires", name: "secondary_title", widget: "string" }
+          - { label: "Sous-titre Services Secondaires", name: "secondary_subtitle", widget: "text" }
+          - label: "Liste des Services Secondaires"
+            name: "secondary_services"
+            widget: "list"
+            fields:
+              - { label: "ID Unique (sans espace)", name: "id", widget: "string" }
+              - { label: "Icône (Émoji)", name: "icon", widget: "string" }
+              - { label: "Nom du Service", name: "title", widget: "string" }
+              - { label: "Description courte", name: "description", widget: "text" }
+              - { label: "Lien interne", name: "link", widget: "string" }
+
+      - file: "data/realisations.json"
+        label: "📷 Portfolio & Réalisations"
+        name: "realisations"
+        fields:
+          - { label: "Titre de la section Portfolio", name: "title", widget: "string" }
+          - { label: "Sous-titre de la section Portfolio", name: "subtitle", widget: "string" }
+          - label: "Nos réalisations"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Nom de la réalisation", name: "title", widget: "string" }
+              - { label: "Catégorie", name: "category", widget: "select", options: ["Construction", "Rénovation", "Étanchéité", "Finitions", "Pavage", "Autres"] }
+              - { label: "Ville (Bénin)", name: "city", widget: "string" }
+              - { label: "Photo du projet", name: "image", widget: "image" }
+
+      - file: "data/temoignages.json"
+        label: "💬 Témoignages Clients"
+        name: "temoignages"
+        fields:
+          - { label: "Titre de la section Témoignages", name: "title", widget: "string" }
+          - { label: "Sous-titre de la section Témoignages", name: "subtitle", widget: "string" }
+          - label: "Avis Clients"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Nom du client", name: "name", widget: "string" }
+              - { label: "Rôle (ex: Propriétaire, Gérant)", name: "role", widget: "string" }
+              - { label: "Ville", name: "city", widget: "string" }
+              - { label: "Note (Etoiles 1-5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5 }
+              - { label: "Avis", name: "comment", widget: "text" }
+
+      - file: "data/faq.json"
+        label: "❓ Foire Aux Questions (FAQ)"
+        name: "faq"
+        fields:
+          - { label: "Titre de la section FAQ", name: "title", widget: "string" }
+          - { label: "Sous-titre de la section FAQ", name: "subtitle", widget: "string" }
+          - label: "Questions / Réponses"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Réponse", name: "answer", widget: "text" }

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Client & Services Payants | BSH Bénin</title>
+  <meta name="description" content="Connectez-vous à votre Espace Client BSH pour accéder à nos plans VIP, guides d'estimation et services premium payants au Bénin.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Spécifique à la page de connexion & espace client */
+    .auth-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: var(--bg-white);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+    }
+    .auth-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 30px;
+    }
+    .auth-tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: var(--transition);
+    }
+    .auth-tab.active {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .auth-form {
+      display: none;
+    }
+    .auth-form.active {
+      display: block;
+    }
+    /* Styles tableau de bord client privé */
+    .dashboard-container {
+      display: none;
+      max-width: 1100px;
+      margin: 40px auto;
+      background: var(--bg-white);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+    }
+    .dashboard-container.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    .premium-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .premium-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+    .premium-badge {
+      position: absolute;
+      top: 15px;
+      right: -30px;
+      background: #ef4444;
+      color: white;
+      padding: 4px 30px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      transform: rotate(45deg);
+    }
+    .premium-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+      font-weight: 800;
+    }
+    .premium-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+      </div>
+      <div class="top-bar-right">
+        <span class="address-text">📍 Abomey-Calavi, Bénin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="realisations.html">Nos Réalisations</a></li>
+        <li><a href="opportunites.html">Opportunités</a></li>
+        <li><a href="connexion.html" style="color: var(--accent);">Espace Client</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- CONTENEUR AUTHENTIFICATION (LOGIN/REGISTRATION) -->
+  <div class="container" id="authBox">
+    <div class="auth-container">
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tabLogin">Se connecter</div>
+        <div class="auth-tab" id="tabRegister">S'inscrire</div>
+      </div>
+
+      <!-- FORMULAIRE DE CONNEXION -->
+      <form id="loginForm" class="auth-form active">
+        <div class="form-group">
+          <label for="loginEmail">Adresse Email *</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="votre.email@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Mot de passe *</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.05rem;">
+          🔑 Accéder à mon Espace Privé
+        </button>
+      </form>
+
+      <!-- FORMULAIRE D'INSCRIPTION -->
+      <form id="registerForm" class="auth-form">
+        <div class="form-group">
+          <label for="regName">Nom complet / Entreprise *</label>
+          <input type="text" id="regName" class="form-control" placeholder="Ex: Samson ALIDOU" required>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Adresse Email *</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="votre.email@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Mot de passe *</label>
+          <input type="password" id="regPassword" class="form-control" minlength="6" placeholder="Minimum 6 caractères" required>
+        </div>
+        <button type="submit" class="btn btn-secondary" style="width: 100%; padding: 14px; font-size: 1.05rem;">
+          👤 Créer mon Compte Client
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TABLEAU DE BORD CLIENT PRIVE (RESTE CACHE TANT QUE L'UTILISATEUR N'EST PAS IDENTIFIE) -->
+  <div class="container" id="clientDashboard" style="display: none;">
+    <div class="dashboard-container active">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+        <div>
+          <h1 style="font-size: 2rem; color: var(--primary); font-weight: 850;">Espace Client BSH Premium</h1>
+          <p style="color: var(--text-muted);">Bienvenue, <strong id="userNameDisplay" style="color: var(--accent);">Cher Client</strong></p>
+        </div>
+        <button id="logoutBtn" class="btn btn-outline" style="padding: 8px 18px;">Se déconnecter</button>
+      </div>
+
+      <h3 style="font-size: 1.5rem; margin-top: 30px; font-weight: 800; color: var(--primary);">💎 Accès exclusif à nos Services Payants Premium</h3>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">En tant que client inscrit, vous pouvez commander nos services exclusifs en direct ou télécharger nos ressources d'ingénierie et de conception 3D.</p>
+
+      <div class="premium-grid">
+        
+        <!-- Service payant 1 -->
+        <div class="premium-card">
+          <div class="premium-badge">PAYANT</div>
+          <h4>Plans de Villa 3D Standards</h4>
+          <p>Téléchargez nos plans types complets (plans de masse, coupes, façades, vues 3D) pour des villas F4 standards ou duplex R+1 optimisés pour les parcelles du Bénin.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">150 000 FCFA</span>
+            <a href="https://wa.me/2290148524590?text=Bonjour%20BSH,%20je%20souhaite%20acheter%20les%20plans%20de%20villa%203D%20Premium." target="_blank" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.85rem;">Commander</a>
+          </div>
+        </div>
+
+        <!-- Service payant 2 -->
+        <div class="premium-card">
+          <div class="premium-badge">PAYANT</div>
+          <h4>Devis Quantitatif Estimatif</h4>
+          <p>Obtenez une étude de coût d'ingénierie ultra-détaillée et certifiée par notre économiste de construction pour sécuriser votre prêt bancaire ou budgétiser votre chantier.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">75 000 FCFA</span>
+            <a href="https://wa.me/2290148524590?text=Bonjour%20BSH,%20je%20souhaite%20commander%20une%20étude%20de%20devis%20quantitatif%20détaillé." target="_blank" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.85rem;">Commander</a>
+          </div>
+        </div>
+
+        <!-- Service payant 3 -->
+        <div class="premium-card">
+          <div class="premium-badge">PAYANT</div>
+          <h4>Suivi de Chantier en Direct</h4>
+          <p>Recevez un accès privé à notre plateforme de suivi d'avancement pour visualiser les photos quotidiennes de votre chantier et les rapports de votre conducteur de travaux BSH.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">50 000 FCFA / mois</span>
+            <a href="https://wa.me/2290148524590?text=Bonjour%20BSH,%20je%20souhaite%20m'abonner%20au%20service%20de%20suivi%20de%20chantier%20VIP." target="_blank" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.85rem;">S'abonner</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="margin-top: 60px;">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>📍 Abomey-Calavi, Bénin</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabLogin = document.getElementById('tabLogin');
+      const tabRegister = document.getElementById('tabRegister');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      
+      const authBox = document.getElementById('authBox');
+      const clientDashboard = document.getElementById('clientDashboard');
+      const userNameDisplay = document.getElementById('userNameDisplay');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      // 1. Basculer entre Se Connecter et S'inscrire
+      tabLogin.addEventListener('click', () => {
+        tabLogin.classList.add('active');
+        tabRegister.classList.remove('active');
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+      });
+
+      tabRegister.addEventListener('click', () => {
+        tabRegister.classList.add('active');
+        tabLogin.classList.remove('active');
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
+      });
+
+      // 2. Traitement d'inscription simulation (Sauvegarde dans localStorage)
+      registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+
+        // Enregistrer les données utilisateur localement
+        const user = { name, email, password };
+        localStorage.setItem(email, JSON.stringify(user));
+        
+        alert(`Compte client créé avec succès pour ${name} !\nVous pouvez maintenant vous connecter.`);
+        registerForm.reset();
+        tabLogin.click(); // Basculer sur connexion
+      });
+
+      // 3. Traitement de connexion
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        // Rechercher l'utilisateur dans localStorage
+        const storedUser = localStorage.getItem(email);
+        
+        if (storedUser) {
+          const user = JSON.parse(storedUser);
+          if (user.password === password) {
+            // Connexion réussie !
+            localStorage.setItem('loggedInUser', JSON.stringify(user));
+            showDashboard(user);
+          } else {
+            alert("Erreur : Mot de passe incorrect !");
+          }
+        } else {
+          // Créer un utilisateur fictif par défaut pour l'exemple s'il n'existe pas
+          const defaultUser = { name: "Samson BSH", email: email, password: password };
+          localStorage.setItem('loggedInUser', JSON.stringify(defaultUser));
+          showDashboard(defaultUser);
+        }
+      });
+
+      // 4. Fonction d'affichage du Tableau de bord
+      function showDashboard(user) {
+        authBox.style.display = 'none';
+        clientDashboard.style.display = 'block';
+        userNameDisplay.textContent = user.name;
+      }
+
+      // 5. Vérifier si déjà connecté au chargement
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      if (loggedInUser) {
+        showDashboard(JSON.parse(loggedInUser));
+      }
+
+      // 6. Déconnexion
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('loggedInUser');
+        clientDashboard.style.display = 'none';
+        authBox.style.display = 'block';
+        loginForm.reset();
+      });
+    });
+  </script>
+</body>
+</html>

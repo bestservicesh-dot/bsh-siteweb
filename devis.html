@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demander un Devis Gratuit — BSH Bénin</title>
+  <meta name="description" content="Obtenez un devis gratuit en 24h pour vos projets de construction, rénovation, étanchéité ou pavage au Bénin avec BSH.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Spécifique à la page de devis */
+    .devis-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: var(--bg-white);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .form-header h1 {
+      font-size: 2.25rem;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .form-header p {
+      color: var(--text-muted);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: var(--bg-light);
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: var(--bg-white);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .devis-container {
+        padding: 20px;
+        margin: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+      </div>
+      <div class="top-bar-right">
+        <span class="address-text">📍 Abomey-Calavi, Bénin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="opportunites.html">Opportunités</a></li>
+        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="index.html" class="btn btn-outline" style="padding: 6px 15px;">Retour au site</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- DEVIS FORM CONTAINER -->
+  <div class="container">
+    <div class="devis-container">
+      <div class="form-header">
+        <h1>Demande de Devis Gratuit</h1>
+        <p>Remplissez ce formulaire pour recevoir votre estimation gratuite et personnalisée sous 24 heures.</p>
+      </div>
+
+      <form id="devisForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fullName">Votre Nom complet *</label>
+            <input type="text" id="fullName" class="form-control" placeholder="Ex: Jean KPODAR" required>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Numéro de Téléphone (WhatsApp de préférence) *</label>
+            <input type="tel" id="phoneNumber" class="form-control" placeholder="Ex: +229 01 48 52 45 90" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emailAddress">Adresse Email</label>
+            <input type="email" id="emailAddress" class="form-control" placeholder="Ex: jean.kpodar@gmail.com">
+          </div>
+          <div class="form-group">
+            <label for="cityLocation">Localisation du projet (Ville, Quartier) *</label>
+            <input type="text" id="cityLocation" class="form-control" placeholder="Ex: Abomey-Calavi, Fidjrossè" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceType">Type de travaux demandé *</label>
+          <select id="serviceType" class="form-control" required>
+            <option value="" disabled selected>Sélectionnez un service...</option>
+            <option value="Construction Complète">Construction Complète de Bâtiment</option>
+            <option value="Rénovation">Rénovation de Bâtiment</option>
+            <option value="Étanchéité">Étanchéité de toiture/terrasse</option>
+            <option value="Réparation de Toiture">Réparation de Toiture</option>
+            <option value="Carrelage / Finitions">Pose de Carrelage / Finitions</option>
+            <option value="Pavage & Assainissement">Pavage & Assainissement</option>
+            <option value="Création de Site Web">Création de Site Web (Service Digital)</option>
+            <option value="Autre projet BSH">Autre service professionnel</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="projectDescription">Description détaillée de votre projet *</label>
+          <textarea id="projectDescription" class="form-control" rows="5" placeholder="Décrivez votre projet (dimensions, matériaux souhaités, contraintes spécifiques...)" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.1rem;">
+          🚀 Envoyer ma demande par WhatsApp (Gratuit)
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="margin-top: 60px;">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>📍 Abomey-Calavi, Bénin</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Script d'envoi du formulaire par WhatsApp pour simplifier la vie de l'administrateur
+    document.getElementById('devisForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('fullName').value;
+      const phone = document.getElementById('phoneNumber').value;
+      const email = document.getElementById('emailAddress').value || "Non spécifié";
+      const location = document.getElementById('cityLocation').value;
+      const service = document.getElementById('serviceType').value;
+      const description = document.getElementById('projectDescription').value;
+
+      // Construction du message WhatsApp
+      const message = `*NOUVELLE DEMANDE DE DEVIS BSH*\n\n` +
+                      `👤 *Nom :* ${name}\n` +
+                      `📞 *Téléphone :* ${phone}\n` +
+                      `📧 *Email :* ${email}\n` +
+                      `📍 *Lieu du projet :* ${location}\n` +
+                      `🏗️ *Service :* ${service}\n\n` +
+                      `📝 *Description du projet :*\n${description}`;
+
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Récupérer le numéro BSH depuis le fichier general.json (ou par défaut le +2290148524590)
+      fetch('data/general.json')
+        .then(res => res.json())
+        .then(data => {
+          const bshPhone = data.phone ? data.phone.replace(/[^0-9]/g, '') : '2290148524590';
+          const whatsappUrl = `https://wa.me/${bshPhone}?text=${encodedMessage}`;
+          window.open(whatsappUrl, '_blank');
+        })
+        .catch(() => {
+          // Fallback par défaut
+          const whatsappUrl = `https://wa.me/2290148524590?text=${encodedMessage}`;
+          window.open(whatsappUrl, '_blank');
+        });
+    });
+  </script>
+</body>
+</html>

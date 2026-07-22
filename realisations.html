@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos Réalisations | BSH - Projets BTP au Bénin</title>
+  <meta name="description" content="Découvrez nos projets et chantiers de construction, rénovation, étanchéité et pavage réalisés à Cotonou et au Bénin.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Spécifique à la page des réalisations */
+    .real-hero {
+      background: linear-gradient(135deg, var(--primary) 40%, var(--primary-light) 100%);
+      color: var(--bg-white);
+      padding: 60px 0;
+      text-align: center;
+    }
+    .real-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+    .real-hero p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+      </div>
+      <div class="top-bar-right">
+        <span class="address-text">📍 Abomey-Calavi, Bénin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="realisations.html" style="color: var(--accent);">Nos Réalisations</a></li>
+        <li><a href="index.html#temoignages">Témoignages</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- REALISATIONS HERO -->
+  <div class="real-hero">
+    <div class="container">
+      <h1>Nos réalisations</h1>
+      <p>Découvrez une sélection de nos projets réalisés à Cotonou, Abomey-Calavi, Porto-Novo et dans tout le Bénin.</p>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO SECTION -->
+  <section class="section">
+    <div class="container">
+      <!-- Filtres du portfolio -->
+      <div class="portfolio-filter">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="Construction">Construction</button>
+        <button class="filter-btn" data-filter="Rénovation">Rénovation</button>
+        <button class="filter-btn" data-filter="Étanchéité">Étanchéité</button>
+        <button class="filter-btn" data-filter="Finitions">Finitions</button>
+        <button class="filter-btn" data-filter="Pavage">Pavage</button>
+      </div>
+
+      <!-- Grid des projets -->
+      <div class="portfolio-grid" id="standalone-portfolio-container">
+        <!-- 9 projets par défaut (remplacés dynamiquement par JS) -->
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Villa moderne">
+            <span class="portfolio-category-badge">Construction</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Villa résidentielle moderne</h4>
+            <p>📍 Cotonou, 2025</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Immeuble commercial">
+            <span class="portfolio-category-badge">Construction</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Immeuble commercial R+3</h4>
+            <p>📍 Abomey-Calavi, 2025</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80" alt="Rénovation maison familiale">
+            <span class="portfolio-category-badge">Rénovation</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Rénovation maison familiale</h4>
+            <p>📍 Porto-Novo, 2024</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1632759162443-112f4002d99d?auto=format&fit=crop&w=600&q=80" alt="Étanchéité terrasse">
+            <span class="portfolio-category-badge">Étanchéité</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Étanchéité toiture terrasse</h4>
+            <p>📍 Cotonou, 2025</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1502005229762-fc1b2381f0db?auto=format&fit=crop&w=600&q=80" alt="Carrelage villa">
+            <span class="portfolio-category-badge">Finitions</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Carrelage et peinture villa</h4>
+            <p>📍 Godomey, 2024</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Pavage cour">
+            <span class="portfolio-category-badge">Pavage</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Pavage cour et allée</h4>
+            <p>📍 Calavi, 2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FOOTER -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Votre projet sera notre prochaine réalisation</h2>
+      <p>Contactez-nous pour un devis gratuit et rejoignez nos clients satisfaits.</p>
+      <div class="hero-actions" style="justify-content: center;">
+        <a href="devis.html" class="btn btn-primary">Demander un devis</a>
+        <a href="https://wa.me/2290148524590" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>📍 Abomey-Calavi, Bénin</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Chargement dynamique du portfolio complet
+    document.addEventListener("DOMContentLoaded", () => {
+      let itemsList = [];
+
+      fetch('/data/realisations.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+          if (data.items) {
+            itemsList = data.items;
+            render(itemsList);
+          }
+        })
+        .catch(err => console.warn("Attention : Réalisations chargées depuis la version statique HTML.", err));
+
+      function render(items) {
+        const container = document.getElementById('standalone-portfolio-container');
+        if (!container) return;
+        container.innerHTML = '';
+        
+        items.forEach(proj => {
+          container.innerHTML += `
+            <div class="portfolio-card">
+              <div class="portfolio-img-wrapper">
+                <img src="${proj.image}" alt="${proj.title}">
+                <span class="portfolio-category-badge">${proj.category}</span>
+              </div>
+              <div class="portfolio-info">
+                <h4>${proj.title}</h4>
+                <p>📍 ${proj.city}</p>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // Gestion des boutons filtres
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const cat = btn.getAttribute('data-filter');
+          if (cat === 'all') {
+            render(itemsList);
+          } else {
+            const filtered = itemsList.filter(i => i.category.toLowerCase() === cat.toLowerCase());
+            render(filtered);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

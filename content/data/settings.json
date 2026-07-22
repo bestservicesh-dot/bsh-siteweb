@@ -1,0 +1,32 @@
+{
+  "general": {
+    "company_name": "BSH - Best Services and House",
+    "slogan": "Votre partenaire de confiance pour tous vos travaux de BTP et services professionnels",
+    "phone": "+229 01 48 52 45 90",
+    "whatsapp": "2290148524590",
+    "email": "contact@bestservicesandhouse.site",
+    "address": "Abomey-Calavi, Rép. du Bénin",
+    "hours": "Lun - Sam : 08h - 18h"
+  },
+  "stats": {
+    "projects": 150,
+    "years": 5,
+    "satisfaction": 98,
+    "team": 30
+  },
+  "hero": {
+    "badge": "Entreprise BTP de confiance au Bénin",
+    "title": "Construisons ensemble votre avenir au Bénin",
+    "highlight": "votre avenir",
+    "description": "BSH (Best Services and House) est votre partenaire de confiance pour tous vos projets de construction, rénovation et services professionnels à Cotonou et dans tout le Bénin.",
+    "cta_text": "Demander un devis gratuit",
+    "whatsapp_text": "WhatsApp"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/BSHBenin",
+    "instagram": "https://www.instagram.com/bsh_benin",
+    "linkedin": "https://www.linkedin.com/company/bsh-benin",
+    "tiktok": "https://www.tiktok.com/@bsh_benin",
+    "youtube": ""
+  }
+}

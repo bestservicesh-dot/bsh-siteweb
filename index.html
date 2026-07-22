@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSH | Entreprise BTP N°1 au Bénin — Construction & Rénovation</title>
+  <meta name="description" content="BSH (Best Services and House) est votre partenaire de confiance pour la construction, rénovation, étanchéité et travaux de finitions au Bénin.">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP CONTACT BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+      </div>
+      <div class="top-bar-right">
+        <span class="address-text">📍 Abomey-Calavi, Bénin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="opportunites.html">Opportunités</a></li>
+        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="accueil">
+    <div class="container">
+      <div class="hero-content">
+        <h1 id="hero-title">Nous construisons votre <span>rêve</span></h1>
+        <p id="hero-subtitle">BSH (Best Services and House) est votre partenaire de confiance pour tous vos projets de construction, rénovation, étanchéité et services professionnels à Cotonou, Abomey-Calavi et dans tout le Bénin.</p>
+        
+        <div class="hero-actions">
+          <a href="devis.html" class="btn btn-primary">Demander un devis gratuit</a>
+          <a href="https://wa.me/2290148524590?text=Bonjour%20BSH,%20je%20souhaite%20avoir%20des%20informations%20sur%20vos%20services." class="btn btn-whatsapp whatsapp-link" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <span style="font-size: 1.5rem;">✓</span>
+            <span><strong>Devis en 24h</strong> Gratuit et sans engagement</span>
+          </div>
+          <div class="hero-badge">
+            <span style="font-size: 1.5rem;">🏗️</span>
+            <span><strong>14 Services</strong> BTP, Digital & Plus</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS / METRICS SECTION -->
+  <div class="container">
+    <section class="stats">
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <h3>150+</h3>
+          <p>Projets réalisés</p>
+        </div>
+        <div class="stat-card">
+          <h3>14 ans</h3>
+          <p>D'expérience</p>
+        </div>
+        <div class="stat-card">
+          <h3>98%</h3>
+          <p>Clients satisfaits</p>
+        </div>
+        <div class="stat-card">
+          <h3>30+</h3>
+          <p>Professionnels qualifiés</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SERVICES SECTION -->
+  <section class="section section-bg" id="services">
+    <div class="container">
+      
+      <!-- Services principaux (BTP) -->
+      <div class="section-header">
+        <h2 id="primary-services-title">🏗️ Services principaux — BTP & Bâtiment</h2>
+        <p id="primary-services-subtitle">Notre cœur de métier : de la construction à la finition, BSH vous accompagne à chaque étape de votre projet avec expertise et professionnalisme.</p>
+      </div>
+
+      <div class="services-grid" id="primary-services-container">
+        <!-- 10 SERVICES BTP COMPLETS EN FALLBACK HTML (et synchronisés avec le JS) -->
+        <div class="service-card" id="service-construction-batiment">
+          <div class="service-icon">🏗️</div>
+          <h3>Construction de bâtiment</h3>
+          <p>Construction complète de bâtiments résidentiels, commerciaux et industriels. Du gros œuvre aux finitions.</p>
+          <a href="services/construction-batiment.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-renovation">
+          <div class="service-icon">🔨</div>
+          <h3>Rénovation de bâtiment</h3>
+          <p>Rénovation complète ou partielle : modernisation, extension, remise à neuf de vos espaces.</p>
+          <a href="services/renovation.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-etancheite">
+          <div class="service-icon">💧</div>
+          <h3>Étanchéité</h3>
+          <p>Solutions d'étanchéité pour toitures, terrasses, fondations et murs. Protection durable contre les infiltrations.</p>
+          <a href="services/etancheite.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-reparation-toiture">
+          <div class="service-icon">🏠</div>
+          <h3>Réparation de toiture</h3>
+          <p>Diagnostic, réparation et remplacement de toiture. Intervention rapide pour stopper les fuites.</p>
+          <a href="services/reparation-toiture.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-peinture-decoration">
+          <div class="service-icon">🎨</div>
+          <h3>Peinture et décoration</h3>
+          <p>Peinture intérieure et extérieure, décoration personnalisée. Finitions soignées et durables.</p>
+          <a href="services/peinture-decoration.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-carrelage">
+          <div class="service-icon">🧱</div>
+          <h3>Carrelage</h3>
+          <p>Pose de carrelage sol et mural. Large choix de matériaux et motifs pour tous vos espaces.</p>
+          <a href="services/carrelage.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-pavage-assainissement">
+          <div class="service-icon">🛣️</div>
+          <h3>Pavage et assainissement</h3>
+          <p>Pavage de cours, allées et espaces extérieurs. Travaux d'assainissement et drainage.</p>
+          <a href="services/pavage-assainissement.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-reparation-fissures">
+          <div class="service-icon">🔧</div>
+          <h3>Réparation de fissures</h3>
+          <p>Diagnostic structurel et réparation de fissures sur dalles, murs et fondations.</p>
+          <a href="services/reparation-fissures.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-isolation">
+          <div class="service-icon">🔇</div>
+          <h3>Isolation thermique & acoustique</h3>
+          <p>Isolation performante pour un confort optimal. Réduction des coûts énergétiques.</p>
+          <a href="services/isolation.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-entretien-nettoyage">
+          <div class="service-icon">🧹</div>
+          <h3>Entretien et nettoyage</h3>
+          <p>Entretien régulier de bâtiments, nettoyage professionnel de chantiers et espaces commerciaux.</p>
+          <a href="services/entretien-nettoyage.html" class="service-link">En savoir plus →</a>
+        </div>
+      </div>
+
+      <!-- Services secondaires / Diversification -->
+      <div class="secondary-divider">
+        <span>Diversification & Autres Services</span>
+      </div>
+
+      <div class="section-header" style="margin-bottom: 30px;">
+        <h2 id="secondary-services-title">🌟 Services secondaires — Au-delà du BTP</h2>
+        <p id="secondary-services-subtitle">BSH, c'est aussi des services complémentaires pour répondre à tous vos besoins professionnels et quotidiens au Bénin.</p>
+      </div>
+
+      <div class="services-grid" id="secondary-services-container">
+        <!-- 4 SERVICES SECONDAIRES COMPLETS EN FALLBACK HTML -->
+        <div class="service-card" id="service-creation-site-web">
+          <div class="service-icon">🌐</div>
+          <h3>Création de site web</h3>
+          <p>Sites vitrines, e-commerce, applications web. Présence digitale professionnelle pour votre entreprise.</p>
+          <a href="services/creation-site-web.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-evenementiel">
+          <div class="service-icon">🎪</div>
+          <h3>Événementiel</h3>
+          <p>Organisation d'événements clé en main : mariages, séminaires, conférences, fêtes d'entreprise.</p>
+          <a href="services/evenementiel.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-savons-produits-entretien">
+          <div class="service-icon">🧼</div>
+          <h3>Savons & produits d'entretien</h3>
+          <p>Fabrication artisanale de savons naturels et produits d'entretien de qualité. Livraison à domicile.</p>
+          <a href="services/savons-produits-entretien.html" class="service-link">En savoir plus →</a>
+        </div>
+
+        <div class="service-card" id="service-distribution-fruits-legumes">
+          <div class="service-icon">🥑</div>
+          <h3>Distribution de fruits & légumes</h3>
+          <p>Produits frais du producteur à votre table. Livraison particuliers, restaurants et entreprises.</p>
+          <a href="services/distribution-fruits-legumes.html" class="service-link">En savoir plus →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="section" id="a-propos">
+    <div class="container about-grid">
+      <div class="about-content">
+        <span style="color:var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.05em;">À Propos de BSH</span>
+        <h3 id="about-title">Votre partenaire BTP de confiance au Bénin</h3>
+        <p id="about-text-1">BSH (Best Services and House) est une entreprise béninoise spécialisée dans le BTP et les services professionnels. Basés à Abomey-Calavi, nous intervenons à Cotonou et dans tout le Bénin pour répondre à vos besoins en construction, rénovation et entretien.</p>
+        <p id="about-text-2">Notre équipe de professionnels expérimentés utilise des matériaux de haute qualité et des techniques modernes pour garantir des résultats durables et esthétiques, que ce soit pour des projets résidentiels, commerciaux ou industriels.</p>
+        
+        <div class="about-features" id="about-features-container">
+          <div class="about-feature"><span>✓</span> Équipe qualifiée</div>
+          <div class="about-feature"><span>✓</span> Matériaux de qualité</div>
+          <div class="about-feature"><span>✓</span> Respect des délais</div>
+          <div class="about-feature"><span>✓</span> Devis gratuit</div>
+          <div class="about-feature"><span>✓</span> Garantie travaux</div>
+          <div class="about-feature"><span>✓</span> Suivi personnalisé</div>
+        </div>
+
+        <a href="devis.html" class="btn btn-primary">Nous confier votre projet</a>
+      </div>
+      
+      <div class="about-img-container">
+        <img class="about-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="Équipe BSH sur chantier au Bénin">
+        <div class="about-badge">
+          <span>14+</span>
+          Ans de Savoir-Faire
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO / REALISATIONS SECTION -->
+  <section class="section section-bg" id="realisations">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="portfolio-title">Nos réalisations récentes</h2>
+        <p id="portfolio-subtitle">Découvrez quelques-uns de nos chantiers et projets réalisés avec succès à Cotonou et dans les environs.</p>
+      </div>
+
+      <!-- Filtres du portfolio -->
+      <div class="portfolio-filter">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="Construction">Construction</button>
+        <button class="filter-btn" data-filter="Rénovation">Rénovation</button>
+        <button class="filter-btn" data-filter="Étanchéité">Étanchéité</button>
+        <button class="filter-btn" data-filter="Finitions">Finitions</button>
+        <button class="filter-btn" data-filter="Pavage">Pavage</button>
+      </div>
+
+      <!-- Grid des projets (6 réalisations complètes) -->
+      <div class="portfolio-grid" id="portfolio-container">
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Villa moderne">
+            <span class="portfolio-category-badge">Construction</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Villa résidentielle moderne</h4>
+            <p>📍 Cotonou</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Immeuble commercial">
+            <span class="portfolio-category-badge">Construction</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Immeuble commercial</h4>
+            <p>📍 Abomey-Calavi</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80" alt="Rénovation complète maison">
+            <span class="portfolio-category-badge">Rénovation</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Rénovation complète maison</h4>
+            <p>📍 Porto-Novo</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1632759162443-112f4002d99d?auto=format&fit=crop&w=600&q=80" alt="Étanchéité terrasse">
+            <span class="portfolio-category-badge">Étanchéité</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Étanchéité toiture terrasse</h4>
+            <p>📍 Cotonou</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1502005229762-fc1b2381f0db?auto=format&fit=crop&w=600&q=80" alt="Carrelage villa">
+            <span class="portfolio-category-badge">Finitions</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Carrelage et peinture villa</h4>
+            <p>📍 Godomey</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Pavage cour">
+            <span class="portfolio-category-badge">Pavage</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Pavage cour et allée</h4>
+            <p>📍 Calavi</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="section" id="temoignages">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="testimonials-title">Ce que disent nos clients</h2>
+        <p id="testimonials-subtitle">La satisfaction de nos clients au Bénin est la meilleure preuve de notre sérieux.</p>
+      </div>
+
+      <div class="testimonials-grid" id="testimonials-container">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"BSH a construit notre maison familiale à Cotonou. Travail impeccable, respect des délais et du budget. Je recommande vivement cette entreprise sérieuse et professionnelle."</p>
+          <div class="testimonial-user">
+            <div class="user-avatar">AK</div>
+            <div class="user-info">
+              <h5>Adjovi K.</h5>
+              <p>Propriétaire — Cotonou</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Problème d'étanchéité résolu en un temps record. Depuis les travaux de BSH, plus aucune infiltration. Très satisfaite du rapport qualité-prix."</p>
+          <div class="testimonial-user">
+            <div class="user-avatar">FS</div>
+            <div class="user-info">
+              <h5>Fatimatou S.</h5>
+              <p>Propriétaire — Porto-Novo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Excellent travail de rénovation sur notre immeuble de bureaux. L'équipe est compétente, à l'écoute et les finitions sont de grande qualité. Merci BSH !"</p>
+          <div class="testimonial-user">
+            <div class="user-avatar">MD</div>
+            <div class="user-info">
+              <h5>Marc D.</h5>
+              <p>Directeur d'entreprise — Calavi</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section section-bg" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="faq-title">Questions fréquentes</h2>
+        <p id="faq-subtitle">Retrouvez les réponses aux questions les plus posées par nos clients concernant leurs projets au Bénin.</p>
+      </div>
+
+      <div class="faq-list" id="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">
+            Combien coûte la construction d'une maison au Bénin ?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Le coût de construction au Bénin varie selon la superficie, les matériaux choisis et le niveau de finition. En moyenne, comptez entre 150 000 et 350 000 FCFA/m² pour une construction standard. Contactez-nous pour un devis personnalisé et gratuit adapté à votre projet.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Quels sont les délais de réalisation ?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Les délais dépendent de la nature et de l'ampleur du projet. Une rénovation de salle de bain peut prendre 2 à 3 semaines, tandis qu'une construction complète peut nécessiter 4 à 8 mois. Nous établissons un planning détaillé avant le démarrage et nous engageons à le respecter.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Dans quelles zones géographiques intervenez-vous ?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Nous intervenons principalement à Cotonou, Abomey-Calavi, Porto-Novo et dans tout le sud du Bénin. Pour des projets importants, nous pouvons intervenir sur l'ensemble du territoire national. Contactez-nous pour vérifier la faisabilité dans votre zone.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Proposez-vous une garantie sur vos travaux ?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Oui, tous nos travaux sont couverts par une garantie. La durée varie selon le type d'intervention : garantie décennale pour le gros œuvre, garantie biennale pour les équipements, et garantie de parfait achèvement d'un an pour l'ensemble des travaux.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Comment obtenir un devis gratuit ?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>C'est simple ! Remplissez notre formulaire de devis en ligne, contactez-nous par WhatsApp au +229 01 48 52 45 90, ou appelez-nous directement. Nous vous répondons sous 24h avec une estimation détaillée et sans engagement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CALL TO ACTION BANNER -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Prêt à concrétiser votre projet ?</h2>
+      <p>Obtenez une estimation claire, détaillée et gratuite de votre projet sous 24h. Nos équipes d'experts BSH sont à votre écoute !</p>
+      <div class="hero-actions">
+        <a href="devis.html" class="btn btn-primary">Demander mon devis gratuit</a>
+        <a href="https://wa.me/2290148524590?text=Bonjour%20BSH,%20je%20souhaite%20avoir%20des%20informations%20sur%20vos%20services." class="btn btn-whatsapp whatsapp-link" target="_blank" rel="noopener">Nous écrire sur WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGAL & TRUST BADGE SECTION -->
+  <section class="section" style="padding: 40px 0; background-color: var(--bg-light); border-top: 1px solid var(--border-color);">
+    <div class="container" style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 30px; text-align: center;">
+      <div style="flex: 1; min-width: 250px;">
+        <span style="font-size: 2rem; display: block; margin-bottom: 10px;">📋</span>
+        <strong style="color: var(--primary); display: block; font-size: 1.1rem; margin-bottom: 5px;">Enregistrement Officiel</strong>
+        <span class="legal-rccm" style="color: var(--text-muted); font-weight: 600;">N° RCCM RB/COT/26 B 12345</span>
+      </div>
+      <div style="flex: 1; min-width: 250px; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">
+        <span style="font-size: 2rem; display: block; margin-bottom: 10px;">🏦</span>
+        <strong style="color: var(--primary); display: block; font-size: 1.1rem; margin-bottom: 5px;">Identifiant Fiscal Unique</strong>
+        <span class="legal-ifu" style="color: var(--text-muted); font-weight: 600;">N° IFU 3202612345678</span>
+      </div>
+      <div style="flex: 1; min-width: 250px;">
+        <span style="font-size: 2rem; display: block; margin-bottom: 10px;">🛡️</span>
+        <strong style="color: var(--primary); display: block; font-size: 1.1rem; margin-bottom: 5px;">Entreprise Agréée</strong>
+        <span style="color: var(--text-muted); font-weight: 600;">Ministère du Cadre de Vie (Bénin)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-col footer-about">
+          <div class="logo-text" style="color: #fff; margin-bottom: 15px;">BSH<span>.</span></div>
+          <p>Best Services and House (BSH) est votre partenaire de confiance au Bénin pour tous travaux de BTP, construction gros œuvre, étanchéité, carrelage, pavage et rénovation.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Liens utiles</h4>
+          <ul>
+            <li><a href="index.html#accueil">Accueil</a></li>
+            <li><a href="a-propos.html">À Propos</a></li>
+            <li><a href="realisations.html">Nos Réalisations</a></li>
+            <li><a href="opportunites.html">Opportunités</a></li>
+            <li><a href="connexion.html">Espace Client</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Nos Services BTP</h4>
+          <ul>
+            <li><a href="#services">Construction de bâtiment</a></li>
+            <li><a href="#services">Rénovation & Peinture</a></li>
+            <li><a href="#services">Étanchéité durable</a></li>
+            <li><a href="#services">Pavage & Finitions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contactez BSH</h4>
+          <ul class="footer-contact">
+            <li>📍 <span class="address-text">Abomey-Calavi, Bénin</span></li>
+            <li>📞 <a href="tel:+2290148524590" class="phone-link"><span class="phone-text">+229 01 48 52 45 90</span></a></li>
+            <li>📧 <a href="mailto:contact@bestservicesandhouse.site" class="email-link"><span class="email-text">contact@bestservicesandhouse.site</span></a></li>
+            <li>🟢 <a href="https://wa.me/2290148524590?text=Bonjour%20BSH,%20je%20souhaite%20avoir%20des%20informations%20sur%20vos%20services." class="whatsapp-link" target="_blank" rel="noopener">WhatsApp Direct</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés. Déployé sur Vercel.</p>
+        <p>Conçu avec excellence pour le Bénin.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Javascript -->
+  <script src="js/main.js"></script>
+</body>
+</html>

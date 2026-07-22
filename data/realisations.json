@@ -1,0 +1,42 @@
+{
+  "title": "Nos réalisations récentes",
+  "subtitle": "Découvrez quelques-uns de nos projets réalisés à Cotonou et dans les environs au Bénin.",
+  "items": [
+    {
+      "title": "Villa résidentielle moderne",
+      "category": "Construction",
+      "city": "Cotonou",
+      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "title": "Immeuble commercial",
+      "category": "Construction",
+      "city": "Abomey-Calavi",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "title": "Rénovation complète maison",
+      "category": "Rénovation",
+      "city": "Porto-Novo",
+      "image": "https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "title": "Étanchéité toiture terrasse",
+      "category": "Étanchéité",
+      "city": "Cotonou",
+      "image": "https://images.unsplash.com/photo-1632759162443-112f4002d99d?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "title": "Carrelage et peinture villa",
+      "category": "Finitions",
+      "city": "Godomey",
+      "image": "https://images.unsplash.com/photo-1502005229762-fc1b2381f0db?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "title": "Pavage cour et allée",
+      "category": "Pavage",
+      "city": "Calavi",
+      "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80"
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos de BSH | Entreprise BTP à Cotonou, Bénin</title>
+  <meta name="description" content="Découvrez BSH (Best Services and House), entreprise BTP de référence à Cotonou. 5+ ans d'expérience, 150+ projets réalisés, équipe qualifiée.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%231B3A5C'/><text x='50' y='62' text-anchor='middle' font-size='40' font-weight='bold' fill='white' font-family='Arial'>BSH</text></svg>">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* Intégration de styles pour correspondre au design Montserrat/Inter de l'utilisateur */
+    .breadcrumb a {
+      color: var(--accent);
+    }
+    .service-hero {
+      background: linear-gradient(135deg, var(--primary) 40%, var(--primary-light) 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+    .service-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .service-hero p {
+      color: #94a3b8;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    .value-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 25px;
+      transition: var(--transition);
+    }
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    .value-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    .value-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .value-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-content" style="padding: 0;">
+        <div class="top-bar-left">
+          <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
+          <a href="mailto:contact@bestservicesandhouse.site" class="email-link" style="margin-left: 15px;">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+        </div>
+        <div class="top-bar-right">
+          <span class="address-text">📍 Abomey-Calavi, Bénin</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html" style="color: var(--accent);">À Propos</a></li>
+        <li><a href="realisations.html">Nos Réalisations</a></li>
+        <li><a href="opportunites.html">Opportunités</a></li>
+        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="service-hero">
+    <div class="container">
+      <div class="breadcrumb" style="margin-bottom: 10px;"><a href="index.html">Accueil</a> <span>/</span> <span>À propos</span></div>
+      <h1>À propos de BSH</h1>
+      <p>Votre partenaire de confiance pour tous vos projets de construction et de rénovation au Bénin.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT / HISTORY -->
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <h2 id="about-history-title">Notre histoire</h2>
+          <p class="about-text" id="about-history-text-1">Fondée à Abomey-Calavi, BSH (Best Services and House) est née de la volonté de proposer des services BTP de qualité supérieure au Bénin. Notre fondateur, animé par la passion du bâtiment et l'excellence, a rassemblé une équipe de professionnels expérimentés pour répondre aux besoins croissants en construction et rénovation dans la région.</p>
+          <p class="about-text" id="about-history-text-2">Aujourd'hui, après plus de 5 ans d'activité et plus de 150 projets réalisés, BSH s'est imposée comme une référence dans le secteur du BTP au Bénin. Notre clientèle, composée de particuliers, d'entreprises et d'institutions, nous fait confiance pour la qualité de nos réalisations et notre professionnalisme.</p>
+          
+          <h2 style="margin-top:32px;" id="about-mission-title">Notre mission</h2>
+          <p class="about-text" id="about-mission-text">Offrir à chaque client des solutions de construction et de rénovation adaptées à ses besoins, son budget et ses ambitions, tout en garantissant la qualité, la durabilité et le respect des délais.</p>
+          
+          <h2 style="margin-top:32px;" id="about-vision-title">Notre vision</h2>
+          <p class="about-text" id="about-vision-text">Devenir l'entreprise BTP de référence en Afrique de l'Ouest, reconnue pour son excellence, son innovation et son engagement envers le développement durable.</p>
+        </div>
+        <div class="about-image">
+          <svg width="100%" height="450" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style="border-radius: 16px; box-shadow: var(--shadow-lg);">
+            <rect width="500" height="500" fill="#0f172a"/>
+            <circle cx="250" cy="150" r="60" fill="#f59e0b" opacity="0.3"/>
+            <rect x="100" y="250" width="300" height="200" rx="8" fill="#1e293b"/>
+            <rect x="130" y="280" width="60" height="60" rx="4" fill="#f59e0b" opacity="0.4"/>
+            <rect x="220" y="280" width="60" height="60" rx="4" fill="#f59e0b" opacity="0.4"/>
+            <rect x="310" y="280" width="60" height="60" rx="4" fill="#f59e0b" opacity="0.4"/>
+            <rect x="130" y="370" width="60" height="60" rx="4" fill="#f59e0b" opacity="0.4"/>
+            <rect x="220" y="370" width="60" height="60" rx="4" fill="#f59e0b" opacity="0.4"/>
+            <rect x="310" y="370" width="60" height="60" rx="4" fill="#f59e0b" opacity="0.4"/>
+            <text x="250" y="480" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.5)" font-family="Arial">BSH — Notre équipe à votre service</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES SECTION WITH DETAILS -->
+  <section class="section section-bg">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span style="color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.9rem;">Ce qui nous guide</span>
+        <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--primary); margin-top: 10px;" id="about-values-title">Nos valeurs</h2>
+        <p style="color: var(--text-muted);" id="about-values-subtitle">Les principes fondamentaux qui guident chacune de nos actions chez BSH.</p>
+      </div>
+      
+      <div class="values-grid" id="about-values-container">
+        <!-- 6 VALEURS AVEC DETAILS EN FALLBACK -->
+        <div class="value-card">
+          <div class="value-icon">⚖️</div>
+          <h4>Éthique</h4>
+          <p>Transparence totale dans nos relations commerciales. Pas de coûts cachés, pas de surprises. Nous travaillons dans le respect rigoureux des normes morales et contractuelles.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🎯</div>
+          <h4>Excellence</h4>
+          <p>Nous visons l'excellence dans chaque projet, de la conception 3D à la livraison des clés. Nous formons notre personnel aux techniques de construction modernes.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h4>Confiance</h4>
+          <p>La confiance de nos clients est notre bien le plus précieux. Nous la méritons chaque jour par notre ponctualité, notre rigueur et notre communication transparente.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🌍</div>
+          <h4>Durabilité</h4>
+          <p>Nous construisons pour durer. Nous sélectionnons des matériaux certifiés de haute qualité et mettons en œuvre des techniques d'étanchéité et de structure de pointe.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💡</div>
+          <h4>Innovation</h4>
+          <p>Nous adoptons de nouvelles solutions techniques (peintures isolantes, structures d'étanchéité modernes, outils digitaux) pour optimiser les performances énergétiques de vos bâtis.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🫂</div>
+          <h4>Respect</h4>
+          <p>Le respect de nos engagements, de nos clients, de nos ouvriers sur chantiers, de votre budget ainsi que des normes environnementales locales du Bénin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGAL & TRUST BADGE SECTION -->
+  <section class="section" style="padding: 40px 0; background-color: var(--bg-light); border-top: 1px solid var(--border-color);">
+    <div class="container" style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 30px; text-align: center;">
+      <div style="flex: 1; min-width: 250px;">
+        <span style="font-size: 2rem; display: block; margin-bottom: 10px;">📋</span>
+        <strong style="color: var(--primary); display: block; font-size: 1.1rem; margin-bottom: 5px;">Enregistrement Officiel</strong>
+        <span class="legal-rccm" style="color: var(--text-muted); font-weight: 600;">N° RCCM RB/COT/26 B 12345</span>
+      </div>
+      <div style="flex: 1; min-width: 250px; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">
+        <span style="font-size: 2rem; display: block; margin-bottom: 10px;">🏦</span>
+        <strong style="color: var(--primary); display: block; font-size: 1.1rem; margin-bottom: 5px;">Identifiant Fiscal Unique</strong>
+        <span class="legal-ifu" style="color: var(--text-muted); font-weight: 600;">N° IFU 3202612345678</span>
+      </div>
+      <div style="flex: 1; min-width: 250px;">
+        <span style="font-size: 2rem; display: block; margin-bottom: 10px;">🛡️</span>
+        <strong style="color: var(--primary); display: block; font-size: 1.1rem; margin-bottom: 5px;">Entreprise Agréée</strong>
+        <span style="color: var(--text-muted); font-weight: 600;">Ministère du Cadre de Vie (Bénin)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>📍 Abomey-Calavi, Bénin</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Chargement dynamique de la page à propos
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch('/data/about.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+          if (data.history_title) document.getElementById('about-history-title').textContent = data.history_title;
+          if (data.history_text_1) document.getElementById('about-history-text-1').textContent = data.history_text_1;
+          if (data.history_text_2) document.getElementById('about-history-text-2').textContent = data.history_text_2;
+          if (data.mission_title) document.getElementById('about-mission-title').textContent = data.mission_title;
+          if (data.mission_text) document.getElementById('about-mission-text').textContent = data.mission_text;
+          if (data.vision_title) document.getElementById('about-vision-title').textContent = data.vision_title;
+          if (data.vision_text) document.getElementById('about-vision-text').textContent = data.vision_text;
+          if (data.values_title) document.getElementById('about-values-title').textContent = data.values_title;
+          if (data.values_subtitle) document.getElementById('about-values-subtitle').textContent = data.values_subtitle;
+
+          if (data.values && data.values.length > 0) {
+            const container = document.getElementById('about-values-container');
+            container.innerHTML = '';
+            data.values.forEach(v => {
+              container.innerHTML += `
+                <div class="value-card">
+                  <div class="value-icon">${v.icon}</div>
+                  <h4>${v.title}</h4>
+                  <p>${v.description}</p>
+                </div>
+              `;
+            });
+          }
+        })
+        .catch(err => console.warn("Attention : Données À Propos chargées depuis la version statique HTML.", err));
+    });
+  </script>
+</body>
+</html>

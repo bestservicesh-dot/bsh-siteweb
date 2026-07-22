@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recrutement & Opportunités | BSH Bénin</title>
+  <meta name="description" content="Rejoignez les équipes de BSH (Best Services and House) au Bénin. Consultez nos offres d'emploi et déposez votre candidature en ligne.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Spécifique à la page de Recrutement */
+    .opp-hero {
+      background: linear-gradient(135deg, var(--primary) 40%, var(--primary-light) 100%);
+      color: var(--bg-white);
+      padding: 60px 0;
+      text-align: center;
+    }
+    .opp-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+    .opp-hero p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+    .job-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+      margin-top: 40px;
+    }
+    .job-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .job-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    .job-details {
+      flex: 1;
+      min-width: 280px;
+    }
+    .job-title {
+      font-size: 1.4rem;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .job-meta {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    .job-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .job-badge-contract {
+      background: #fef3c7;
+      color: #b45309;
+      padding: 3px 10px;
+      border-radius: 30px;
+    }
+    .job-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    /* Formulaire candidature (Section ou Modal) */
+    .apply-section {
+      display: none; /* Rendu visible quand on clique sur postuler */
+      background: var(--bg-light);
+      border-radius: 16px;
+      padding: 40px;
+      margin-top: 40px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+    }
+    .apply-section.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+      </div>
+      <div class="top-bar-right">
+        <span class="address-text">📍 Abomey-Calavi, Bénin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="realisations.html">Nos Réalisations</a></li>
+        <li><a href="opportunites.html" style="color: var(--accent);">Opportunités</a></li>
+        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- OPPORTUNITIES HERO -->
+  <div class="opp-hero">
+    <div class="container">
+      <h1 id="recrutement-title">Recrutement & Carrières</h1>
+      <p id="recrutement-subtitle">Rejoignez une équipe de passionnés et participez à la construction du Bénin de demain.</p>
+    </div>
+  </div>
+
+  <!-- JOBS LIST SECTION -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Nos offres d'emploi actuelles</h2>
+        <p>Parcourez nos opportunités de carrière et soumettez votre dossier directement en ligne.</p>
+      </div>
+
+      <div class="job-grid" id="job-container">
+        <!-- Rempli dynamiquement (Fallbacks statiques) -->
+        <div class="job-card">
+          <div class="job-details">
+            <h3 class="job-title">Conducteur de Travaux Principal (H/F)</h3>
+            <div class="job-meta">
+              <span class="job-badge-contract">CDI</span>
+              <span>📍 Cotonou / Abomey-Calavi</span>
+              <span>📅 Limite : 15 Août 2026</span>
+            </div>
+            <p class="job-desc">Nous recherchons un Conducteur de Travaux expérimenté pour superviser nos chantiers de construction résidentiels et commerciaux. Vous serez garant de la qualité des travaux, du respect des délais et du budget.</p>
+          </div>
+          <button class="btn btn-primary btn-apply" data-id="conducteur-travaux" data-title="Conducteur de Travaux Principal (H/F)">Postuler en ligne</button>
+        </div>
+      </div>
+
+      <!-- FORMULAIRE DE CANDIDATURE (S'active au clic) -->
+      <div class="apply-section" id="applySection">
+        <h2 style="font-size: 1.75rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; text-align: center;">Déposer ma candidature</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Poste : <strong id="selectedJobTitle" style="color: var(--accent);">Conducteur de Travaux</strong></p>
+
+        <form id="candidateForm">
+          <input type="hidden" id="selectedJobId" value="">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="candLastName">Nom *</label>
+              <input type="text" id="candLastName" class="form-control" placeholder="Votre nom de famille" required>
+            </div>
+            <div class="form-group">
+              <label for="candFirstName">Prénom *</label>
+              <input type="text" id="candFirstName" class="form-control" placeholder="Vos prénoms" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="candAddress">Adresse de résidence *</label>
+              <input type="text" id="candAddress" class="form-control" placeholder="Ex: Abomey-Calavi, Quartier Zogbadjè" required>
+            </div>
+            <div class="form-group">
+              <label for="candNationality">Nationalité *</label>
+              <input type="text" id="candNationality" class="form-control" placeholder="Ex: Béninoise" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="candExpYears">Nombre d'années d'expérience *</label>
+              <input type="number" id="candExpYears" class="form-control" min="0" placeholder="Ex: 5" required>
+            </div>
+            <div class="form-group">
+              <label for="candSalary">Prétention salariale (Mensuelle nette en FCFA) *</label>
+              <input type="text" id="candSalary" class="form-control" placeholder="Ex: 350 000 FCFA" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="candPhone">Numéro de Téléphone *</label>
+              <input type="tel" id="candPhone" class="form-control" placeholder="Ex: +229 01 48 52 45 90" required>
+            </div>
+            <div class="form-group">
+              <label for="candEmail">Adresse Email *</label>
+              <input type="email" id="candEmail" class="form-control" placeholder="Ex: candidat@mail.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="candCV">Téléverser votre CV (Format PDF uniquement) *</label>
+            <input type="file" id="candCV" class="form-control" accept=".pdf" required>
+            <small style="color: var(--text-muted); display: block; margin-top: 5px;">Taille maximale conseillée : 5 Mo.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="candMotivation">Lettre de Motivation / Message aux recruteurs *</label>
+            <textarea id="candMotivation" class="form-control" rows="6" placeholder="Expliquez en quelques lignes votre motivation à rejoindre BSH au Bénin..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 10px;">
+            ✉️ Soumettre ma candidature gratuitement
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>📍 Abomey-Calavi, Bénin</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Chargement dynamique des offres de recrutement
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch('/data/recrutements.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+          if (data.title) document.getElementById('recrutement-title').textContent = data.title;
+          if (data.subtitle) document.getElementById('recrutement-subtitle').textContent = data.subtitle;
+
+          if (data.items && data.items.length > 0) {
+            const container = document.getElementById('job-container');
+            container.innerHTML = '';
+            data.items.forEach(job => {
+              container.innerHTML += `
+                <div class="job-card">
+                  <div class="job-details">
+                    <h3 class="job-title">${job.title}</h3>
+                    <div class="job-meta">
+                      <span class="job-badge-contract">${job.contract}</span>
+                      <span>📍 ${job.location}</span>
+                      <span>📅 Limite : ${job.deadline}</span>
+                    </div>
+                    <p class="job-desc">${job.description}</p>
+                  </div>
+                  <button class="btn btn-primary btn-apply" data-id="${job.id}" data-title="${job.title}">Postuler en ligne</button>
+                </div>
+              `;
+            });
+
+            // Attacher les écouteurs sur les boutons postuler générés
+            attachApplyListeners();
+          }
+        })
+        .catch(err => {
+          console.warn("Attention : Données recrutement chargées depuis la version statique HTML fallback.", err);
+          attachApplyListeners();
+        });
+
+      function attachApplyListeners() {
+        const buttons = document.querySelectorAll('.btn-apply');
+        const section = document.getElementById('applySection');
+        const titleEl = document.getElementById('selectedJobTitle');
+        const idInput = document.getElementById('selectedJobId');
+
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const title = btn.getAttribute('data-title');
+
+            titleEl.textContent = title;
+            idInput.value = id;
+
+            // Faire défiler l'écran jusqu'au formulaire d'inscription
+            section.classList.add('active');
+            section.scrollIntoView({ behavior: 'smooth' });
+          });
+        });
+      }
+
+      // Gestion de la soumission du formulaire candidat
+      const form = document.getElementById('candidateForm');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Récupérer les données du formulaire
+        const job = document.getElementById('selectedJobTitle').textContent;
+        const nom = document.getElementById('candLastName').value;
+        const prenom = document.getElementById('candFirstName').value;
+        const adresse = document.getElementById('candAddress').value;
+        const nationalite = document.getElementById('candNationality').value;
+        const exp = document.getElementById('candExpYears').value;
+        const salaire = document.getElementById('candSalary').value;
+        const tel = document.getElementById('candPhone').value;
+        const email = document.getElementById('candEmail').value;
+        const motivation = document.getElementById('candMotivation').value;
+
+        // Préparer un message WhatsApp ou simulation d'envoi
+        alert(`Félicitations ${prenom} ${nom} !\nVotre candidature pour le poste de [${job}] a été simulée avec succès.\n\nDans un environnement réel, le CV aurait été envoyé vers notre espace de stockage, et les recruteurs de BSH auraient reçu un email avec toutes vos coordonnées.`);
+        
+        // Optionnel : on redirige les recruteurs ou on affiche un message de réussite esthétique
+        form.reset();
+        document.getElementById('applySection').classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>

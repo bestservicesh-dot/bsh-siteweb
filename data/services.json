@@ -1,0 +1,108 @@
+{
+  "primary_title": "🏗️ Services principaux — BTP & Bâtiment",
+  "primary_subtitle": "Notre cœur de métier : de la construction à la finition, BSH vous accompagne à chaque étape de votre projet avec expertise et professionnalisme.",
+  "primary_services": [
+    {
+      "id": "construction-batiment",
+      "icon": "🏗️",
+      "title": "Construction de bâtiment",
+      "description": "Construction complète de bâtiments résidentiels, commerciaux et industriels. Du gros œuvre aux finitions.",
+      "link": "services/construction-batiment.html"
+    },
+    {
+      "id": "renovation",
+      "icon": "🔨",
+      "title": "Rénovation de bâtiment",
+      "description": "Rénovation complète ou partielle : modernisation, extension, remise à neuf de vos espaces.",
+      "link": "services/renovation.html"
+    },
+    {
+      "id": "etancheite",
+      "icon": "💧",
+      "title": "Étanchéité",
+      "description": "Solutions d'étanchéité pour toitures, terrasses, fondations et murs. Protection durable contre les infiltrations.",
+      "link": "services/etancheite.html"
+    },
+    {
+      "id": "reparation-toiture",
+      "icon": "🏠",
+      "title": "Réparation de toiture",
+      "description": "Diagnostic, réparation et remplacement de toiture. Intervention rapide pour stopper les fuites.",
+      "link": "services/reparation-toiture.html"
+    },
+    {
+      "id": "peinture-decoration",
+      "icon": "🎨",
+      "title": "Peinture et décoration",
+      "description": "Peinture intérieure et extérieure, décoration personnalisée. Finitions soignées et durables.",
+      "link": "services/peinture-decoration.html"
+    },
+    {
+      "id": "carrelage",
+      "icon": "🧱",
+      "title": "Carrelage",
+      "description": "Pose de carrelage sol et mural. Large choix de matériaux et motifs pour tous vos espaces.",
+      "link": "services/carrelage.html"
+    },
+    {
+      "id": "pavage-assainissement",
+      "icon": "🛣️",
+      "title": "Pavage et assainissement",
+      "description": "Pavage de cours, allées et espaces extérieurs. Travaux d'assainissement et drainage.",
+      "link": "services/pavage-assainissement.html"
+    },
+    {
+      "id": "reparation-fissures",
+      "icon": "🔧",
+      "title": "Réparation de fissures",
+      "description": "Diagnostic structurel et réparation de fissures sur dalles, murs et fondations.",
+      "link": "services/reparation-fissures.html"
+    },
+    {
+      "id": "isolation",
+      "icon": "🔇",
+      "title": "Isolation thermique et acoustique",
+      "description": "Isolation performante pour un confort optimal. Réduction des coûts énergétiques.",
+      "link": "services/isolation.html"
+    },
+    {
+      "id": "entretien-nettoyage",
+      "icon": "🧹",
+      "title": "Entretien et nettoyage",
+      "description": "Entretien régulier de bâtiments, nettoyage professionnel de chantiers et espaces commerciaux.",
+      "link": "services/entretien-nettoyage.html"
+    }
+  ],
+  "secondary_title": "🌟 Services secondaires — Au-delà du BTP",
+  "secondary_subtitle": "BSH, c'est aussi des services complémentaires pour répondre à tous vos besoins professionnels et quotidiens au Bénin.",
+  "secondary_services": [
+    {
+      "id": "creation-site-web",
+      "icon": "🌐",
+      "title": "Création de site web",
+      "description": "Sites vitrines, e-commerce, applications web. Présence digitale professionnelle pour votre entreprise.",
+      "link": "services/creation-site-web.html"
+    },
+    {
+      "id": "evenementiel",
+      "icon": "🎪",
+      "title": "Événementiel",
+      "description": "Organisation d'événements clé en main : mariages, séminaires, conférences, fêtes d'entreprise.",
+      "link": "services/evenementiel.html"
+    },
+    {
+      "id": "savons-produits-entretien",
+      "icon": "🧼",
+      "title": "Savons et produits d'entretien",
+      "description": "Fabrication artisanale de savons naturels et produits d'entretien de qualité. Livraison à domicile.",
+      "link": "services/savons-produits-entretien.html"
+    },
+    {
+      "id": "distribution-fruits-legumes",
+      "icon": "🥑",
+      "title": "Distribution de fruits et légumes",
+      "description": "Produits frais du producteur à votre table. Livraison particuliers, restaurants et entreprises.",
+      "link": "services/distribution-fruits-legumes.html"
+    }
+  ]
+}

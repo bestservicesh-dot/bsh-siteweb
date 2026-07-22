@@ -1,0 +1,27 @@
+{
+  "title": "Ce que disent nos clients",
+  "subtitle": "La satisfaction de nos clients au Bénin est notre plus grande fierté.",
+  "items": [
+    {
+      "name": "Adjovi K.",
+      "role": "Propriétaire",
+      "city": "Cotonou",
+      "rating": 5,
+      "comment": "BSH a construit notre maison familiale à Cotonou. Travail impeccable, respect des délais et du budget. Je recommande vivement cette entreprise sérieuse et professionnelle."
+    },
+    {
+      "name": "Fatimatou S.",
+      "role": "Propriétaire",
+      "city": "Porto-Novo",
+      "rating": 5,
+      "comment": "Problème d'étanchéité résolu en un temps record. Depuis les travaux de BSH, plus aucune infiltration. Très satisfaite du rapport qualité-prix."
+    },
+    {
+      "name": "Marc D.",
+      "role": "Directeur d'entreprise",
+      "city": "Calavi",
+      "rating": 5,
+      "comment": "Excellent travail de rénovation sur notre immeuble de bureaux. L'équipe est compétente, à l'écoute et les finitions sont de grande qualité. Merci BSH !"
+    }
+  ]
+}

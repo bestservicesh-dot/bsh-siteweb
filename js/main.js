@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return res.json();
     })
     .then(data => {
-      // Mettre à jour les informations de contact (Téléphone, Email, Adresse, WhatsApp)
+      // --- LIAISON CLASSIQUE (PAR CLASSES & IDS) ---
       if (data.phone) {
         document.querySelectorAll('.phone-text').forEach(el => el.textContent = data.phone);
         document.querySelectorAll('.phone-link').forEach(el => el.href = `tel:${data.phone.replace(/[^0-9+]/g, '')}`);
@@ -61,38 +61,79 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.legal-ifu').forEach(el => el.textContent = data.ifu);
       }
 
-      // Mettre à jour les réseaux sociaux de manière dynamique
+      // Mettre à jour les réseaux sociaux classique
       if (data.facebook_url) {
         document.querySelectorAll('.facebook-link').forEach(el => {
           el.href = data.facebook_url;
-          el.removeAttribute('style'); // s'assurer qu'il est visible s'il était caché
+          el.style.display = 'inline-flex';
         });
       }
       if (data.linkedin_url) {
         document.querySelectorAll('.linkedin-link').forEach(el => {
           el.href = data.linkedin_url;
-          el.removeAttribute('style');
+          el.style.display = 'inline-flex';
         });
       }
       if (data.instagram_url) {
         document.querySelectorAll('.instagram-link').forEach(el => {
           el.href = data.instagram_url;
-          el.removeAttribute('style');
+          el.style.display = 'inline-flex';
         });
       }
       if (data.tiktok_url) {
         document.querySelectorAll('.tiktok-link').forEach(el => {
           el.href = data.tiktok_url;
-          el.removeAttribute('style');
+          el.style.display = 'inline-flex';
         });
       }
 
-      // Mettre à jour le Logo BSH de manière dynamique (si téléversé dans l'Admin)
+      // Mettre à jour le Logo BSH classique
       if (data.logo_url) {
         document.querySelectorAll('.logo-container').forEach(el => {
           el.innerHTML = `<img src="${data.logo_url}" alt="BSH Logo" style="max-height: 45px; width: auto; object-fit: contain;">`;
         });
       }
+
+      // --- LIAISON UNIVERSELLE PAR ATTRIBUT [data-field] ---
+      // (Pour garantir la compatibilité absolue avec tous vos fichiers HTML d'origine !)
+      document.querySelectorAll('[data-field]').forEach(el => {
+        const fieldName = el.getAttribute('data-field');
+        
+        if (fieldName === 'phone' && data.phone) {
+          if (el.tagName === 'A') el.href = `tel:${data.phone.replace(/[^0-9+]/g, '')}`;
+          el.textContent = data.phone;
+        }
+        else if (fieldName === 'email' && data.email) {
+          if (el.tagName === 'A') el.href = `mailto:${data.email}`;
+          el.textContent = data.email;
+        }
+        else if (fieldName === 'whatsapp-link' && data.whatsapp) {
+          el.href = data.whatsapp;
+        }
+        else if (fieldName === 'facebook-link' && data.facebook_url) {
+          el.href = data.facebook_url;
+          el.style.display = 'inline-flex';
+        }
+        else if (fieldName === 'linkedin-link' && data.linkedin_url) {
+          el.href = data.linkedin_url;
+          el.style.display = 'inline-flex';
+        }
+        else if (fieldName === 'instagram-link' && data.instagram_url) {
+          el.href = data.instagram_url;
+          el.style.display = 'inline-flex';
+        }
+        else if (fieldName === 'tiktok-link' && data.tiktok_url) {
+          el.href = data.tiktok_url;
+          el.style.display = 'inline-flex';
+        }
+        else if (fieldName === 'logo' && data.logo_url) {
+          if (el.tagName === 'IMG') {
+            el.src = data.logo_url;
+          } else {
+            el.innerHTML = `<img src="${data.logo_url}" alt="Logo" style="max-height: 45px; width: auto; object-fit: contain;">`;
+          }
+        }
+      });
 
       // Mettre à jour l'en-tête Hero
       if (data.hero_title) {

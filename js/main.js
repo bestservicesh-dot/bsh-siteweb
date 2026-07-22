@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cacheBuster = `?v=${Date.now()}`;
 
   // ---------------------------------------------------------
-  // 1. CHARGEMENT DES INFOS GENERALES & CONTACT
+  // 1. CHARGEMENT DES INFOS GENERALES, LOGO & RESEAUX
   // ---------------------------------------------------------
   fetch('/data/general.json' + cacheBuster)
     .then(res => {
@@ -59,6 +59,39 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (data.ifu) {
         document.querySelectorAll('.legal-ifu').forEach(el => el.textContent = data.ifu);
+      }
+
+      // Mettre à jour les réseaux sociaux de manière dynamique
+      if (data.facebook_url) {
+        document.querySelectorAll('.facebook-link').forEach(el => {
+          el.href = data.facebook_url;
+          el.removeAttribute('style'); // s'assurer qu'il est visible s'il était caché
+        });
+      }
+      if (data.linkedin_url) {
+        document.querySelectorAll('.linkedin-link').forEach(el => {
+          el.href = data.linkedin_url;
+          el.removeAttribute('style');
+        });
+      }
+      if (data.instagram_url) {
+        document.querySelectorAll('.instagram-link').forEach(el => {
+          el.href = data.instagram_url;
+          el.removeAttribute('style');
+        });
+      }
+      if (data.tiktok_url) {
+        document.querySelectorAll('.tiktok-link').forEach(el => {
+          el.href = data.tiktok_url;
+          el.removeAttribute('style');
+        });
+      }
+
+      // Mettre à jour le Logo BSH de manière dynamique (si téléversé dans l'Admin)
+      if (data.logo_url) {
+        document.querySelectorAll('.logo-container').forEach(el => {
+          el.innerHTML = `<img src="${data.logo_url}" alt="BSH Logo" style="max-height: 45px; width: auto; object-fit: contain;">`;
+        });
       }
 
       // Mettre à jour l'en-tête Hero

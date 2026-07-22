@@ -16,13 +16,18 @@ collections:
       preview: false
     files:
       - file: "data/general.json"
-        label: "📞 Contact & Accueil"
+        label: "📞 Contact, Logo & Réseaux"
         name: "general"
         fields:
-          - { label: "Téléphone", name: "phone", widget: "string" }
+          - { label: "Téléphone BSH", name: "phone", widget: "string" }
           - { label: "Adresse Email", name: "email", widget: "string" }
           - { label: "Adresse physique", name: "address", widget: "string" }
           - { label: "Lien WhatsApp direct", name: "whatsapp", widget: "string" }
+          - { label: "Logo d'entreprise (Image personnalisée)", name: "logo_url", widget: "image", required: false }
+          - { label: "Lien Page Facebook", name: "facebook_url", widget: "string", required: false }
+          - { label: "Lien Page LinkedIn", name: "linkedin_url", widget: "string", required: false }
+          - { label: "Lien Page Instagram", name: "instagram_url", widget: "string", required: false }
+          - { label: "Lien Page TikTok", name: "tiktok_url", widget: "string", required: false }
           - { label: "Registre de Commerce (RCCM)", name: "rccm", widget: "string" }
           - { label: "Identifiant Fiscal Unique (IFU)", name: "ifu", widget: "string" }
           - { label: "Titre principal de l'accueil", name: "hero_title", widget: "string" }
@@ -36,7 +41,10 @@ collections:
           - { label: "Titre de la section À propos", name: "about_title", widget: "string" }
           - { label: "À propos - Paragraphe 1", name: "about_text_1", widget: "text" }
           - { label: "À propos - Paragraphe 2", name: "about_text_2", widget: "text" }
-          - { label: "À propos - Atouts clés", name: "about_features", widget: "list" }
+          - label: "À propos - Atouts clés"
+            name: "about_features"
+            widget: "list"
+            field: { label: "Atout", widget: "string" }
 
       - file: "data/about.json"
         label: "ℹ️ Page À Propos (Histoire & Valeurs)"

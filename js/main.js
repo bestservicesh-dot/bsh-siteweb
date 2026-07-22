@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="service-icon">${srv.icon || '🏗️'}</div>
               <h3>${srv.title}</h3>
               <p>${srv.description}</p>
-              <a href="${srv.link || '#'}" class="service-link">En savoir plus →</a>
+              <a href="/service-details.html?id=${srv.id}" class="service-link">En savoir plus →</a>
             </div>
           `;
         });
@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="service-icon">${srv.icon || '🌟'}</div>
               <h3>${srv.title}</h3>
               <p>${srv.description}</p>
-              <a href="${srv.link || '#'}" class="service-link">En savoir plus →</a>
+              <a href="/service-details.html?id=${srv.id}" class="service-link">En savoir plus →</a>
             </div>
           `;
         });

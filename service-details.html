@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails du Service — BSH Bénin</title>
+  <meta name="description" content="Découvrez les détails de nos prestations professionnelles en BTP, construction, rénovation, étanchéité et services digitaux au Bénin.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Spécifique à la page de détails de service */
+    .srv-hero {
+      background: linear-gradient(135deg, var(--primary) 40%, var(--primary-light) 100%);
+      color: var(--bg-white);
+      padding: 70px 0;
+      text-align: center;
+    }
+    .srv-icon-big {
+      font-size: 3.5rem;
+      background-color: #1e293b;
+      width: 90px;
+      height: 90px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 3px solid var(--accent);
+      box-shadow: var(--shadow-lg);
+    }
+    .srv-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+    .srv-content-box {
+      max-width: 850px;
+      margin: 40px auto;
+      background: var(--bg-white);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+    }
+    .srv-description {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+    .back-services {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .back-services:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP CONTACT BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+      </div>
+      <div class="top-bar-right">
+        <span class="address-text">📍 Abomey-Calavi, Bénin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="realisations.html">Nos Réalisations</a></li>
+        <li><a href="opportunites.html">Opportunités</a></li>
+        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- SERVICE HERO -->
+  <div class="srv-hero">
+    <div class="container">
+      <div id="srvIcon" class="srv-icon-big">🏗️</div>
+      <h1 id="srvTitle">Nom du Service</h1>
+      <p id="srvCategory">Prestation d'excellence par BSH Bénin</p>
+    </div>
+  </div>
+
+  <!-- SERVICE DETAIL BOX -->
+  <div class="container">
+    <div class="srv-content-box">
+      <a href="index.html#services" class="back-services">← Retourner à la liste de nos services</a>
+      
+      <p id="srvDesc" class="srv-description">Chargement des détails du service...</p>
+
+      <div style="border-top: 1px solid var(--border-color); padding-top: 30px; margin-top: 30px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <h3 style="color: var(--primary); font-weight: 800; font-size: 1.35rem; margin-bottom: 10px;">Intéressé par cette prestation ?</h3>
+        <p style="color: var(--text-muted); margin-bottom: 25px; max-width: 500px;">Contactez nos ingénieurs et techniciens d'expérience pour obtenir une étude technique et un devis gratuit pour vos travaux.</p>
+        <div class="hero-actions" style="justify-content: center; gap: 15px; width: 100%;">
+          <a id="ctaDevis" href="devis.html" class="btn btn-primary" style="padding: 14px 30px; font-size: 1.05rem;">Obtenir mon devis gratuit</a>
+          <a href="#" class="btn btn-whatsapp whatsapp-link" target="_blank" rel="noopener" style="padding: 14px 30px; font-size: 1.05rem;">Discuter sur WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" style="text-align: center;">
+      <div class="logo-text" style="color: #fff; margin-bottom: 15px; justify-content: center; display: flex;">BSH<span>.</span></div>
+      <p style="max-width: 500px; margin: 0 auto 20px auto; color: #94a3b8; font-size: 0.9rem;">Best Services and House (BSH) est votre partenaire de confiance au Bénin pour tous travaux de BTP, construction gros œuvre, étanchéité, carrelage, pavage et rénovation.</p>
+      <div class="social-links" style="margin: 0 auto 25px auto; display: flex; gap: 10px; justify-content: center;">
+        <a href="https://facebook.com/bestservicesandhouse" class="facebook-link" target="_blank" rel="noopener" title="Facebook" style="font-weight: bold; font-family: sans-serif;">f</a>
+        <a href="https://linkedin.com/company/bestservicesandhouse" class="linkedin-link" target="_blank" rel="noopener" title="LinkedIn" style="font-weight: bold; font-family: sans-serif;">in</a>
+        <a href="https://instagram.com/bestservicesandhouse" class="instagram-link" target="_blank" rel="noopener" title="Instagram" style="font-weight: bold; font-family: sans-serif;">ig</a>
+        <a href="https://tiktok.com/@bestservicesandhouse" class="tiktok-link" target="_blank" rel="noopener" title="TikTok" style="font-weight: bold; font-family: sans-serif;">tk</a>
+      </div>
+      <div class="footer-bottom" style="border-top: 1px solid #1e293b; padding-top: 20px;">
+        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>📍 Abomey-Calavi, Bénin</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Lire le paramètre 'id' dans l'URL (ex: service-details.html?id=etancheite)
+      const urlParams = new URLSearchParams(window.location.search);
+      const serviceId = urlParams.get('id');
+
+      if (!serviceId) {
+        window.location.href = "index.html#services";
+        return;
+      }
+
+      // 2. Charger les services depuis services.json
+      fetch('/data/services.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+          // Chercher d'abord dans les services principaux, puis secondaires
+          let service = null;
+          let isPrimary = true;
+
+          if (data.primary_services) {
+            service = data.primary_services.find(s => s.id === serviceId);
+          }
+          if (!service && data.secondary_services) {
+            service = data.secondary_services.find(s => s.id === serviceId);
+            isPrimary = false;
+          }
+
+          if (service) {
+            // Remplir les données dynamiquement
+            document.title = `${service.title} — BSH Bénin`;
+            document.getElementById('srvIcon').textContent = service.icon || '🏗️';
+            document.getElementById('srvTitle').textContent = service.title;
+            document.getElementById('srvCategory').textContent = isPrimary ? "Service Principal BTP & Bâtiment" : "Prestation de diversification BSH";
+            document.getElementById('srvDesc').textContent = service.description;
+
+            // Paramétrer le bouton Devis pour pré-sélectionner ce service
+            document.getElementById('ctaDevis').href = `devis.html?service=${encodeURIComponent(service.title)}`;
+          } else {
+            document.getElementById('srvDesc').textContent = "Service non trouvé ou expiré.";
+          }
+        })
+        .catch(err => {
+          console.error("Erreur de chargement du service :", err);
+          document.getElementById('srvDesc').textContent = "Impossible de charger les détails du service pour le moment.";
+        });
+    });
+  </script>
+</body>
+</html>

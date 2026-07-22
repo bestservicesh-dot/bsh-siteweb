@@ -193,6 +193,30 @@
 
   <script src="js/main.js"></script>
   <script>
+    // Pré-sélectionner le service demandé via l'URL
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const serviceParam = urlParams.get('service');
+      if (serviceParam) {
+        const select = document.getElementById('serviceType');
+        if (select) {
+          let found = false;
+          for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].text.toLowerCase().includes(serviceParam.toLowerCase()) || 
+                select.options[i].value.toLowerCase().includes(serviceParam.toLowerCase())) {
+              select.selectedIndex = i;
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            const newOpt = new Option(serviceParam, serviceParam, true, true);
+            select.add(newOpt);
+          }
+        }
+      }
+    });
+
     // Script d'envoi du formulaire hybride (Email automatique + WhatsApp en direct)
     document.getElementById('devisForm').addEventListener('submit', function(e) {
       e.preventDefault();

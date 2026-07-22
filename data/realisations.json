@@ -6,37 +6,37 @@
       "title": "Villa résidentielle moderne",
       "category": "Construction",
       "city": "Cotonou",
-      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80"
+      "image": "/assets/images/uploads/whatsapp-image-2026-06-08-at-23.34.49.jpeg"
     },
     {
-      "title": "Immeuble commercial",
+      "title": "Grand Auditorium de 600m² ",
       "category": "Construction",
-      "city": "Abomey-Calavi",
-      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
+      "city": "Natitingou",
+      "image": "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.03.jpeg"
     },
     {
-      "title": "Rénovation complète maison",
-      "category": "Rénovation",
-      "city": "Porto-Novo",
-      "image": "https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80"
+      "title": "Construction de piscine",
+      "category": "Construction",
+      "city": "Natitingou",
+      "image": "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.08.jpeg"
     },
     {
-      "title": "Étanchéité toiture terrasse",
+      "title": "Pose de géomembrane",
       "category": "Étanchéité",
       "city": "Cotonou",
-      "image": "https://images.unsplash.com/photo-1632759162443-112f4002d99d?auto=format&fit=crop&w=600&q=80"
+      "image": "/assets/images/uploads/whatsapp-image-2026-07-05-at-20.40.27.jpeg"
     },
     {
-      "title": "Carrelage et peinture villa",
-      "category": "Finitions",
-      "city": "Godomey",
-      "image": "https://images.unsplash.com/photo-1502005229762-fc1b2381f0db?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      "title": "Pavage cour et allée",
+      "title": "Pavage de la cour ",
       "category": "Pavage",
+      "city": "Ouagadougou",
+      "image": "/assets/images/uploads/capture.png"
+    },
+    {
+      "title": "Construction de site web",
+      "category": "Autres",
       "city": "Calavi",
-      "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80"
+      "image": "/assets/images/uploads/site-web-bsh.png"
     }
   ]
 }

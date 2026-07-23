@@ -1,9 +1,4 @@
-# robots.txt pour bestservicesandhouse.site
 User-agent: *
 Allow: /
 
-# Blocages
-Disallow: /admin/
-
-# Sitemap
 Sitemap: https://www.bestservicesandhouse.site/sitemap.xml

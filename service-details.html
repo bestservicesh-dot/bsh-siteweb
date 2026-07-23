@@ -35,6 +35,9 @@
       font-weight: 850;
       margin-bottom: 10px;
     }
+    .srv-hero p {
+      color: #94a3b8;
+    }
     .srv-content-box {
       max-width: 850px;
       margin: 40px auto;
@@ -48,7 +51,27 @@
       font-size: 1.15rem;
       line-height: 1.8;
       color: var(--text-muted);
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+    }
+    .srv-price-box {
+      background-color: #fef3c7;
+      border-left: 5px solid var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 35px;
+    }
+    .srv-price-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #b45309;
+      margin-bottom: 5px;
+      letter-spacing: 0.05em;
+    }
+    .srv-price-value {
+      font-size: 1.6rem;
+      font-weight: 850;
+      color: #92400e;
     }
     .back-services {
       display: inline-flex;
@@ -120,6 +143,12 @@
       
       <p id="srvDesc" class="srv-description">Chargement des détails du service...</p>
 
+      <!-- Zone d'affichage des tarifs unitaires configurables de l'Admin -->
+      <div class="srv-price-box">
+        <div class="srv-price-title">Tarif indicatif</div>
+        <div id="srvPrice" class="srv-price-value">Chargement du tarif...</div>
+      </div>
+
       <div style="border-top: 1px solid var(--border-color); padding-top: 30px; margin-top: 30px; display: flex; flex-direction: column; align-items: center; text-align: center;">
         <h3 style="color: var(--primary); font-weight: 800; font-size: 1.35rem; margin-bottom: 10px;">Intéressé par cette prestation ?</h3>
         <p style="color: var(--text-muted); margin-bottom: 25px; max-width: 500px;">Contactez nos ingénieurs et techniciens d'expérience pour obtenir une étude technique et un devis gratuit pour vos travaux.</p>
@@ -184,6 +213,9 @@
             document.getElementById('srvTitle').textContent = service.title;
             document.getElementById('srvCategory').textContent = isPrimary ? "Service Principal BTP & Bâtiment" : "Prestation de diversification BSH";
             document.getElementById('srvDesc').textContent = service.description;
+            
+            // Afficher le tarif dynamique configuré depuis l'Admin
+            document.getElementById('srvPrice').textContent = service.price || "Sur devis personnalisé";
 
             // Paramétrer le bouton Devis pour pré-sélectionner ce service
             document.getElementById('ctaDevis').href = `devis.html?service=${encodeURIComponent(service.title)}`;

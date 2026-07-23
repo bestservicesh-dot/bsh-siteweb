@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recrutement & Opportunités | BSH Bénin</title>
-  <meta name="description" content="Rejoignez les équipes de BSH (Best Services and House) au Bénin. Consultez nos offres d'emploi et déposez votre candidature en ligne.">
+  <title>Opportunités : Recrutement & Immobilier | BSH Bénin</title>
+  <meta name="description" content="Découvrez nos opportunités de carrières (recrutement) et nos offres d'investissements immobiliers (vente, location de parcelles et maisons) au Bénin.">
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* Spécifique à la page de Recrutement */
+    /* Spécifique à la page de Recrutement & Immobilier */
     .opp-hero {
       background: linear-gradient(135deg, var(--primary) 40%, var(--primary-light) 100%);
       color: var(--bg-white);
@@ -26,12 +26,47 @@
       color: #94a3b8;
       font-size: 1.1rem;
     }
-    .job-grid {
+    
+    /* Onglets de navigation interactifs */
+    .opp-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 40px auto 20px auto;
+      border-bottom: 2px solid var(--border-color);
+      max-width: 600px;
+    }
+    .opp-tab {
+      padding: 12px 25px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: var(--transition);
+    }
+    .opp-tab.active {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    
+    .opp-content-pane {
+      display: none;
+    }
+    .opp-content-pane.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .job-grid, .immo-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 25px;
-      margin-top: 40px;
+      margin-top: 30px;
     }
+    
+    /* Cartes de recrutement */
     .job-card {
       background: var(--bg-white);
       border: 1px solid var(--border-color);
@@ -85,9 +120,97 @@
       font-size: 0.95rem;
       line-height: 1.6;
     }
+    
+    /* Cartes Immobilières */
+    .immo-grid {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+    .immo-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .immo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    .immo-img-wrapper {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+    .immo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .immo-card:hover .immo-img {
+      transform: scale(1.05);
+    }
+    .immo-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .immo-type-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--primary);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .immo-body {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .immo-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .immo-price {
+      font-size: 1.4rem;
+      font-weight: 850;
+      color: #b45309;
+      margin-bottom: 12px;
+    }
+    .immo-location {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .immo-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
     /* Formulaire candidature (Section ou Modal) */
     .apply-section {
-      display: none; /* Rendu visible quand on clique sur postuler */
+      display: none;
       background: var(--bg-light);
       border-radius: 16px;
       padding: 40px;
@@ -148,21 +271,27 @@
   <!-- OPPORTUNITIES HERO -->
   <div class="opp-hero">
     <div class="container">
-      <h1 id="recrutement-title">Recrutement & Carrières</h1>
-      <p id="recrutement-subtitle">Rejoignez une équipe de passionnés et participez à la construction du Bénin de demain.</p>
+      <h1>Recrutements & Immobilier</h1>
+      <p>Rejoignez nos équipes ou investissez dans l'immobilier d'exception au Bénin avec BSH.</p>
     </div>
   </div>
 
-  <!-- JOBS LIST SECTION -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Nos offres d'emploi actuelles</h2>
-        <p>Parcourez nos opportunités de carrière et soumettez votre dossier directement en ligne.</p>
+  <!-- INTERACTIVE TABS -->
+  <div class="container">
+    <div class="opp-tabs">
+      <div class="opp-tab active" id="tabJobs">💼 Carrières & Recrutement</div>
+      <div class="opp-tab" id="tabImmo">🏠 Annonces Immobilières</div>
+    </div>
+
+    <!-- PANE 1: RECRUTEMENT -->
+    <div class="opp-content-pane active" id="paneJobs">
+      <div class="section-header" style="margin-bottom: 20px;">
+        <h2 id="recrutement-title">Nos offres d'emploi actuelles</h2>
+        <p id="recrutement-subtitle">Parcourez nos opportunités de carrière et soumettez votre dossier directement en ligne.</p>
       </div>
 
       <div class="job-grid" id="job-container">
-        <!-- Rempli dynamiquement (Fallbacks statiques) -->
+        <!-- Rempli dynamiquement -->
         <div class="job-card">
           <div class="job-details">
             <h3 class="job-title">Conducteur de Travaux Principal (H/F)</h3>
@@ -176,81 +305,106 @@
           <button class="btn btn-primary btn-apply" data-id="conducteur-travaux" data-title="Conducteur de Travaux Principal (H/F)">Postuler en ligne</button>
         </div>
       </div>
+    </div>
 
-      <!-- FORMULAIRE DE CANDIDATURE (S'active au clic) -->
-      <div class="apply-section" id="applySection">
-        <h2 style="font-size: 1.75rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; text-align: center;">Déposer ma candidature</h2>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Poste : <strong id="selectedJobTitle" style="color: var(--accent);">Conducteur de Travaux</strong></p>
-
-        <form id="candidateForm">
-          <input type="hidden" id="selectedJobId" value="">
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="candLastName">Nom *</label>
-              <input type="text" id="candLastName" class="form-control" placeholder="Votre nom de famille" required>
-            </div>
-            <div class="form-group">
-              <label for="candFirstName">Prénom *</label>
-              <input type="text" id="candFirstName" class="form-control" placeholder="Vos prénoms" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="candAddress">Adresse de résidence *</label>
-              <input type="text" id="candAddress" class="form-control" placeholder="Ex: Abomey-Calavi, Quartier Zogbadjè" required>
-            </div>
-            <div class="form-group">
-              <label for="candNationality">Nationalité *</label>
-              <input type="text" id="candNationality" class="form-control" placeholder="Ex: Béninoise" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="candExpYears">Nombre d'années d'expérience *</label>
-              <input type="number" id="candExpYears" class="form-control" min="0" placeholder="Ex: 5" required>
-            </div>
-            <div class="form-group">
-              <label for="candSalary">Prétention salariale (Mensuelle nette en FCFA) *</label>
-              <input type="text" id="candSalary" class="form-control" placeholder="Ex: 350 000 FCFA" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="candPhone">Numéro de Téléphone *</label>
-              <input type="tel" id="candPhone" class="form-control" placeholder="Ex: +229 01 48 52 45 90" required>
-            </div>
-            <div class="form-group">
-              <label for="candEmail">Adresse Email *</label>
-              <input type="email" id="candEmail" class="form-control" placeholder="Ex: candidat@mail.com" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="candCV">Téléverser votre CV (Format PDF uniquement) *</label>
-            <input type="file" id="candCV" class="form-control" accept=".pdf" required>
-            <small style="color: var(--text-muted); display: block; margin-top: 5px;">Taille maximale conseillée : 5 Mo.</small>
-          </div>
-
-          <div class="form-group">
-            <label for="candMotivation">Lettre de Motivation / Message aux recruteurs *</label>
-            <textarea id="candMotivation" class="form-control" rows="6" placeholder="Expliquez en quelques lignes votre motivation à rejoindre BSH au Bénin..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 10px;">
-            ✉️ Soumettre ma candidature gratuitement
-          </button>
-        </form>
+    <!-- PANE 2: IMMOBILIER (NEW!) -->
+    <div class="opp-content-pane" id="paneImmo">
+      <div class="section-header" style="margin-bottom: 20px;">
+        <h2 id="immo-title">Nos offres immobilières</h2>
+        <p id="immo-subtitle">Trouvez votre terrain sécurisé ou votre maison de rêve grâce à l'expertise immobilière de BSH.</p>
       </div>
 
+      <div class="immo-grid" id="immo-container">
+        <!-- Rempli dynamiquement -->
+        <div class="immo-card">
+          <div class="immo-img-wrapper">
+            <span class="immo-tag">VENTE</span>
+            <span class="immo-type-badge">Terrain</span>
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80" alt="Terrain" class="immo-img">
+          </div>
+          <div class="immo-body">
+            <h4 class="immo-title">Parcelle sécurisée de 500m²</h4>
+            <div class="immo-price">12 000 000 FCFA</div>
+            <div class="immo-location">📍 Abomey-Calavi, Quartier Zogbadjè</div>
+            <p class="immo-desc">Superbe terrain de 500m² avec titre foncier et levé topographique, idéal pour la construction d'une villa résidentielle ou d'un immeuble de rapports.</p>
+            <a href="#" class="btn btn-primary" style="width: 100%;">Nous contacter pour ce bien</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
+
+    <!-- FORMULAIRE DE CANDIDATURE (Pour recrutement) -->
+    <div class="apply-section" id="applySection">
+      <h2 style="font-size: 1.75rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; text-align: center;">Déposer ma candidature</h2>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Poste : <strong id="selectedJobTitle" style="color: var(--accent);">Conducteur de Travaux</strong></p>
+
+      <form id="candidateForm">
+        <input type="hidden" id="selectedJobId" value="">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="candLastName">Nom *</label>
+            <input type="text" id="candLastName" class="form-control" placeholder="Votre nom de famille" required>
+          </div>
+          <div class="form-group">
+            <label for="candFirstName">Prénom *</label>
+            <input type="text" id="candFirstName" class="form-control" placeholder="Vos prénoms" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="candAddress">Adresse de résidence *</label>
+            <input type="text" id="candAddress" class="form-control" placeholder="Ex: Abomey-Calavi, Quartier Zogbadjè" required>
+          </div>
+          <div class="form-group">
+            <label for="candNationality">Nationalité *</label>
+            <input type="text" id="candNationality" class="form-control" placeholder="Ex: Béninoise" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="candExpYears">Nombre d'années d'expérience *</label>
+            <input type="number" id="candExpYears" class="form-control" min="0" placeholder="Ex: 5" required>
+          </div>
+          <div class="form-group">
+            <label for="candSalary">Prétention salariale (Mensuelle nette en FCFA) *</label>
+            <input type="text" id="candSalary" class="form-control" placeholder="Ex: 350 000 FCFA" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="candPhone">Numéro de Téléphone *</label>
+            <input type="tel" id="candPhone" class="form-control" placeholder="Ex: +229 01 48 52 45 90" required>
+          </div>
+          <div class="form-group">
+            <label for="candEmail">Adresse Email *</label>
+            <input type="email" id="candEmail" class="form-control" placeholder="Ex: candidat@mail.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="candCV">Téléverser votre CV (Format PDF uniquement) *</label>
+          <input type="file" id="candCV" class="form-control" accept=".pdf" required>
+          <small style="color: var(--text-muted); display: block; margin-top: 5px;">Taille maximale conseillée : 5 Mo.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="candMotivation">Lettre de Motivation / Message aux recruteurs *</label>
+          <textarea id="candMotivation" class="form-control" rows="6" placeholder="Expliquez en quelques lignes votre motivation à rejoindre BSH au Bénin..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 10px;">
+          ✉️ Soumettre ma candidature gratuitement
+        </button>
+      </form>
+    </div>
+  </div>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer" style="margin-top: 60px;">
     <div class="container" style="text-align: center;">
       <div class="logo-text" style="color: #fff; margin-bottom: 15px; justify-content: center; display: flex;">BSH<span>.</span></div>
       <p style="max-width: 500px; margin: 0 auto 20px auto; color: #94a3b8; font-size: 0.9rem;">Best Services and House (BSH) est votre partenaire de confiance au Bénin pour tous travaux de BTP, construction gros œuvre, étanchéité, carrelage, pavage et rénovation.</p>
@@ -269,8 +423,30 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Chargement dynamique des offres de recrutement
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. Gestion interactive des onglets (Recrutement vs Immobilier)
+      const tabJobs = document.getElementById('tabJobs');
+      const tabImmo = document.getElementById('tabImmo');
+      const paneJobs = document.getElementById('paneJobs');
+      const paneImmo = document.getElementById('paneImmo');
+
+      tabJobs.addEventListener('click', () => {
+        tabJobs.classList.add('active');
+        tabImmo.classList.remove('active');
+        paneJobs.classList.add('active');
+        paneImmo.classList.remove('active');
+        document.getElementById('applySection').classList.remove('active'); // cacher le formulaire si ouvert
+      });
+
+      tabImmo.addEventListener('click', () => {
+        tabImmo.classList.add('active');
+        tabJobs.classList.remove('active');
+        paneImmo.classList.add('active');
+        paneJobs.classList.remove('active');
+        document.getElementById('applySection').classList.remove('active');
+      });
+
+      // 2. Chargement dynamique des opportunités de recrutement
       fetch('/data/recrutements.json?v=' + Date.now())
         .then(res => res.json())
         .then(data => {
@@ -297,14 +473,49 @@
               `;
             });
 
-            // Attacher les écouteurs sur les boutons postuler générés
             attachApplyListeners();
           }
         })
         .catch(err => {
-          console.warn("Attention : Données recrutement chargées depuis la version statique HTML fallback.", err);
+          console.warn("Attention : Fallback local recrutement.", err);
           attachApplyListeners();
         });
+
+      // 3. Chargement dynamique des annonces immobilières (NEW!)
+      fetch('/data/immobilier.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+          if (data.title) document.getElementById('immo-title').textContent = data.title;
+          if (data.subtitle) document.getElementById('immo-subtitle').textContent = data.subtitle;
+
+          if (data.items && data.items.length > 0) {
+            const container = document.getElementById('immo-container');
+            container.innerHTML = '';
+            data.items.forEach(im => {
+              // Redirection directe WhatsApp pour commande/visite du bien
+              const waMessage = encodeURIComponent(`Bonjour BSH, je souhaite avoir des informations sur votre annonce immobilière : "${im.title}" située à [${im.location}] affichée au prix de [${im.price}].`);
+              const waLink = `https://wa.me/2290148524590?text=${waMessage}`;
+
+              container.innerHTML += `
+                <div class="immo-card">
+                  <div class="immo-img-wrapper">
+                    <span class="immo-tag">${im.type.toUpperCase()}</span>
+                    <span class="immo-type-badge">${im.property_type}</span>
+                    <img src="${im.image}" alt="${im.title}" class="immo-img">
+                  </div>
+                  <div class="immo-body">
+                    <h4 class="immo-title">${im.title}</h4>
+                    <div class="immo-price">${im.price}</div>
+                    <div class="immo-location">📍 ${im.location}</div>
+                    <p class="immo-desc">${im.description}</p>
+                    <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">💬 Nous contacter pour ce bien</a>
+                  </div>
+                </div>
+              `;
+            });
+          }
+        })
+        .catch(err => console.warn("Attention : Impossible de charger l'immobilier.", err));
 
       function attachApplyListeners() {
         const buttons = document.querySelectorAll('.btn-apply');
@@ -320,7 +531,6 @@
             titleEl.textContent = title;
             idInput.value = id;
 
-            // Faire défiler l'écran jusqu'au formulaire d'inscription
             section.classList.add('active');
             section.scrollIntoView({ behavior: 'smooth' });
           });
@@ -349,7 +559,6 @@
         const motivation = document.getElementById('candMotivation').value;
         const cvInput = document.getElementById('candCV');
 
-        // Créer un objet FormData pour gérer l'envoi de fichier
         const formData = new FormData();
         formData.append('jobTitle', job);
         formData.append('lastName', nom);
@@ -366,7 +575,6 @@
           formData.append('cv', cvInput.files[0]);
         }
 
-        // Envoyer la candidature à l'API de recrutement
         fetch('/api/recrutement', {
           method: 'POST',
           body: formData

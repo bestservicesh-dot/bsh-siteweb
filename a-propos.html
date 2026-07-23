@@ -62,6 +62,73 @@
       font-size: 0.95rem;
       line-height: 1.6;
     }
+    
+    /* Style spécifique pour la section du Mot du Promoteur */
+    .promoter-section {
+      background-color: var(--bg-light);
+      padding: 60px 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .promoter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .promoter-img-box {
+      position: relative;
+      text-align: center;
+    }
+    .promoter-img {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      border: 4px solid var(--bg-white);
+      background-color: var(--primary);
+    }
+    .promoter-badge {
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--accent);
+      color: var(--primary);
+      padding: 8px 25px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      box-shadow: var(--shadow-md);
+      white-space: nowrap;
+    }
+    .promoter-text-box h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .promoter-quote {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      font-style: italic;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 20px;
+      border-left: 4px solid var(--accent);
+    }
+    @media (max-width: 992px) {
+      .promoter-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      .promoter-quote {
+        padding-left: 0;
+        border-left: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -148,6 +215,22 @@
     </div>
   </section>
 
+  <!-- MOT DU PROMOTEUR SECTION (NEW!) -->
+  <section class="promoter-section">
+    <div class="container promoter-grid">
+      <div class="promoter-img-box">
+        <img id="promoterImg" src="/assets/images/uploads/promoteur.png" alt="Samson - Promoteur BSH" class="promoter-img">
+        <div id="promoterName" class="promoter-badge">Samson, Promoteur BSH</div>
+      </div>
+      <div class="promoter-text-box">
+        <h3 id="promoterTitle">Le mot du Promoteur</h3>
+        <p id="promoterText" class="promoter-quote">
+          "En tant que promoteur de BSH, mon engagement premier est de vous offrir des prestations d'excellence adaptées à vos exigences de budget et de qualité. Bâtir au Bénin nécessite du sérieux, de la rigueur et de l'innovation technique. Nous mettons tout en œuvre pour faire de vos rêves de construction une réalité solide, pérenne et sécurisée."
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- VALUES SECTION WITH DETAILS -->
   <section class="section section-bg">
     <div class="container">
@@ -158,7 +241,7 @@
       </div>
       
       <div class="values-grid" id="about-values-container">
-        <!-- 6 VALEURS AVEC DETAILS EN FALLBACK -->
+        <!-- Rempli dynamiquement -->
         <div class="value-card">
           <div class="value-icon">⚖️</div>
           <h4>Éthique</h4>
@@ -168,26 +251,6 @@
           <div class="value-icon">🎯</div>
           <h4>Excellence</h4>
           <p>Nous visons l'excellence dans chaque projet, de la conception 3D à la livraison des clés. Nous formons notre personnel aux techniques de construction modernes.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🤝</div>
-          <h4>Confiance</h4>
-          <p>La confiance de nos clients est notre bien le plus précieux. Nous la méritons chaque jour par notre ponctualité, notre rigueur et notre communication transparente.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🌍</div>
-          <h4>Durabilité</h4>
-          <p>Nous construisons pour durer. Nous sélectionnons des matériaux certifiés de haute qualité et mettons en œuvre des techniques d'étanchéité et de structure de pointe.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">💡</div>
-          <h4>Innovation</h4>
-          <p>Nous adoptons de nouvelles solutions techniques (peintures isolantes, structures d'étanchéité modernes, outils digitaux) pour optimiser les performances énergétiques de vos bâtis.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🫂</div>
-          <h4>Respect</h4>
-          <p>Le respect de nos engagements, de nos clients, de nos ouvriers sur chantiers, de votre budget ainsi que des normes environnementales locales du Bénin.</p>
         </div>
       </div>
     </div>
@@ -209,7 +272,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (SANS VERCEL MENTION) -->
   <footer class="footer">
     <div class="container" style="text-align: center;">
       <div class="logo-text" style="color: #fff; margin-bottom: 15px; justify-content: center; display: flex;">BSH<span>.</span></div>
@@ -243,6 +306,12 @@
           if (data.vision_text) document.getElementById('about-vision-text').textContent = data.vision_text;
           if (data.values_title) document.getElementById('about-values-title').textContent = data.values_title;
           if (data.values_subtitle) document.getElementById('about-values-subtitle').textContent = data.values_subtitle;
+
+          // Charger le mot du promoteur de manière dynamique
+          if (data.promoter_title) document.getElementById('promoterTitle').textContent = data.promoter_title;
+          if (data.promoter_name) document.getElementById('promoterName').textContent = data.promoter_name + ", Promoteur BSH";
+          if (data.promoter_text) document.getElementById('promoterText').innerHTML = `"${data.promoter_text}"`;
+          if (data.promoter_photo) document.getElementById('promoterImg').src = data.promoter_photo;
 
           if (data.values && data.values.length > 0) {
             const container = document.getElementById('about-values-container');

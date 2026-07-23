@@ -41,10 +41,13 @@ collections:
           - { label: "Titre de la section À propos", name: "about_title", widget: "string" }
           - { label: "À propos - Paragraphe 1", name: "about_text_1", widget: "text" }
           - { label: "À propos - Paragraphe 2", name: "about_text_2", widget: "text" }
-          - { label: "À propos - Atouts clés", name: "about_features", widget: "list" }
+          - label: "À propos - Atouts clés"
+            name: "about_features"
+            widget: "list"
+            field: { label: "Atout", widget: "string" }
 
       - file: "data/about.json"
-        label: "ℹ️ Page À Propos (Histoire & Valeurs)"
+        label: "ℹ️ Page À Propos (Histoire, Promoteur & Valeurs)"
         name: "about_page"
         fields:
           - { label: "Titre Histoire", name: "history_title", widget: "string" }
@@ -54,6 +57,10 @@ collections:
           - { label: "Mission - Description", name: "mission_text", widget: "text" }
           - { label: "Titre Vision", name: "vision_title", widget: "string" }
           - { label: "Vision - Description", name: "vision_text", widget: "text" }
+          - { label: "Titre Mot du Promoteur", name: "promoter_title", widget: "string" }
+          - { label: "Nom du Promoteur", name: "promoter_name", widget: "string" }
+          - { label: "Texte Mot du Promoteur", name: "promoter_text", widget: "text" }
+          - { label: "Photo du Promoteur", name: "promoter_photo", widget: "image" }
           - { label: "Titre Nos Valeurs", name: "values_title", widget: "string" }
           - { label: "Sous-titre Valeurs", name: "values_subtitle", widget: "string" }
           - label: "Nos Valeurs (Liste)"
@@ -81,8 +88,26 @@ collections:
               - { label: "Date limite (AAAA-MM-JJ)", name: "deadline", widget: "string" }
               - { label: "Description / Profil recherché", name: "description", widget: "text" }
 
+      - file: "data/immobilier.json"
+        label: "🏠 Annonces Immobilières (Offres)"
+        name: "immobilier_page"
+        fields:
+          - { label: "Titre Section Immobilier", name: "title", widget: "string" }
+          - { label: "Sous-titre Section Immobilier", name: "subtitle", widget: "string" }
+          - label: "Liste des biens immobiliers"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Titre de l'annonce", name: "title", widget: "string" }
+              - { label: "Type d'offre", name: "type", widget: "select", options: ["Location", "Vente", "Gestion"] }
+              - { label: "Type de bien", name: "property_type", widget: "select", options: ["Villa", "Appartement", "Parcelle / Terrain", "Bureau / Boutique"] }
+              - { label: "Prix (FCFA)", name: "price", widget: "string" }
+              - { label: "Lieu", name: "location", widget: "string" }
+              - { label: "Photo du bien", name: "image", widget: "image" }
+              - { label: "Description du bien", name: "description", widget: "text" }
+
       - file: "data/services.json"
-        label: "🏗️ Gestion des Services"
+        label: "🏗️ Gestion des Services & Prix"
         name: "services"
         fields:
           - { label: "Titre Section Services Principaux", name: "primary_title", widget: "string" }
@@ -95,7 +120,8 @@ collections:
               - { label: "Icône (Émoji ou SVG)", name: "icon", widget: "string" }
               - { label: "Nom du Service", name: "title", widget: "string" }
               - { label: "Description courte", name: "description", widget: "text" }
-              - { label: "Lien interne (page de détails)", name: "link", widget: "string" }
+              - { label: "Tarif indicatif (ex: À partir de 150 000 FCFA/m²)", name: "price", widget: "string" }
+              - { label: "Lien interne", name: "link", widget: "string" }
           - { label: "Titre Section Services Secondaires", name: "secondary_title", widget: "string" }
           - { label: "Sous-titre Services Secondaires", name: "secondary_subtitle", widget: "text" }
           - label: "Liste des Services Secondaires"
@@ -106,6 +132,7 @@ collections:
               - { label: "Icône (Émoji)", name: "icon", widget: "string" }
               - { label: "Nom du Service", name: "title", widget: "string" }
               - { label: "Description courte", name: "description", widget: "text" }
+              - { label: "Tarif indicatif", name: "price", widget: "string" }
               - { label: "Lien interne", name: "link", widget: "string" }
 
       - file: "data/realisations.json"

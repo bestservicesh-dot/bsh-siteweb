@@ -255,33 +255,66 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.warn("Attention : Fallback données générales.", err));
 
   // ---------------------------------------------------------
-  // 2. CHARGEMENT DES SERVICES PAR PÔLES D'EXPERTISE
+  // 2. CHARGEMENT DES SERVICES PAR PÔLES D'EXPERTISE (COMPATIBILITÉ DOUBLE)
   // ---------------------------------------------------------
   fetch('/data/services.json' + cacheBuster)
     .then(res => res.json())
     .then(data => {
-      // Pôle BTP
+      let btpList = [];
+      let digitalList = [];
+      let multiList = [];
+
+      // A. Si le fichier est au NOUVEAU format (découpé par Pôles)
+      if (data.btp_services) {
+        btpList = data.btp_services;
+        digitalList = data.digital_services || [];
+        multiList = data.multi_services || [];
+      } 
+      // B. Si le fichier est à l'ANCIEN format (découpé par primary/secondary)
+      // On le classe à la volée pour que l'utilisateur ne perde rien !
+      else {
+        if (data.primary_services) {
+          data.primary_services.forEach(srv => {
+            if (srv.id === 'entretien-nettoyage') {
+              multiList.push(srv);
+            } else {
+              btpList.push(srv);
+            }
+          });
+        }
+        if (data.secondary_services) {
+          data.secondary_services.forEach(srv => {
+            if (srv.id === 'creation-site-web' || srv.id === 'conception-graphique' || srv.id === 'enquetes-digitales') {
+              digitalList.push(srv);
+            } else {
+              multiList.push(srv);
+            }
+          });
+        }
+      }
+
+      // Rendu du Pôle BTP
       const btpContainer = document.getElementById('btp-services-container');
-      if (btpContainer && data.btp_services) {
+      if (btpContainer) {
         btpContainer.innerHTML = '';
-        data.btp_services.forEach(srv => {
+        btpList.forEach(srv => {
           btpContainer.innerHTML += `
             <div class="service-card" id="service-${srv.id}">
               <div class="service-icon">${srv.icon || '🏗️'}</div>
               <h3>${srv.title}</h3>
               <p>${srv.description}</p>
-              <div style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">${srv.price || 'Sur devis'}</div>
+              <div style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">${srv.price || 'Sur devis personnalisé'}</div>
               <a href="/service-details.html?id=${srv.id}" class="service-link">En savoir plus →</a>
             </div>
           `;
         });
       }
 
-      // Pôle Digital
+      // Rendu du Pôle Digital
       const digitalContainer = document.getElementById('digital-services-container');
-      if (digitalContainer && data.digital_services) {
+      if (digitalContainer) {
         digitalContainer.innerHTML = '';
-        data.digital_services.forEach(srv => {
+        digitalList.forEach(srv => {
           digitalContainer.innerHTML += `
             <div class="service-card" id="service-${srv.id}">
               <div class="service-icon">${srv.icon || '💻'}</div>
@@ -294,11 +327,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Pôle Services & Divers
+      // Rendu du Pôle Services & Divers
       const multiContainer = document.getElementById('multi-services-container');
-      if (multiContainer && data.multi_services) {
+      if (multiContainer) {
         multiContainer.innerHTML = '';
-        data.multi_services.forEach(srv => {
+        multiList.forEach(srv => {
           multiContainer.innerHTML += `
             <div class="service-card" id="service-${srv.id}">
               <div class="service-icon">${srv.icon || '🌟'}</div>
@@ -311,7 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     })
-    .catch(err => console.warn("Attention : Fallback services par pôles.", err));
+    .catch(err => console.warn("Attention : Erreur de chargement des pôles d'expertise.", err));
 
   // ---------------------------------------------------------
   // 3. CHARGEMENT DES REALISATIONS (PORTFOLIO)
@@ -490,7 +523,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const submitBtn = diagForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.textContent;
       submitBtn.disabled = true;
-      submitBtn.textContent = "⌛ Envoi de votre demande de diagnostic...";
+      submitBtn.textContent = "Envoi de votre demande de diagnostic...";
 
       const payload = {
         fullName: name,

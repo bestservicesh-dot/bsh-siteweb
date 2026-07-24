@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
-   BSH (Best Services and House) - MAIN JAVASCRIPT (VERSION AUTO-RÉPARATRICE)
+   BSH (Best Services and House) - MAIN JAVASCRIPT
    -------------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,6 +29,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cache buster pour forcer le navigateur à charger la toute dernière version des JSON sans cache
   const cacheBuster = `?v=${Date.now()}`;
+
+  // --- HORLOGE NUMÉRIQUE DU BÉNIN (GMT+1) ---
+  const clockEl = document.getElementById('beninClock');
+  if (clockEl) {
+    setInterval(() => {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const beninTime = new Date(utc + (3600000 * 1)); // UTC+1 (Heure du Bénin)
+      
+      const hours = String(beninTime.getHours()).padStart(2, '0');
+      const minutes = String(beninTime.getMinutes()).padStart(2, '0');
+      const seconds = String(beninTime.getSeconds()).padStart(2, '0');
+      
+      clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+    }, 1000);
+  }
+
+  // --- CAROUSEL FADE AUTOMATIQUE ---
+  const slides = document.querySelectorAll('.carousel-slide');
+  if (slides.length > 0) {
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 5000); // Changer toutes les 5 secondes
+  }
 
   // ---------------------------------------------------------
   // 1. CHARGEMENT DES INFOS GENERALES, LOGO & RESEAUX
@@ -61,7 +88,21 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.legal-ifu').forEach(el => el.textContent = data.ifu);
       }
 
-      // Mettre à jour les réseaux sociaux existants dans le HTML
+      // Slogan et campagne
+      if (data.slogan) {
+        const sloganEl = document.getElementById('hero-slogan');
+        if (sloganEl) sloganEl.textContent = data.slogan;
+      }
+      if (data.campaign_title) {
+        const campTitleEl = document.getElementById('campaign-title');
+        if (campTitleEl) campTitleEl.textContent = data.campaign_title;
+      }
+      if (data.campaign_desc) {
+        const campDescEl = document.getElementById('campaign-desc');
+        if (campDescEl) campDescEl.textContent = data.campaign_desc;
+      }
+
+      // Mettre à jour les réseaux sociaux classique
       if (data.facebook_url) {
         document.querySelectorAll('.facebook-link').forEach(el => {
           el.href = data.facebook_url;
@@ -88,8 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // --- INJECTION AUTOMATIQUE DES RÉSEAUX SOCIAUX ---
-      // Si l'utilisateur utilise ses anciens modèles de pages sans bloc HTML .social-links,
-      // notre script détecte la zone de présentation de la marque dans le footer et l'injecte automatiquement !
       if (!document.querySelector('.social-links')) {
         const footerBrand = document.querySelector('.footer-brand, .footer-about');
         if (footerBrand) {
@@ -115,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // --- LIAISON DU LOGO BSH ---
-      // (Prend en charge les classes de l'ancien template '.logo' et du nouveau '.logo-container')
       if (data.logo_url) {
         document.querySelectorAll('.logo-container, .logo').forEach(el => {
           if (el.tagName === 'A') {
@@ -168,23 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // Mettre à jour l'en-tête Hero
-      if (data.hero_title) {
-        const heroTitleEl = document.getElementById('hero-title');
-        if (heroTitleEl) {
-          if (data.hero_title.includes("rêve")) {
-            heroTitleEl.innerHTML = data.hero_title.replace("rêve", "<span>rêve</span>");
-          } else {
-            heroTitleEl.textContent = data.hero_title;
-          }
-        }
-      }
-      if (data.hero_subtitle) {
-        const heroSubtitleEl = document.getElementById('hero-subtitle');
-        if (heroSubtitleEl) heroSubtitleEl.textContent = data.hero_subtitle;
-      }
-
-      // Mettre à jour la section À propos
+      // Mettre à jour la section À propos de l'accueil
       if (data.about_title) {
         const aboutTitleEl = document.getElementById('about-title');
         if (aboutTitleEl) aboutTitleEl.textContent = data.about_title;
@@ -230,57 +252,66 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     })
-    .catch(err => console.warn("Attention : Données générales chargées depuis la fallback HTML.", err));
+    .catch(err => console.warn("Attention : Fallback données générales.", err));
 
   // ---------------------------------------------------------
-  // 2. CHARGEMENT DES SERVICES
+  // 2. CHARGEMENT DES SERVICES PAR PÔLES D'EXPERTISE
   // ---------------------------------------------------------
   fetch('/data/services.json' + cacheBuster)
     .then(res => res.json())
     .then(data => {
-      // Services Principaux (BTP)
-      const primaryTitle = document.getElementById('primary-services-title');
-      const primarySubtitle = document.getElementById('primary-services-subtitle');
-      if (primaryTitle && data.primary_title) primaryTitle.textContent = data.primary_title;
-      if (primarySubtitle && data.primary_subtitle) primarySubtitle.textContent = data.primary_subtitle;
-
-      const primaryContainer = document.getElementById('primary-services-container');
-      if (primaryContainer && data.primary_services) {
-        primaryContainer.innerHTML = '';
-        data.primary_services.forEach(srv => {
-          primaryContainer.innerHTML += `
+      // Pôle BTP
+      const btpContainer = document.getElementById('btp-services-container');
+      if (btpContainer && data.btp_services) {
+        btpContainer.innerHTML = '';
+        data.btp_services.forEach(srv => {
+          btpContainer.innerHTML += `
             <div class="service-card" id="service-${srv.id}">
               <div class="service-icon">${srv.icon || '🏗️'}</div>
               <h3>${srv.title}</h3>
               <p>${srv.description}</p>
+              <div style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">${srv.price || 'Sur devis'}</div>
               <a href="/service-details.html?id=${srv.id}" class="service-link">En savoir plus →</a>
             </div>
           `;
         });
       }
 
-      // Services Secondaires
-      const secondaryTitle = document.getElementById('secondary-services-title');
-      const secondarySubtitle = document.getElementById('secondary-services-subtitle');
-      if (secondaryTitle && data.secondary_title) secondaryTitle.textContent = data.secondary_title;
-      if (secondarySubtitle && data.secondary_subtitle) secondarySubtitle.textContent = data.secondary_subtitle;
+      // Pôle Digital
+      const digitalContainer = document.getElementById('digital-services-container');
+      if (digitalContainer && data.digital_services) {
+        digitalContainer.innerHTML = '';
+        data.digital_services.forEach(srv => {
+          digitalContainer.innerHTML += `
+            <div class="service-card" id="service-${srv.id}">
+              <div class="service-icon">${srv.icon || '💻'}</div>
+              <h3>${srv.title}</h3>
+              <p>${srv.description}</p>
+              <div style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">${srv.price || 'Sur devis'}</div>
+              <a href="/service-details.html?id=${srv.id}" class="service-link">En savoir plus →</a>
+            </div>
+          `;
+        });
+      }
 
-      const secondaryContainer = document.getElementById('secondary-services-container');
-      if (secondaryContainer && data.secondary_services) {
-        secondaryContainer.innerHTML = '';
-        data.secondary_services.forEach(srv => {
-          secondaryContainer.innerHTML += `
+      // Pôle Services & Divers
+      const multiContainer = document.getElementById('multi-services-container');
+      if (multiContainer && data.multi_services) {
+        multiContainer.innerHTML = '';
+        data.multi_services.forEach(srv => {
+          multiContainer.innerHTML += `
             <div class="service-card" id="service-${srv.id}">
               <div class="service-icon">${srv.icon || '🌟'}</div>
               <h3>${srv.title}</h3>
               <p>${srv.description}</p>
+              <div style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">${srv.price || 'Sur devis'}</div>
               <a href="/service-details.html?id=${srv.id}" class="service-link">En savoir plus →</a>
             </div>
           `;
         });
       }
     })
-    .catch(err => console.warn("Attention : Services chargés depuis le fallback HTML.", err));
+    .catch(err => console.warn("Attention : Fallback services par pôles.", err));
 
   // ---------------------------------------------------------
   // 3. CHARGEMENT DES REALISATIONS (PORTFOLIO)
@@ -298,9 +329,8 @@ document.addEventListener("DOMContentLoaded", () => {
         renderPortfolio('all');
       }
     })
-    .catch(err => console.warn("Attention : Réalisations chargées depuis le fallback HTML.", err));
+    .catch(err => console.warn("Attention : Fallback réalisations.", err));
 
-  // Fonction de rendu du portfolio
   function renderPortfolio(categoryFilter) {
     const portfolioContainer = document.getElementById('portfolio-container');
     if (!portfolioContainer) return;
@@ -332,15 +362,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Gestion des filtres du Portfolio
   const filterButtons = document.querySelectorAll('.filter-btn');
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Activer le bouton cliqué
       filterButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      // Filtrer les projets
       const filterValue = btn.getAttribute('data-filter');
       renderPortfolio(filterValue);
     });
@@ -384,7 +411,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     })
-    .catch(err => console.warn("Attention : Témoignages chargés depuis le fallback HTML.", err));
+    .catch(err => console.warn("Attention : Fallback témoignages.", err));
 
   // ---------------------------------------------------------
   // 5. CHARGEMENT DE LA FAQ (AVEC ANIMATION ACCORDEON)
@@ -418,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
     .catch(err => {
-      console.warn("Attention : FAQ chargée depuis le fallback HTML.", err);
+      console.warn("Attention : FAQ fallback.", err);
       attachFaqListeners();
     });
 
@@ -439,5 +466,64 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isActive) {
       item.classList.add('active');
     }
+  }
+
+  // --- FORMULAIRE DE DIAGNOSTIC GRATUIT DU BÂTIMENT ---
+  const diagForm = document.getElementById('diagnosticForm');
+  if (diagForm) {
+    diagForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Protection anti-spam Honeypot (sécurité)
+      const honey = document.getElementById('diagHoney').value;
+      if (honey) {
+        console.warn("Spam bot détecté et bloqué.");
+        return; // bloquer le bot
+      }
+
+      const name = document.getElementById('diagName').value;
+      const phone = document.getElementById('diagPhone').value;
+      const location = document.getElementById('diagLocation').value;
+      const issue = document.getElementById('diagIssue').value;
+      const desc = document.getElementById('diagDesc').value;
+
+      const submitBtn = diagForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "⌛ Envoi de votre demande de diagnostic...";
+
+      const payload = {
+        fullName: name,
+        phoneNumber: phone,
+        emailAddress: "diagnostic@bestservicesandhouse.site",
+        cityLocation: location,
+        serviceType: `Diagnostic Bâtiment - ${issue}`,
+        projectDescription: desc
+      };
+
+      fetch('/api/devis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          alert(`Félicitations ${name} !\n\nVotre demande d'étude de diagnostic gratuit pour [${issue}] a été transmise avec succès à devis@bestservicesandhouse.site.\n\nNos ingénieurs BSH vous contacteront sous 24h pour planifier l'intervention à domicile.`);
+          diagForm.reset();
+        } else {
+          throw new Error(data.error || "Erreur serveur");
+        }
+      })
+      .catch(err => {
+        alert("Votre demande de diagnostic a été validée ! Vous allez être redirigé vers WhatsApp pour finaliser.");
+        const msg = encodeURIComponent(`*DEMANDE DE DIAGNOSTIC GRATUIT*\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Lieu :* ${location}\n🚨 *Problème :* ${issue}\n\n📝 *Description :*\n${desc}`);
+        window.open(`https://wa.me/2290148524590?text=${msg}`, '_blank');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      });
+    });
   }
 });

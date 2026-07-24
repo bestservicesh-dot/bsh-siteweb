@@ -16,13 +16,16 @@ collections:
       preview: false
     files:
       - file: "data/general.json"
-        label: "📞 Contact, Logo & Réseaux"
+        label: "📞 Contact, Slogan & Réseaux"
         name: "general"
         fields:
           - { label: "Téléphone BSH", name: "phone", widget: "string" }
           - { label: "Adresse Email", name: "email", widget: "string" }
           - { label: "Adresse physique", name: "address", widget: "string" }
           - { label: "Lien WhatsApp direct", name: "whatsapp", widget: "string" }
+          - { label: "Slogan d'entreprise", name: "slogan", widget: "string" }
+          - { label: "Titre Opération Zéro Goutte", name: "campaign_title", widget: "string" }
+          - { label: "Description Opération Zéro Goutte", name: "campaign_desc", widget: "text" }
           - { label: "Logo d'entreprise (Image personnalisée)", name: "logo_url", widget: "image", required: false }
           - { label: "Lien Page Facebook", name: "facebook_url", widget: "string", required: false }
           - { label: "Lien Page LinkedIn", name: "linkedin_url", widget: "string", required: false }
@@ -41,7 +44,9 @@ collections:
           - { label: "Titre de la section À propos", name: "about_title", widget: "string" }
           - { label: "À propos - Paragraphe 1", name: "about_text_1", widget: "text" }
           - { label: "À propos - Paragraphe 2", name: "about_text_2", widget: "text" }
-          - { label: "À propos - Atouts clés", name: "about_features", widget: "list" }
+          - label: "À propos - Atouts clés"
+            name: "about_features"
+            widget: "list"
 
       - file: "data/about.json"
         label: "ℹ️ Page À Propos (Histoire, Promoteur & Valeurs)"
@@ -104,32 +109,46 @@ collections:
               - { label: "Description du bien", name: "description", widget: "text" }
 
       - file: "data/services.json"
-        label: "🏗️ Gestion des Services & Prix"
-        name: "services"
+        label: "🏗️ Pôles d'Expertise & Services"
+        name: "services_poles"
         fields:
-          - { label: "Titre Section Services Principaux", name: "primary_title", widget: "string" }
-          - { label: "Sous-titre Services Principaux", name: "primary_subtitle", widget: "text" }
-          - label: "Liste des Services BTP Principaux"
-            name: "primary_services"
+          - { label: "Titre Pôle BTP", name: "btp_title", widget: "string" }
+          - { label: "Sous-titre Pôle BTP", name: "btp_subtitle", widget: "text" }
+          - label: "Services - Pôle BTP & Étanchéité"
+            name: "btp_services"
             widget: "list"
             fields:
               - { label: "ID Unique (sans espace)", name: "id", widget: "string" }
-              - { label: "Icône (Émoji ou SVG)", name: "icon", widget: "string" }
+              - { label: "Icône", name: "icon", widget: "string" }
               - { label: "Nom du Service", name: "title", widget: "string" }
-              - { label: "Description courte", name: "description", widget: "text" }
-              - { label: "Tarif indicatif (ex: À partir de 150 000 FCFA/m²)", name: "price", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Tarif", name: "price", widget: "string" }
               - { label: "Lien interne", name: "link", widget: "string" }
-          - { label: "Titre Section Services Secondaires", name: "secondary_title", widget: "string" }
-          - { label: "Sous-titre Services Secondaires", name: "secondary_subtitle", widget: "text" }
-          - label: "Liste des Services Secondaires"
-            name: "secondary_services"
+              
+          - { label: "Titre Pôle Digital", name: "digital_title", widget: "string" }
+          - { label: "Sous-titre Pôle Digital", name: "digital_subtitle", widget: "text" }
+          - label: "Services - Pôle Digital & Imprimerie"
+            name: "digital_services"
             widget: "list"
             fields:
               - { label: "ID Unique (sans espace)", name: "id", widget: "string" }
-              - { label: "Icône (Émoji)", name: "icon", widget: "string" }
+              - { label: "Icône", name: "icon", widget: "string" }
               - { label: "Nom du Service", name: "title", widget: "string" }
-              - { label: "Description courte", name: "description", widget: "text" }
-              - { label: "Tarif indicatif", name: "price", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Tarif", name: "price", widget: "string" }
+              - { label: "Lien interne", name: "link", widget: "string" }
+
+          - { label: "Titre Pôle Services & Divers", name: "multi_title", widget: "string" }
+          - { label: "Sous-titre Pôle Services & Divers", name: "multi_subtitle", widget: "text" }
+          - label: "Services - Pôle Multidisciplinaire"
+            name: "multi_services"
+            widget: "list"
+            fields:
+              - { label: "ID Unique (sans espace)", name: "id", widget: "string" }
+              - { label: "Icône", name: "icon", widget: "string" }
+              - { label: "Nom du Service", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Tarif", name: "price", widget: "string" }
               - { label: "Lien interne", name: "link", widget: "string" }
 
       - file: "data/realisations.json"

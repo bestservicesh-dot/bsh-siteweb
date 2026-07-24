@@ -340,6 +340,8 @@
 
       <form id="candidateForm">
         <input type="hidden" id="selectedJobId" value="">
+        <!-- Champ caché Honeypot anti-spam -->
+        <input type="text" id="candHoney" style="display:none !important;" tabindex="-1" autocomplete="off">
         
         <div class="form-row">
           <div class="form-group">
@@ -541,6 +543,13 @@
       const form = document.getElementById('candidateForm');
       form.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Protection anti-spam Honeypot (sécurité)
+        const honey = document.getElementById('candHoney').value;
+        if (honey) {
+          console.warn("Spam bot détecté.");
+          return;
+        }
 
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;

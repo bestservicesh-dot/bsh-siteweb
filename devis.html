@@ -124,6 +124,9 @@
       </div>
 
       <form id="devisForm">
+        <!-- Champ caché Honeypot contre le spam -->
+        <input type="text" id="devisHoney" style="display:none !important;" tabindex="-1" autocomplete="off">
+        
         <div class="form-row">
           <div class="form-group">
             <label for="fullName">Votre Nom complet *</label>
@@ -220,6 +223,13 @@
     // Script d'envoi du formulaire hybride (Email automatique + WhatsApp en direct)
     document.getElementById('devisForm').addEventListener('submit', function(e) {
       e.preventDefault();
+
+      // Protection anti-spam Honeypot
+      const honey = document.getElementById('devisHoney').value;
+      if (honey) {
+        console.warn("Spam bot détecté.");
+        return;
+      }
 
       const name = document.getElementById('fullName').value;
       const phone = document.getElementById('phoneNumber').value;

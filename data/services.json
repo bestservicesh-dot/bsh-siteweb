@@ -1,6 +1,69 @@
 {
+  "multi_services": [
+    {
+      "id": "entretien-nettoyage",
+      "icon": "🧹",
+      "title": "Entretien et nettoyage",
+      "description": "Entretien régulier de bâtiments commerciaux ou d'habitation, nettoyage complet de fin de chantiers et désinfection de bureaux.",
+      "price": "À partir de 2500/m²",
+      "link": "service-details.html?id=entretien-nettoyage"
+    },
+    {
+      "id": "quincaillerie-evenementiel",
+      "icon": "🎪",
+      "title": "Quincaillerie & Événementiel",
+      "description": "Vente de fournitures techniques et de quincaillerie BTP, et organisation d'événements clé en main.",
+      "price": "Sur devis personnalisé",
+      "link": "service-details.html?id=quincaillerie-evenementiel"
+    },
+    {
+      "id": "savons-produits-entretien",
+      "icon": "🧼",
+      "title": "Savons & produits d'entretien",
+      "description": "Fabrication et distribution de savons solides et  liquides, détergents écologiques et produits d'entretien à domicile: \nsavon Palmida - savon Pigeon - savon boule kongui - Savon Omo - savon liquide - Eau de Javelle - savon ''Si je savais'' - Gel de douche (divers) - baumes de nerf- désodorisants - savon multicolore - savon éclaircissant - savon teint marron - savon teint noir - savon anti vergetures - savon anti acné - savon anti ride - savon anti taches- lait de corps - Lotions - Gommages - Crèmes corps et visage etc.\n\nNB: Possibilité de vous former à fabriquer tous ces éléments sur négociation",
+      "price": "À partir de 1 000 FCFA",
+      "link": "service-details.html?id=savons-produits-entretien"
+    },
+    {
+      "id": "distribution-fruits-legumes",
+      "icon": "🥑",
+      "title": "Distribution de fruits & légumes",
+      "description": "Distribution de paniers de fruits frais et légumes biologiques locaux, du producteur à votre table.",
+      "price": "Selon la commande",
+      "link": "service-details.html?id=distribution-fruits-legumes"
+    }
+  ],
+  "digital_services": [
+    {
+      "id": "creation-site-web",
+      "icon": "🌐",
+      "title": "Création de site web",
+      "description": "Conception de sites vitrines professionnels (à l'image du présent site web de BSH), e-commerce, applications sur-mesure et hébergement sécurisé.",
+      "price": "À partir de 150 000 FCFA",
+      "link": "service-details.html?id=creation-site-web"
+    },
+    {
+      "id": "conception-graphique",
+      "icon": "🎨",
+      "title": "Conception Graphique & Imprimerie",
+      "description": "Création d'identités visuelles (logos, chartes graphiques) et travaux d'imprimerie (cartes d'affaires, flyers, calendriers, affiches).",
+      "price": "Sur commande de maquette",
+      "link": "service-details.html?id=conception-graphique"
+    },
+    {
+      "id": "enquetes-digitales",
+      "icon": "📊",
+      "title": "Enquêtes Digitales & Sondages",
+      "description": "Création de formulaires interactifs, traitement de données d'enquêtes de satisfaction et sondages en ligne.",
+      "price": "Sur cahier des charges",
+      "link": "service-details.html?id=enquetes-digitales"
+    }
+  ],
+  "digital_title": "💻 Pôle Digital, Graphisme & Imprimerie",
+  "multi_title": "🌟 Pôle Services & Multidisciplinaire",
   "btp_title": "🏗️ Pôle BTP, Génie Civil & Étanchéité",
   "btp_subtitle": "Notre cœur de métier : de la construction à la finition d'excellence, avec notre campagne préventive 'Opération Zéro Goutte'.",
+  "multi_subtitle": "Des prestations multidisciplinaires de confiance pour répondre à vos besoins quotidiens.",
   "btp_services": [
     {
       "id": "construction-batiment",
@@ -75,68 +138,5 @@
       "link": "service-details.html?id=isolation"
     }
   ],
-  "digital_title": "💻 Pôle Digital, Graphisme & Imprimerie",
-  "digital_subtitle": "Valorisez votre marque et votre présence professionnelle en ligne et sur supports physiques.",
-  "digital_services": [
-    {
-      "id": "creation-site-web",
-      "icon": "🌐",
-      "title": "Création de site web",
-      "description": "Conception de sites vitrines professionnels, e-commerce, applications sur-mesure et hébergement sécurisé.",
-      "price": "À partir de 150 000 FCFA",
-      "link": "service-details.html?id=creation-site-web"
-    },
-    {
-      "id": "conception-graphique",
-      "icon": "🎨",
-      "title": "Conception Graphique & Imprimerie",
-      "description": "Création d'identités visuelles (logos, chartes graphiques) et travaux d'imprimerie (cartes d'affaires, flyers, calendriers, affiches).",
-      "price": "Sur commande de maquette",
-      "link": "service-details.html?id=conception-graphique"
-    },
-    {
-      "id": "enquetes-digitales",
-      "icon": "📊",
-      "title": "Enquêtes Digitales & Sondages",
-      "description": "Création de formulaires interactifs, traitement de données d'enquêtes de satisfaction et sondages en ligne.",
-      "price": "Sur cahier des charges",
-      "link": "service-details.html?id=enquetes-digitales"
-    }
-  ],
-  "multi_title": "🌟 Pôle Services & Multidisciplinaire",
-  "multi_subtitle": "Des prestations multidisciplinaires de confiance pour répondre à vos besoins quotidiens.",
-  "multi_services": [
-    {
-      "id": "entretien-nettoyage",
-      "icon": "🧹",
-      "title": "Entretien et nettoyage",
-      "description": "Entretien régulier de bâtiments commerciaux, nettoyage complet de fin de chantiers et désinfection de bureaux.",
-      "price": "À partir de 25 000 FCFA / prestation",
-      "link": "service-details.html?id=entretien-nettoyage"
-    },
-    {
-      "id": "quincaillerie-evenementiel",
-      "icon": "🎪",
-      "title": "Quincaillerie & Événementiel",
-      "description": "Vente de fournitures techniques et de quincaillerie BTP, et organisation d'événements clé en main.",
-      "price": "Sur devis personnalisé",
-      "link": "service-details.html?id=quincaillerie-evenementiel"
-    },
-    {
-      "id": "savons-produits-entretien",
-      "icon": "🧼",
-      "title": "Savons & produits d'entretien",
-      "description": "Fabrication et distribution de savons liquides, détergents écologiques et produits d'entretien à domicile.",
-      "price": "À partir de 1 000 FCFA",
-      "link": "service-details.html?id=savons-produits-entretien"
-    },
-    {
-      "id": "distribution-fruits-legumes",
-      "icon": "🥑",
-      "title": "Distribution de fruits & légumes",
-      "description": "Distribution de paniers de fruits frais et légumes biologiques locaux, du producteur à votre table.",
-      "price": "Selon la commande",
-      "link": "service-details.html?id=distribution-fruits-legumes"
-    }
-  ]
+  "digital_subtitle": "Valorisez votre marque et votre présence professionnelle en ligne et sur supports physiques."
 }

@@ -1,108 +1,142 @@
 {
-  "primary_title": "🏗️ Services principaux — Bâtiment Travaux Publics & Etanchéité",
-  "primary_subtitle": "Notre cœur de métier : de la construction à la finition, BSH vous accompagne à chaque étape de votre projet avec expertise et professionnalisme.",
-  "primary_services": [
+  "btp_title": "🏗️ Pôle BTP, Génie Civil & Étanchéité",
+  "btp_subtitle": "Notre cœur de métier : de la construction à la finition d'excellence, avec notre campagne préventive 'Opération Zéro Goutte'.",
+  "btp_services": [
     {
       "id": "construction-batiment",
       "icon": "🏗️",
       "title": "Construction de bâtiment",
-      "description": "Construction complète de bâtiments résidentiels, commerciaux et industriels. Du gros œuvre aux finitions.",
-      "link": "services/construction-batiment.html"
+      "description": "Construction complète de bâtiments résidentiels, commerciaux et industriels. Du gros œuvre aux finitions de prestige.",
+      "price": "À partir de 150 000 FCFA / m²",
+      "link": "service-details.html?id=construction-batiment"
     },
     {
       "id": "renovation",
       "icon": "🔨",
       "title": "Rénovation de bâtiment",
-      "description": "Rénovation complète ou partielle : modernisation, extension, remise à neuf de vos espaces.",
-      "link": "services/renovation.html"
+      "description": "Rénovation complète ou partielle : modernisation de façades, extensions, remise à neuf de vos espaces de vie.",
+      "price": "Sur devis personnalisé",
+      "link": "service-details.html?id=renovation"
     },
     {
       "id": "etancheite",
       "icon": "💧",
-      "title": "Étanchéité",
-      "description": "Solutions d'étanchéité pour toitures, terrasses, fondations et murs. Protection durable contre les infiltrations.",
-      "link": "services/etancheite.html"
+      "title": "Étanchéité (Opération Zéro Goutte)",
+      "description": "Solutions d'étanchéité professionnelles pour toitures, terrasses, fondations et murs. Garantie décennale anti-infiltration.",
+      "price": "À partir de 5 000 FCFA / m²",
+      "link": "service-details.html?id=etancheite"
     },
     {
       "id": "reparation-toiture",
       "icon": "🏠",
       "title": "Réparation de toiture",
-      "description": "Diagnostic, réparation et remplacement de toiture. Intervention rapide pour stopper les fuites.",
-      "link": "services/reparation-toiture.html"
-    },
-    {
-      "id": "peinture-decoration",
-      "icon": "🎨",
-      "title": "Peinture et décoration",
-      "description": "Peinture intérieure et extérieure, décoration personnalisée. Finitions soignées et durables.",
-      "link": "services/peinture-decoration.html"
-    },
-    {
-      "id": "carrelage",
-      "icon": "🧱",
-      "title": "Carrelage",
-      "description": "Pose de carrelage sol et mural. Large choix de matériaux et motifs pour tous vos espaces.",
-      "link": "services/carrelage.html"
+      "description": "Diagnostic de charpente, réparation, étanchéité et remplacement de tôles de toiture. Intervention rapide en cas de fuite.",
+      "price": "Sur diagnostic gratuit",
+      "link": "service-details.html?id=reparation-toiture"
     },
     {
       "id": "pavage-assainissement",
       "icon": "🛣️",
       "title": "Pavage et assainissement",
-      "description": "Pavage de cours, allées et espaces extérieurs. Travaux d'assainissement et drainage.",
-      "link": "services/pavage-assainissement.html"
+      "description": "Pavage de cours de villas, allées et espaces publics. Travaux de drainage, caniveaux et raccordements.",
+      "price": "À partir de 4 500 FCFA / m²",
+      "link": "service-details.html?id=pavage-assainissement"
+    },
+    {
+      "id": "carrelage",
+      "icon": "🧱",
+      "title": "Carrelage & Finitions",
+      "description": "Pose de carrelage sol, mural, faïences et marbre de haute qualité pour toutes vos pièces d'eau et salons.",
+      "price": "À partir de 2 500 FCFA / m²",
+      "link": "service-details.html?id=carrelage"
+    },
+    {
+      "id": "peinture-decoration",
+      "icon": "🎨",
+      "title": "Peinture et décoration",
+      "description": "Peinture intérieure, extérieure et décoration personnalisée. Enduits, stucs et finitions soignées durables.",
+      "price": "À partir de 1 500 FCFA / m²",
+      "link": "service-details.html?id=peinture-decoration"
     },
     {
       "id": "reparation-fissures",
       "icon": "🔧",
       "title": "Réparation de fissures",
-      "description": "Diagnostic structurel et réparation de fissures sur dalles, murs et fondations.",
-      "link": "services/reparation-fissures.html"
+      "description": "Diagnostic de fissures structurelles et réparation de dalles, murs porteurs et fondations.",
+      "price": "Sur diagnostic technique",
+      "link": "service-details.html?id=reparation-fissures"
     },
     {
       "id": "isolation",
       "icon": "🔇",
-      "title": "Isolation thermique et acoustique",
-      "description": "Isolation performante pour un confort optimal. Réduction des coûts énergétiques.",
-      "link": "services/isolation.html"
-    },
-    {
-      "id": "entretien-nettoyage",
-      "icon": "🧹",
-      "title": "Entretien et nettoyage",
-      "description": "Entretien régulier de bâtiments, nettoyage professionnel de chantiers et espaces commerciaux.",
-      "link": "services/entretien-nettoyage.html"
+      "title": "Isolation thermique & acoustique",
+      "description": "Isolation thermique sous toiture et isolation phonique de murs pour un confort et des économies d'énergie.",
+      "price": "À partir de 8 000 FCFA / m²",
+      "link": "service-details.html?id=isolation"
     }
   ],
-  "secondary_title": "🌟 Services secondaires — Au-delà du BTP",
-  "secondary_subtitle": "BSH, c'est aussi des services complémentaires pour répondre à tous vos besoins professionnels et quotidiens au Bénin.",
-  "secondary_services": [
+  "digital_title": "💻 Pôle Digital, Graphisme & Imprimerie",
+  "digital_subtitle": "Valorisez votre marque et votre présence professionnelle en ligne et sur supports physiques.",
+  "digital_services": [
     {
       "id": "creation-site-web",
       "icon": "🌐",
       "title": "Création de site web",
-      "description": "Sites vitrines, e-commerce, applications web. Présence digitale professionnelle pour votre entreprise.",
-      "link": "services/creation-site-web.html"
+      "description": "Conception de sites vitrines professionnels, e-commerce, applications sur-mesure et hébergement sécurisé.",
+      "price": "À partir de 150 000 FCFA",
+      "link": "service-details.html?id=creation-site-web"
     },
     {
-      "id": "evenementiel",
+      "id": "conception-graphique",
+      "icon": "🎨",
+      "title": "Conception Graphique & Imprimerie",
+      "description": "Création d'identités visuelles (logos, chartes graphiques) et travaux d'imprimerie (cartes d'affaires, flyers, calendriers, affiches).",
+      "price": "Sur commande de maquette",
+      "link": "service-details.html?id=conception-graphique"
+    },
+    {
+      "id": "enquetes-digitales",
+      "icon": "📊",
+      "title": "Enquêtes Digitales & Sondages",
+      "description": "Création de formulaires interactifs, traitement de données d'enquêtes de satisfaction et sondages en ligne.",
+      "price": "Sur cahier des charges",
+      "link": "service-details.html?id=enquetes-digitales"
+    }
+  ],
+  "multi_title": "🌟 Pôle Services & Multidisciplinaire",
+  "multi_subtitle": "Des prestations multidisciplinaires de confiance pour répondre à vos besoins quotidiens.",
+  "multi_services": [
+    {
+      "id": "entretien-nettoyage",
+      "icon": "🧹",
+      "title": "Entretien et nettoyage",
+      "description": "Entretien régulier de bâtiments commerciaux, nettoyage complet de fin de chantiers et désinfection de bureaux.",
+      "price": "À partir de 25 000 FCFA / prestation",
+      "link": "service-details.html?id=entretien-nettoyage"
+    },
+    {
+      "id": "quincaillerie-evenementiel",
       "icon": "🎪",
-      "title": "Événementiel",
-      "description": "Organisation d'événements clé en main : mariages, séminaires, conférences, fêtes d'entreprise.",
-      "link": "services/evenementiel.html"
+      "title": "Quincaillerie & Événementiel",
+      "description": "Vente de fournitures techniques et de quincaillerie BTP, et organisation d'événements clé en main.",
+      "price": "Sur devis personnalisé",
+      "link": "service-details.html?id=quincaillerie-evenementiel"
     },
     {
       "id": "savons-produits-entretien",
       "icon": "🧼",
-      "title": "Savons et produits d'entretien",
-      "description": "Fabrication artisanale de savons naturels et produits d'entretien de qualité. Livraison à domicile.",
-      "link": "services/savons-produits-entretien.html"
+      "title": "Savons & produits d'entretien",
+      "description": "Fabrication et distribution de savons liquides, détergents écologiques et produits d'entretien à domicile.",
+      "price": "À partir de 1 000 FCFA",
+      "link": "service-details.html?id=savons-produits-entretien"
     },
     {
       "id": "distribution-fruits-legumes",
       "icon": "🥑",
-      "title": "Distribution de fruits et légumes",
-      "description": "Produits frais du producteur à votre table. Livraison particuliers, restaurants et entreprises.",
-      "link": "services/distribution-fruits-legumes.html"
+      "title": "Distribution de fruits & légumes",
+      "description": "Distribution de paniers de fruits frais et légumes biologiques locaux, du producteur à votre table.",
+      "price": "Selon la commande",
+      "link": "service-details.html?id=distribution-fruits-legumes"
     }
   ]
 }

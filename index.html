@@ -63,27 +63,56 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(15, 23, 42, 0.85);
       border: 1px solid var(--accent);
-      padding: 10px 20px;
+      padding: 10px 22px;
       border-radius: 50px;
       margin-bottom: 25px;
-      box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
       backdrop-filter: blur(5px);
     }
     .clock-label {
       font-size: 0.85rem;
       text-transform: uppercase;
       font-weight: 700;
-      color: #cbd5e1;
+      color: #94a3b8;
       letter-spacing: 0.05em;
     }
     .clock-time {
-      font-size: 1.15rem;
-      font-weight: 850;
+      font-size: 1.25rem;
+      font-weight: 900;
       color: var(--accent);
       font-family: monospace;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+    }
+    
+    /* Animation défilante du Slogan (Marquee) */
+    @keyframes marquee {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-100%, 0, 0); }
+    }
+    .marquee-container {
+      overflow: hidden;
+      white-space: nowrap;
+      margin-bottom: 35px;
+      background: rgba(15, 23, 42, 0.65);
+      padding: 12px 0;
+      border-top: 1px solid rgba(245, 158, 11, 0.4);
+      border-bottom: 1px solid rgba(245, 158, 11, 0.4);
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+      border-radius: 8px;
+    }
+    .marquee-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 20s linear infinite;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow: 0 0 10px #f59e0b, 0 0 20px #d97706, 0 0 35px rgba(245, 158, 11, 0.6);
+      font-family: 'Montserrat', sans-serif;
+      white-space: nowrap;
     }
     
     /* Pôles d'Expertise */
@@ -208,7 +237,6 @@
   <header class="header">
     <div class="container navbar">
       <a href="index.html" class="logo-container">
-        <!-- Logo text / image injectée par JS -->
         <div class="logo-text">BSH<span>.</span></div>
       </a>
       
@@ -232,7 +260,6 @@
 
   <!-- HERO SECTION WITH SLIDESHOW / CAROUSEL -->
   <section class="hero-carousel" id="accueil">
-    <!-- Diapositives du carrousel d'expertise -->
     <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=80');"></div>
     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80');"></div>
     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -248,10 +275,13 @@
         </div>
         
         <h1 id="hero-title">Nous construisons votre <span>rêve</span></h1>
-        <p id="hero-subtitle" style="display:none;">BSH (Best Services and House) est votre partenaire de confiance...</p>
-        <p class="hero-slogan" id="hero-slogan" style="font-size: 1.4rem; color: #f8fafc; font-weight: 700; margin-bottom: 35px; line-height: 1.4; border-left: 4px solid var(--accent); padding-left: 15px;">
-          BSH : L'Excellence multiservices au Bénin. Construisez, Rénovez, Digitalisez en toute sérénité.
-        </p>
+        
+        <!-- Slogan Animé Défilant & Brillant BSH (Marquee) -->
+        <div class="marquee-container">
+          <div class="marquee-text" id="hero-slogan">
+            🌟 Best Services and House - BSH : L'Excellence multiservices au Bénin. Construisez, Rénovez, Digitalisez en toute sérénité. 🌟 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🏗️ BSH BTP & SERVICES : Votre rêve, notre devoir d'excellence. 🏗️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
         
         <div class="hero-actions">
           <a href="devis.html" class="btn btn-primary">Demander un devis gratuit</a>
@@ -291,14 +321,13 @@
       
       <div class="section-header" style="margin-bottom: 60px;">
         <h2>Nos Pôles d'Expertise & Prestations</h2>
-        <p>Découvrez notre organisation structurée pour répondre avec précision and excellence à l'ensemble de vos projets.</p>
+        <p>Découvrez notre organisation structurée pour répondre avec précision et excellence à l'ensemble de vos projets.</p>
       </div>
 
       <!-- 1. PÔLE BTP, GÉNIE CIVIL & ÉTANCHÉITÉ -->
       <div class="pole-section">
-        <div class="pole-badge">PÔLE BTP, GÉNIE CIVIL & ÉTANCHÉITÉ</div>
+        <div class="pole-badge" id="pole-btp-title">PÔLE BTP, GÉNIE CIVIL & ÉTANCHÉITÉ</div>
         <div class="services-grid" id="btp-services-container">
-          <!-- Chargé dynamiquement par JS -->
           <div class="service-card">
             <div class="service-icon">🏗️</div>
             <h3>Construction de bâtiment</h3>
@@ -321,9 +350,8 @@
 
       <!-- 2. PÔLE DIGITAL, GRAPHISME & IMPRIMERIE -->
       <div class="pole-section" style="margin-top: 50px;">
-        <div class="pole-badge" style="background-color: #0369a1; color: white;">PÔLE DIGITAL, GRAPHISME & IMPRIMERIE</div>
+        <div class="pole-badge" id="pole-digital-title" style="background-color: #0369a1; color: white;">PÔLE DIGITAL, GRAPHISME & IMPRIMERIE</div>
         <div class="services-grid" id="digital-services-container">
-          <!-- Chargé dynamiquement par JS -->
           <div class="service-card">
             <div class="service-icon">🌐</div>
             <h3>Création de site web</h3>
@@ -335,9 +363,8 @@
 
       <!-- 3. PÔLE SERVICES & MULTIDISCIPLINAIRE -->
       <div class="pole-section" style="margin-top: 50px;">
-        <div class="pole-badge" style="background-color: #047857; color: white;">PÔLE SERVICES & MULTIDISCIPLINAIRE</div>
+        <div class="pole-badge" id="pole-multi-title" style="background-color: #047857; color: white;">PÔLE SERVICES & MULTIDISCIPLINAIRE</div>
         <div class="services-grid" id="multi-services-container">
-          <!-- Chargé dynamiquement par JS -->
           <div class="service-card">
             <div class="service-icon">🧹</div>
             <h3>Entretien et nettoyage</h3>
@@ -401,7 +428,6 @@
 
       <!-- Grid des projets -->
       <div class="portfolio-grid" id="portfolio-container">
-        <!-- Rempli dynamiquement -->
         <div class="portfolio-card">
           <div class="portfolio-img-wrapper">
             <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Villa moderne">

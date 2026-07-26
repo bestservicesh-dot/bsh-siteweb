@@ -1,0 +1,12 @@
+{
+  "id": "renovation",
+  "title": "Rénovation de bâtiment",
+  "pole": "btp",
+  "icon": "🔨",
+  "short_description": "Rénovation complète ou partielle : modernisation de façades, extensions, remise à neuf de vos espaces de vie.",
+  "price": "Sur devis personnalisé",
+  "description": "Donnez une seconde jeunesse à vos bâtiments et appartements avec le service de rénovation BSH. Nous intervenons pour des travaux de réhabilitation complète, d'extension de pièces, de modification de cloisons, de surélévation de villas, ou de modernisation d'espaces commerciaux.\n\nNous réalisons une étude de l'existant pour garantir la solidité de la structure avant toute intervention.",
+  "images": [
+    "https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80"
+  ]
+}

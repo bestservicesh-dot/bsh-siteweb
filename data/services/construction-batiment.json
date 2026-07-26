@@ -1,0 +1,13 @@
+{
+  "id": "construction-batiment",
+  "title": "Construction de bâtiment",
+  "pole": "btp",
+  "icon": "🏗️",
+  "short_description": "Construction complète de bâtiments résidentiels, commerciaux et industriels. Du gros œuvre aux finitions de prestige.",
+  "price": "À partir de 150 000 FCFA / m²",
+  "description": "BSH est votre entreprise de référence pour tous travaux de construction de bâtiments au Bénin. Nous prenons en charge l'intégralité de vos projets, de l'étude de sol à la remise des clés : gros œuvre, maçonnerie, charpente, dalles de béton, cloisons, plomberie et électricité.\n\nNos équipes d'ingénieurs et techniciens d'expérience veillent au strict respect des normes de sécurité et de construction en vigueur au Bénin, avec une sélection rigoureuse de matériaux de haute qualité.",
+  "images": [
+    "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80"
+  ]
+}

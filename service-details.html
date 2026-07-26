@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     /* Spécifique à la page de détails de service */
     .srv-hero {
@@ -39,7 +39,7 @@
       color: #94a3b8;
     }
     .srv-content-box {
-      max-width: 850px;
+      max-width: 900px;
       margin: 40px auto;
       background: var(--bg-white);
       padding: 40px;
@@ -51,7 +51,8 @@
       font-size: 1.15rem;
       line-height: 1.8;
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      white-space: pre-line; /* Conserver les sauts de lignes pour les paragraphes de description */
     }
     .srv-price-box {
       background-color: #fef3c7;
@@ -84,6 +85,38 @@
     .back-services:hover {
       color: var(--accent-hover);
       text-decoration: underline;
+    }
+    
+    /* Style de la galerie d'images du service */
+    .srv-gallery-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 40px 0 20px 0;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+    .srv-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .srv-gallery-item {
+      height: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+    }
+    .srv-gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .srv-gallery-item:hover .srv-gallery-img {
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -141,12 +174,21 @@
     <div class="srv-content-box">
       <a href="index.html#services" class="back-services">← Retourner à la liste de nos services</a>
       
+      <!-- Description détaillée du service -->
       <p id="srvDesc" class="srv-description">Chargement des détails du service...</p>
 
       <!-- Zone d'affichage des tarifs unitaires configurables de l'Admin -->
       <div class="srv-price-box">
         <div class="srv-price-title">Tarif indicatif</div>
         <div id="srvPrice" class="srv-price-value">Chargement du tarif...</div>
+      </div>
+
+      <!-- Galerie photos du service (NEW!) -->
+      <div id="gallerySection" style="display: none;">
+        <h3 class="srv-gallery-title">📸 Galerie Photos du Service</h3>
+        <div class="srv-gallery-grid" id="srvGalleryContainer">
+          <!-- Chargé dynamiquement -->
+        </div>
       </div>
 
       <div style="border-top: 1px solid var(--border-color); padding-top: 30px; margin-top: 30px; display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -190,42 +232,58 @@
         return;
       }
 
-      // 2. Charger les services depuis services.json
-      fetch('/data/services.json?v=' + Date.now())
-        .then(res => res.json())
-        .then(data => {
-          // Chercher d'abord dans les services principaux, puis secondaires
-          let service = null;
-          let isPrimary = true;
+      // 2. Charger les détails du service individuel depuis son fichier JSON propre sur Vercel
+      fetch(`/data/services/${serviceId}.json?v=` + Date.now())
+        .then(res => {
+          if (!res.ok) throw new Error("Fichier non trouvé");
+          return res.json();
+        })
+        .then(service => {
+          // Remplir les données dynamiquement
+          document.title = `${service.title} — BSH Bénin`;
+          document.getElementById('srvIcon').textContent = service.icon || '🏗️';
+          document.getElementById('srvTitle').textContent = service.title;
+          
+          let categoryText = "Service Principal BTP & Bâtiment";
+          if (service.pole === 'digital') categoryText = "Pôle Digital, Graphisme & Imprimerie";
+          if (service.pole === 'multi') categoryText = "Pôle Services & Multidisciplinaire";
+          
+          document.getElementById('srvCategory').textContent = categoryText;
+          document.getElementById('srvDesc').textContent = service.description;
+          document.getElementById('srvPrice').textContent = service.price || "Sur devis personnalisé";
 
-          if (data.primary_services) {
-            service = data.primary_services.find(s => s.id === serviceId);
-          }
-          if (!service && data.secondary_services) {
-            service = data.secondary_services.find(s => s.id === serviceId);
-            isPrimary = false;
-          }
-
-          if (service) {
-            // Remplir les données dynamiquement
-            document.title = `${service.title} — BSH Bénin`;
-            document.getElementById('srvIcon').textContent = service.icon || '🏗️';
-            document.getElementById('srvTitle').textContent = service.title;
-            document.getElementById('srvCategory').textContent = isPrimary ? "Service Principal BTP & Bâtiment" : "Prestation de diversification BSH";
-            document.getElementById('srvDesc').textContent = service.description;
+          // Générer la galerie de photos si existante et remplie
+          if (service.images && service.images.length > 0) {
+            const gallerySection = document.getElementById('gallerySection');
+            const container = document.getElementById('srvGalleryContainer');
             
-            // Afficher le tarif dynamique configuré depuis l'Admin
-            document.getElementById('srvPrice').textContent = service.price || "Sur devis personnalisé";
+            container.innerHTML = '';
+            let validImages = 0;
+            
+            service.images.forEach(imgUrl => {
+              // Si c'est un objet (Decap CMS structure parfois comme {"image": "url"}) ou une simple chaîne
+              const url = typeof imgUrl === 'string' ? imgUrl : (imgUrl.image || '');
+              if (url) {
+                validImages++;
+                container.innerHTML += `
+                  <div class="srv-gallery-item">
+                    <img src="${url}" alt="Photo de chantier BSH" class="srv-gallery-img" onclick="window.open('${url}', '_blank')">
+                  </div>
+                `;
+              }
+            });
 
-            // Paramétrer le bouton Devis pour pré-sélectionner ce service
-            document.getElementById('ctaDevis').href = `devis.html?service=${encodeURIComponent(service.title)}`;
-          } else {
-            document.getElementById('srvDesc').textContent = "Service non trouvé ou expiré.";
+            if (validImages > 0) {
+              gallerySection.style.display = 'block';
+            }
           }
+
+          // Paramétrer le bouton Devis pour pré-sélectionner ce service
+          document.getElementById('ctaDevis').href = `devis.html?service=${encodeURIComponent(service.title)}`;
         })
         .catch(err => {
           console.error("Erreur de chargement du service :", err);
-          document.getElementById('srvDesc').textContent = "Impossible de charger les détails du service pour le moment.";
+          document.getElementById('srvDesc').textContent = "Impossible de charger les détails du service pour le moment. Veuillez nous contacter directement.";
         });
     });
   </script>

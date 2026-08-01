@@ -11,20 +11,28 @@
       "description": "Nous recherchons un Conducteur de Travaux expérimenté pour superviser nos chantiers de construction résidentiels et commerciaux. Vous serez garant de la qualité des travaux, du respect des délais, du budget et des normes de sécurité."
     },
     {
-      "id": "specialiste-etancheite",
-      "title": "Technicien Applicateur en Étanchéité (H/F)",
+      "id": "Agents d'entretien",
+      "title": "Technicien nettoyeur (H/F)",
       "contract": "CDD",
-      "location": "Tout le Bénin",
+      "location": "Abomey Calavi",
       "deadline": "2026-08-30",
-      "description": "Spécialiste de la protection des bâtiments, vous interviendrez sur nos chantiers pour réaliser l'étanchéité de toitures-terrasses, fondations et dalles. Maîtrise des membranes bitumineuses et résines liquides indispensable."
+      "description": "Spécialiste du nettoyage sol -carreau - vitre - bureau - bâtiments, vous serez programmés pour intervenir sur nos chantiers de nettoyage."
     },
     {
-      "id": "commercial-btp",
-      "title": "Chargé d'Affaires & Commercial BTP (H/F)",
-      "contract": "Prestation",
-      "location": "Cotonou",
+      "id": "Agents commerciaux",
+      "title": "Chargés d'Affaires & Commerciaux  (H/F)",
+      "contract": "CDD",
+      "location": "Tout le Bénin",
       "deadline": "2026-09-10",
-      "description": "Pour soutenir notre forte croissance, nous recrutons un commercial BTP indépendant pour prospecter, négocier et vendre nos services de construction et rénovation auprès des particuliers et des professionnels au Bénin."
+      "description": "Pour soutenir notre forte croissance, nous recrutons deux commerciaux indépendants pour prospecter, négocier et vendre nos services de pôle BTP, pôle Digital et pôle Commercial auprès des particuliers et des professionnels au Bénin. Vous êtes polyvalents, vous avez un grand sens de responsabilité, vous ambitionnez de prospérer dans le métier commercial, rejoignez-nous.\n\n"
+    },
+    {
+      "location": "Tout le Bénin",
+      "id": "Superviseur des  travaux ",
+      "title": "Agent de Supervision H/F",
+      "contract": "CDD",
+      "deadline": "2026-09-10",
+      "description": "Vous serez garant des livraisons faites par les agents de terrains. Votre rôle est de vérifier et coordonner les tâches appliquer les règles des cahiers de charge afin que nos réalisations soient conformes à ces derniers"
     }
   ]
 }

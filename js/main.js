@@ -271,7 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
         multiList = data.multi_services || [];
       } 
       // B. Si le fichier est à l'ANCIEN format (découpé par primary/secondary)
-      // On le classe à la volée pour que l'utilisateur ne perde rien !
       else {
         if (data.primary_services) {
           data.primary_services.forEach(srv => {
@@ -347,22 +346,27 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.warn("Attention : Erreur de chargement des pôles d'expertise.", err));
 
   // ---------------------------------------------------------
-  // 3. CHARGEMENT DES REALISATIONS (PORTFOLIO)
+  // 3. CHARGEMENT DES REALISATIONS (PORTFOLIO MULTI-PHOTOS) (CORRIGÉ !)
   // ---------------------------------------------------------
-  fetch('/data/realisations.json' + cacheBuster)
-    .then(res => res.json())
-    .then(data => {
-      const portTitle = document.getElementById('portfolio-title');
-      const portSubtitle = document.getElementById('portfolio-subtitle');
-      if (portTitle && data.title) portTitle.textContent = data.title;
-      if (portSubtitle && data.subtitle) portSubtitle.textContent = data.subtitle;
+  const realisationsList = [
+    "villa-cotonou",
+    "auditorium-natitingou",
+    "piscine-natitingou",
+    "geomembrane-cotonou",
+    "pavage-ouagadougou",
+    "siteweb-calavi"
+  ];
 
-      if (data.items) {
-        allRealisations = data.items;
-        renderPortfolio('all');
-      }
-    })
-    .catch(err => console.warn("Attention : Fallback réalisations.", err));
+  Promise.all(realisationsList.map(id => 
+    fetch(`/data/realisations/${id}.json${cacheBuster}`).then(res => res.json())
+  ))
+  .then(projects => {
+    allRealisations = projects;
+    renderPortfolio('all');
+  })
+  .catch(err => {
+    console.warn("Attention : Fallback statique réalisations.", err);
+  });
 
   function renderPortfolio(categoryFilter) {
     const portfolioContainer = document.getElementById('portfolio-container');
@@ -383,7 +387,7 @@ document.addEventListener("DOMContentLoaded", () => {
       portfolioContainer.innerHTML += `
         <div class="portfolio-card">
           <div class="portfolio-img-wrapper">
-            <img src="${proj.image}" alt="${proj.title}">
+            <img src="${proj.main_image}" alt="${proj.title}">
             <span class="portfolio-category-badge">${proj.category}</span>
           </div>
           <div class="portfolio-info">
@@ -564,7 +568,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const formattedPrice = price.toLocaleString('fr-FR') + " FCFA";
 
-      // Alerte de confirmation de paiement à la validation
       const confirmText = `🚨 CONFIRMATION DE PRESTATION PAYANTE BSH 🚨\n\n` +
                           `Vous vous apprêtez à soumettre une demande de diagnostic technique pour votre bâtiment.\n\n` +
                           `• Forfait diagnostic : ${zoneSelect.options[zoneSelect.selectedIndex].text}\n` +
@@ -580,7 +583,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const submitBtn = diagForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.textContent;
       submitBtn.disabled = true;
-      submitBtn.textContent = "⌛ Envoi de votre demande de diagnostic...";
+      submitBtn.textContent = "Envoi de votre demande de diagnostic...";
 
       const payload = {
         fullName: name,

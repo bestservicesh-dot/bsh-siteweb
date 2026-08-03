@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Fiches Techniques | BSH Bénin</title>
+  <meta name="description" content="Découvrez nos conseils BTP, astuces de rénovation, et téléchargez les fiches techniques PDF de nos produits recommandés sur notre espace membre BSH.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Spécifique à la page Blog */
+    .blog-hero {
+      background: linear-gradient(135deg, var(--primary) 40%, var(--primary-light) 100%);
+      color: var(--bg-white);
+      padding: 60px 0;
+      text-align: center;
+    }
+    .blog-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+    .blog-hero p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .blog-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    .blog-img-wrapper {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    .blog-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .blog-card:hover .blog-img {
+      transform: scale(1.05);
+    }
+    .blog-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .blog-body {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-date {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .blog-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .blog-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    
+    /* Boutons de téléchargement sécurisé */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary);
+      color: white;
+      font-weight: 700;
+      border-radius: 8px;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+    .download-btn:hover {
+      background-color: var(--accent);
+      color: var(--primary);
+    }
+    .download-btn.locked {
+      background-color: #e2e8f0;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+      </div>
+      <div class="top-bar-right">
+        <span class="address-text">📍 Abomey-Calavi, Bénin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="realisations.html">Nos Réalisations</a></li>
+        <li><a href="opportunites.html">Opportunités</a></li>
+        <li><a href="blog.html" style="color: var(--accent);">Blog & PDF</a></li>
+        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- BLOG HERO -->
+  <div class="blog-hero">
+    <div class="container">
+      <h1>Conseils BTP & Guides PDF</h1>
+      <p>Retrouvez l'expertise d'ingénieurs BSH : guides techniques, fiches de produits d'étanchéité and astuces de chantiers.</p>
+    </div>
+  </div>
+
+  <!-- ARTICLES LIST -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Nos Fiches Techniques & Articles Récents</h2>
+        <p>Les téléchargements de fiches techniques d'imperméabilisation and de gros œuvre sont réservés exclusivement aux membres enregistrés de BSH.</p>
+      </div>
+
+      <div class="blog-grid" id="blog-container">
+        <!-- 3 Articles par défaut (Remplacés dynamiquement par JS) -->
+        <div class="blog-card">
+          <div class="blog-img-wrapper">
+            <span class="blog-badge">Fiche Technique</span>
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80" alt="Sika" class="blog-img">
+          </div>
+          <div class="blog-body">
+            <div class="blog-date">23 Juillet 2026</div>
+            <h4 class="blog-title">Fiche Technique : Sika Latex pour étanchéité de dalles</h4>
+            <p class="blog-desc">Téléchargez le guide technique d'application du Sika Latex pour consolider l'imperméabilisation de vos bétons et mortiers.</p>
+            <button class="download-btn btn-download-file" data-id="fiche-sika-etancheite" data-premium="true" data-file="/assets/pdf/fiche_technique_sika_latex.pdf">
+              📥 Télécharger le PDF (Membres)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" style="text-align: center;">
+      <div class="logo-text" style="color: #fff; margin-bottom: 15px; justify-content: center; display: flex;">BSH<span>.</span></div>
+      <p style="max-width: 500px; margin: 0 auto 20px auto; color: #94a3b8; font-size: 0.9rem;">Best Services and House (BSH) est votre partenaire de confiance au Bénin pour tous travaux de BTP, construction gros œuvre, étanchéité, carrelage, pavage et rénovation.</p>
+      <div class="social-links" style="margin: 0 auto 25px auto; display: flex; gap: 10px; justify-content: center;">
+        <a href="https://facebook.com/bestservicesandhouse" class="facebook-link" target="_blank" rel="noopener" title="Facebook" style="font-weight: bold; font-family: sans-serif;">f</a>
+        <a href="https://linkedin.com/company/bestservicesandhouse" class="linkedin-link" target="_blank" rel="noopener" title="LinkedIn" style="font-weight: bold; font-family: sans-serif;">in</a>
+        <a href="https://instagram.com/bestservicesandhouse" class="instagram-link" target="_blank" rel="noopener" title="Instagram" style="font-weight: bold; font-family: sans-serif;">ig</a>
+        <a href="https://tiktok.com/@bestservicesandhouse" class="tiktok-link" target="_blank" rel="noopener" title="TikTok" style="font-weight: bold; font-family: sans-serif;">tk</a>
+      </div>
+      <div class="footer-bottom" style="border-top: 1px solid #1e293b; padding-top: 20px;">
+        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>📍 Abomey-Calavi, Bénin</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Charger dynamiquement les articles de blog depuis data/blog/
+      const articlesList = [
+        "fiche-sika-etancheite",
+        "fondation-sable-benin",
+        "entretien-etancheite-toiture"
+      ];
+
+      const container = document.getElementById('blog-container');
+      if (container) {
+        container.innerHTML = '';
+        
+        // Charger tous les articles en parallèle de manière asynchrone
+        Promise.all(articlesList.map(id => 
+          fetch(`/data/blog/${id}.json?v=` + Date.now()).then(res => res.json())
+        ))
+        .then(posts => {
+          posts.forEach(post => {
+            let actionBtn = '';
+            if (post.pdf_file) {
+              const isPremiumLabel = post.is_premium ? " (🔒 Membres)" : " (Gratuit)";
+              actionBtn = `
+                <button class="download-btn btn-download-file" 
+                        data-title="${post.title}" 
+                        data-premium="${post.is_premium}" 
+                        data-file="${post.pdf_file}">
+                  📥 Télécharger le PDF${isPremiumLabel}
+                </button>
+              `;
+            } else {
+              actionBtn = `<a href="contact.html" class="btn btn-outline" style="width:100%; text-align:center;">💬 Nous poser une question</a>`;
+            }
+
+            container.innerHTML += `
+              <div class="blog-card">
+                <div class="blog-img-wrapper">
+                  <span class="blog-badge">${post.category}</span>
+                  <img src="${post.image}" alt="${post.title}" class="blog-img">
+                </div>
+                <div class="blog-body">
+                  <div class="blog-date">📅 Publié le ${post.date}</div>
+                  <h4 class="blog-title">${post.title}</h4>
+                  <p class="blog-desc">${post.summary}</p>
+                  ${actionBtn}
+                </div>
+              </div>
+            `;
+          });
+
+          // Attacher l'écouteur d'événements de téléchargement sécurisé
+          attachDownloadListeners();
+        })
+        .catch(err => console.warn("Attention : Fallback statique blog.", err));
+      }
+
+      function attachDownloadListeners() {
+        const downloadButtons = document.querySelectorAll('.btn-download-file');
+        downloadButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const isPremium = btn.getAttribute('data-premium') === 'true';
+            const fileUrl = btn.getAttribute('data-file');
+            const fileTitle = btn.getAttribute('data-title');
+
+            // Vérifier si le téléchargement est Premium et requiert un compte client
+            if (isPremium) {
+              const loggedInUser = localStorage.getItem('loggedInUser');
+              
+              if (!loggedInUser) {
+                // Bloquer et afficher un message de redirection
+                const registerConfirm = confirm(
+                  `🔒 TÉLÉCHARGEMENT REQUIS COMPTE CLIENT BSH 🔒\n\n` +
+                  `Le document technique : "${fileTitle}" est un guide réservé exclusivement à nos membres enregistrés.\n\n` +
+                  `Voulez-vous être redirigé vers l'Espace Client pour vous connecter ou créer votre compte gratuitement en 30 secondes ?`
+                );
+                
+                if (registerConfirm) {
+                  window.location.href = "connexion.html";
+                }
+              } else {
+                // Autoriser le téléchargement (Simulé ou réel)
+                alert(`📥 Déverrouillage d'Espace Client réussi !\n\nTéléchargement en cours de votre document technique : "${fileTitle}"...\n\n(Fichier simulé : ${fileUrl})`);
+                // Dans le cas réel, on redirige vers le fichier
+                // window.open(fileUrl, '_blank');
+              }
+            } else {
+              // Téléchargement libre gratuit
+              alert(`📥 Téléchargement gratuit en cours : "${fileTitle}"...\n\n(Fichier : ${fileUrl})`);
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -124,50 +124,6 @@ collections:
               - { label: "Photo du bien", name: "image", widget: "image" }
               - { label: "Description du bien", name: "description", widget: "text" }
 
-      - file: "data/realisations.json"
-        label: "📷 Portfolio & Réalisations"
-        name: "realisations"
-        fields:
-          - { label: "Titre de la section Portfolio", name: "title", widget: "string" }
-          - { label: "Sous-titre de la section Portfolio", name: "subtitle", widget: "string" }
-          - label: "Nos réalisations"
-            name: "items"
-            widget: "list"
-            fields:
-              - { label: "Nom de la réalisation", name: "title", widget: "string" }
-              - { label: "Catégorie", name: "category", widget: "select", options: ["Construction", "Rénovation", "Étanchéité", "Finitions", "Pavage", "Autres"] }
-              - { label: "Ville (Bénin)", name: "city", widget: "string" }
-              - { label: "Photo du projet", name: "image", widget: "image" }
-
-      - file: "data/temoignages.json"
-        label: "💬 Témoignages Clients"
-        name: "temoignages"
-        fields:
-          - { label: "Titre de la section Témoignages", name: "title", widget: "string" }
-          - { label: "Sous-titre de la section Témoignages", name: "subtitle", widget: "string" }
-          - label: "Avis Clients"
-            name: "items"
-            widget: "list"
-            fields:
-              - { label: "Nom du client", name: "name", widget: "string" }
-              - { label: "Rôle (ex: Propriétaire, Gérant)", name: "role", widget: "string" }
-              - { label: "Ville", name: "city", widget: "string" }
-              - { label: "Note (Etoiles 1-5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5 }
-              - { label: "Avis", name: "comment", widget: "text" }
-
-      - file: "data/faq.json"
-        label: "❓ Foire Aux Questions (FAQ)"
-        name: "faq"
-        fields:
-          - { label: "Titre de la section FAQ", name: "title", widget: "string" }
-          - { label: "Sous-titre de la section FAQ", name: "subtitle", widget: "string" }
-          - label: "Questions / Réponses"
-            name: "items"
-            widget: "list"
-            fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Réponse", name: "answer", widget: "text" }
-
   - name: "services"
     label: "🏗️ Pages de Services & Photos"
     folder: "data/services"
@@ -189,3 +145,40 @@ collections:
         name: "images"
         widget: "list"
         field: { label: "Photo", name: "image", widget: "image" }
+
+  - name: "realisations"
+    label: "📷 Réalisations (Mots & Multi-images)"
+    folder: "data/realisations"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "ID Unique du projet (sans espace)", name: "id", widget: "string" }
+      - { label: "Titre du projet", name: "title", widget: "string" }
+      - { label: "Catégorie", name: "category", widget: "select", options: ["Construction", "Rénovation", "Étanchéité", "Finitions", "Pavage", "Autres"] }
+      - { label: "Ville (Bénin)", name: "city", widget: "string" }
+      - { label: "Photo Principale", name: "main_image", widget: "image" }
+      - { label: "Description du projet", name: "description", widget: "text" }
+      - label: "Galerie d'images de la réalisation (Multi-photos)"
+        name: "images"
+        widget: "list"
+        field: { label: "Photo supplémentaire", name: "image", widget: "image" }
+
+  - name: "blog"
+    label: "✍️ Blog, Conseils & Fiches PDF"
+    folder: "data/blog"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "ID Unique de l'article", name: "id", widget: "string" }
+      - { label: "Titre de l'article", name: "title", widget: "string" }
+      - { label: "Date de publication (AAAA-MM-JJ)", name: "date", widget: "string" }
+      - { label: "Catégorie", name: "category", widget: "select", options: ["Conseil BTP", "Astuces", "Fiche Technique", "Actualité"] }
+      - { label: "Image de couverture", name: "image", widget: "image" }
+      - { label: "Résumé court (Liste)", name: "summary", widget: "text" }
+      - { label: "Contenu détaillé de l'article", name: "content", widget: "markdown" }
+      - { label: "Fiche Technique PDF à télécharger (Optionnel)", name: "pdf_file", widget: "file", required: false }
+      - { label: "Téléchargement du PDF réservé aux membres connectés", name: "is_premium", widget: "boolean", default: true }

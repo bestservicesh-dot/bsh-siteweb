@@ -92,17 +92,7 @@
 
       <!-- Grid des projets -->
       <div class="portfolio-grid" id="standalone-portfolio-container">
-        <!-- Rempli dynamiquement -->
-        <div class="portfolio-card">
-          <div class="portfolio-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Villa moderne">
-            <span class="portfolio-category-badge">Construction</span>
-          </div>
-          <div class="portfolio-info">
-            <h4>Villa résidentielle moderne</h4>
-            <p>📍 Cotonou, 2025</p>
-          </div>
-        </div>
+        <p style="text-align: center; grid-column: 1/-1;">Chargement de vos réalisations...</p>
       </div>
     </div>
   </section>
@@ -139,12 +129,12 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Chargement dynamique du portfolio complet (Folder Collection)
+    // Chargement dynamique du portfolio complet (Folder Collection 100% Dynamique !)
     document.addEventListener("DOMContentLoaded", () => {
       let itemsList = [];
       const cacheBuster = "?v=" + Date.now();
 
-      const realisationsList = [
+      const defaultRealisations = [
         "villa-cotonou",
         "auditorium-natitingou",
         "piscine-natitingou",
@@ -153,22 +143,44 @@
         "siteweb-calavi"
       ];
 
-      Promise.all(realisationsList.map(id => 
-        fetch(`/data/realisations/${id}.json${cacheBuster}`).then(res => res.json())
-      ))
-      .then(projects => {
-        itemsList = projects;
-        render(itemsList);
-      })
-      .catch(err => {
-        console.warn("Attention : Fallback statique réalisations.", err);
-      });
+      const container = document.getElementById('standalone-portfolio-container');
+      if (container) {
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Chargement de vos réalisations...</p>';
+
+        // 1. Interroger dynamiquement GitHub pour lister les chantiers dans data/realisations
+        fetch('https://api.github.com/repos/bestservicesh-dot/bsh-siteweb/contents/data/realisations')
+          .then(res => {
+            if (!res.ok) throw new Error("API GitHub indisponible.");
+            return res.json();
+          })
+          .then(files => {
+            const jsonFiles = files.filter(f => f.name.endsWith('.json'));
+            return Promise.all(jsonFiles.map(f => 
+              fetch('/' + f.path + cacheBuster).then(res => res.json())
+            ));
+          })
+          .catch(err => {
+            console.warn("Utilisation de la liste de réalisations par défaut (fallback).", err);
+            // Charger la liste par défaut
+            return Promise.all(defaultRealisations.map(id => 
+              fetch(`/data/realisations/${id}.json${cacheBuster}`).then(res => res.json())
+            ));
+          })
+          .then(projects => {
+            itemsList = projects;
+            render(itemsList);
+          });
+      }
 
       function render(items) {
-        const container = document.getElementById('standalone-portfolio-container');
         if (!container) return;
         container.innerHTML = '';
         
+        if (items.length === 0) {
+          container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--text-muted);">Aucune réalisation publiée pour le moment.</p>';
+          return;
+        }
+
         items.forEach(proj => {
           container.innerHTML += `
             <div class="portfolio-card">
@@ -193,22 +205,24 @@
         const project = itemsList.find(p => p.id === id);
         if (!project) return;
 
-        let imagesText = "";
+        let imagesHTML = "";
+        let imagesCount = 0;
         if (project.images && project.images.length > 0) {
           project.images.forEach((img, index) => {
             const url = typeof img === 'string' ? img : (img.image || '');
             if (url) {
-              imagesText += `• Photo ${index + 1} : ${url}\n`;
+              imagesCount++;
+              imagesHTML += `• Photo ${imagesCount} : ${url}\n`;
             }
           });
         }
 
-        // Alerte interactive listant les photos de la galerie pour cette réalisation !
         alert(
           `📸 GALERIE PHOTOS - ${project.title.toUpperCase()} 📸\n\n` +
+          `• Catégorie : ${project.category}\n` +
           `• Ville : ${project.city}\n` +
           `• Description : ${project.description}\n\n` +
-          `Photos additionnelles configurées dans l'Admin :\n${imagesText || 'Aucune photo supplémentaire.'}`
+          `Photos additionnelles chargées dans l'Admin (${imagesCount}) :\n${imagesHTML || 'Aucune photo supplémentaire.'}`
         );
       };
 

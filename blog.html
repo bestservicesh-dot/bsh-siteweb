@@ -119,11 +119,6 @@
       background-color: var(--accent);
       color: var(--primary);
     }
-    .download-btn.locked {
-      background-color: #e2e8f0;
-      color: #94a3b8;
-      cursor: not-allowed;
-    }
   </style>
 </head>
 <body>
@@ -158,7 +153,7 @@
         <li><a href="index.html#accueil">Accueil</a></li>
         <li><a href="index.html#services">Nos Services</a></li>
         <li><a href="a-propos.html">À Propos</a></li>
-        <li><a href="realisations.html">Nos Réalisations</a></li>
+        <li><a href="realisations.html" style="color: var(--accent);">Nos Réalisations</a></li>
         <li><a href="opportunites.html">Opportunités</a></li>
         <li><a href="blog.html" style="color: var(--accent);">Blog & PDF</a></li>
         <li><a href="connexion.html">Espace Client</a></li>
@@ -171,7 +166,7 @@
   <div class="blog-hero">
     <div class="container">
       <h1>Conseils BTP & Guides PDF</h1>
-      <p>Retrouvez l'expertise d'ingénieurs BSH : guides techniques, fiches de produits d'étanchéité and astuces de chantiers.</p>
+      <p>Retrouvez l'expertise d'ingénieurs BSH : guides techniques, fiches de produits d'étanchéité et astuces de chantiers.</p>
     </div>
   </div>
 
@@ -180,25 +175,12 @@
     <div class="container">
       <div class="section-header">
         <h2>Nos Fiches Techniques & Articles Récents</h2>
-        <p>Les téléchargements de fiches techniques d'imperméabilisation and de gros œuvre sont réservés exclusivement aux membres enregistrés de BSH.</p>
+        <p>Les téléchargements de fiches techniques d'imperméabilisation et de gros œuvre sont réservés exclusivement aux membres enregistrés de BSH.</p>
       </div>
 
       <div class="blog-grid" id="blog-container">
-        <!-- 3 Articles par défaut (Remplacés dynamiquement par JS) -->
-        <div class="blog-card">
-          <div class="blog-img-wrapper">
-            <span class="blog-badge">Fiche Technique</span>
-            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80" alt="Sika" class="blog-img">
-          </div>
-          <div class="blog-body">
-            <div class="blog-date">23 Juillet 2026</div>
-            <h4 class="blog-title">Fiche Technique : Sika Latex pour étanchéité de dalles</h4>
-            <p class="blog-desc">Téléchargez le guide technique d'application du Sika Latex pour consolider l'imperméabilisation de vos bétons et mortiers.</p>
-            <button class="download-btn btn-download-file" data-id="fiche-sika-etancheite" data-premium="true" data-file="/assets/pdf/fiche_technique_sika_latex.pdf">
-              📥 Télécharger le PDF (Membres)
-            </button>
-          </div>
-        </div>
+        <!-- Rempli dynamiquement -->
+        <p style="text-align: center; grid-column: 1/-1;">Chargement des articles de blog...</p>
       </div>
     </div>
   </section>
@@ -224,8 +206,7 @@
   <script src="js/main.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Charger dynamiquement les articles de blog depuis data/blog/
-      const articlesList = [
+      const defaultArticles = [
         "fiche-sika-etancheite",
         "fondation-sable-benin",
         "entretien-etancheite-toiture"
@@ -233,49 +214,70 @@
 
       const container = document.getElementById('blog-container');
       if (container) {
-        container.innerHTML = '';
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Chargement des articles de blog...</p>';
         
-        // Charger tous les articles en parallèle de manière asynchrone
-        Promise.all(articlesList.map(id => 
-          fetch(`/data/blog/${id}.json?v=` + Date.now()).then(res => res.json())
-        ))
-        .then(posts => {
-          posts.forEach(post => {
-            let actionBtn = '';
-            if (post.pdf_file) {
-              const isPremiumLabel = post.is_premium ? " (🔒 Membres)" : " (Gratuit)";
-              actionBtn = `
-                <button class="download-btn btn-download-file" 
-                        data-title="${post.title}" 
-                        data-premium="${post.is_premium}" 
-                        data-file="${post.pdf_file}">
-                  📥 Télécharger le PDF${isPremiumLabel}
-                </button>
-              `;
-            } else {
-              actionBtn = `<a href="contact.html" class="btn btn-outline" style="width:100%; text-align:center;">💬 Nous poser une question</a>`;
+        // 1. Tenter d'interroger dynamiquement l'API de GitHub pour lister tous les articles du dossier data/blog
+        fetch('https://api.github.com/repos/bestservicesh-dot/bsh-siteweb/contents/data/blog')
+          .then(res => {
+            if (!res.ok) throw new Error("API GitHub non disponible (dépôt privé ou quota atteint).");
+            return res.json();
+          })
+          .then(files => {
+            const jsonFiles = files.filter(f => f.name.endsWith('.json'));
+            return Promise.all(jsonFiles.map(f => 
+              fetch('/' + f.path + '?v=' + Date.now()).then(res => res.json())
+            ));
+          })
+          .catch(err => {
+            console.warn("Utilisation de la liste d'articles de secours (fallback).", err);
+            // Charger la liste par défaut en cas d'échec
+            return Promise.all(defaultArticles.map(id => 
+              fetch(`/data/blog/${id}.json?v=` + Date.now()).then(res => res.json())
+            ));
+          })
+          .then(posts => {
+            container.innerHTML = '';
+            
+            if (posts.length === 0) {
+              container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--text-muted);">Aucun article de blog publié pour le moment.</p>';
+              return;
             }
 
-            container.innerHTML += `
-              <div class="blog-card">
-                <div class="blog-img-wrapper">
-                  <span class="blog-badge">${post.category}</span>
-                  <img src="${post.image}" alt="${post.title}" class="blog-img">
-                </div>
-                <div class="blog-body">
-                  <div class="blog-date">📅 Publié le ${post.date}</div>
-                  <h4 class="blog-title">${post.title}</h4>
-                  <p class="blog-desc">${post.summary}</p>
-                  ${actionBtn}
-                </div>
-              </div>
-            `;
-          });
+            posts.forEach(post => {
+              let actionBtn = '';
+              if (post.pdf_file) {
+                const isPremiumLabel = post.is_premium ? " (🔒 Membres)" : " (Gratuit)";
+                actionBtn = `
+                  <button class="download-btn btn-download-file" 
+                          data-title="${post.title}" 
+                          data-premium="${post.is_premium}" 
+                          data-file="${post.pdf_file}">
+                    📥 Télécharger le PDF${isPremiumLabel}
+                  </button>
+                `;
+              } else {
+                actionBtn = `<a href="devis.html" class="btn btn-outline" style="width:100%; text-align:center; border-radius:8px;">💬 Demander des conseils</a>`;
+              }
 
-          // Attacher l'écouteur d'événements de téléchargement sécurisé
-          attachDownloadListeners();
-        })
-        .catch(err => console.warn("Attention : Fallback statique blog.", err));
+              container.innerHTML += `
+                <div class="blog-card">
+                  <div class="blog-img-wrapper">
+                    <span class="blog-badge">${post.category}</span>
+                    <img src="${post.image}" alt="${post.title}" class="blog-img">
+                  </div>
+                  <div class="blog-body">
+                    <div class="blog-date">📅 Publié le ${post.date}</div>
+                    <h4 class="blog-title">${post.title}</h4>
+                    <p class="blog-desc">${post.summary}</p>
+                    ${actionBtn}
+                  </div>
+                </div>
+              `;
+            });
+
+            // Ré-attacher l'écouteur d'événements de téléchargement sécurisé
+            attachDownloadListeners();
+          });
       }
 
       function attachDownloadListeners() {
@@ -286,12 +288,10 @@
             const fileUrl = btn.getAttribute('data-file');
             const fileTitle = btn.getAttribute('data-title');
 
-            // Vérifier si le téléchargement est Premium et requiert un compte client
             if (isPremium) {
               const loggedInUser = localStorage.getItem('loggedInUser');
               
               if (!loggedInUser) {
-                // Bloquer et afficher un message de redirection
                 const registerConfirm = confirm(
                   `🔒 TÉLÉCHARGEMENT REQUIS COMPTE CLIENT BSH 🔒\n\n` +
                   `Le document technique : "${fileTitle}" est un guide réservé exclusivement à nos membres enregistrés.\n\n` +
@@ -302,14 +302,13 @@
                   window.location.href = "connexion.html";
                 }
               } else {
-                // Autoriser le téléchargement (Simulé ou réel)
-                alert(`📥 Déverrouillage d'Espace Client réussi !\n\nTéléchargement en cours de votre document technique : "${fileTitle}"...\n\n(Fichier simulé : ${fileUrl})`);
-                // Dans le cas réel, on redirige vers le fichier
-                // window.open(fileUrl, '_blank');
+                // Autoriser le téléchargement
+                alert(`📥 Espace Client connecté !\n\nTéléchargement en cours de votre document technique : "${fileTitle}"...\n\nLien : ${fileUrl}`);
+                window.open(fileUrl, '_blank');
               }
             } else {
-              // Téléchargement libre gratuit
-              alert(`📥 Téléchargement gratuit en cours : "${fileTitle}"...\n\n(Fichier : ${fileUrl})`);
+              alert(`📥 Téléchargement gratuit en cours : "${fileTitle}"...\n\nLien : ${fileUrl}`);
+              window.open(fileUrl, '_blank');
             }
           });
         });

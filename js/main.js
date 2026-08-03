@@ -346,9 +346,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.warn("Attention : Erreur de chargement des pôles d'expertise.", err));
 
   // ---------------------------------------------------------
-  // 3. CHARGEMENT DES REALISATIONS (PORTFOLIO MULTI-PHOTOS) (CORRIGÉ !)
+  // 3. CHARGEMENT DES REALISATIONS (PORTFOLIO MULTI-PHOTOS DYNAMIQUE) (CORRIGÉ !)
   // ---------------------------------------------------------
-  const realisationsList = [
+  const defaultRealisations = [
     "villa-cotonou",
     "auditorium-natitingou",
     "piscine-natitingou",
@@ -357,16 +357,27 @@ document.addEventListener("DOMContentLoaded", () => {
     "siteweb-calavi"
   ];
 
-  Promise.all(realisationsList.map(id => 
-    fetch(`/data/realisations/${id}.json${cacheBuster}`).then(res => res.json())
-  ))
-  .then(projects => {
-    allRealisations = projects;
-    renderPortfolio('all');
-  })
-  .catch(err => {
-    console.warn("Attention : Fallback statique réalisations.", err);
-  });
+  fetch('https://api.github.com/repos/bestservicesh-dot/bsh-siteweb/contents/data/realisations')
+    .then(res => {
+      if (!res.ok) throw new Error("API GitHub indisponible.");
+      return res.json();
+    })
+    .then(files => {
+      const jsonFiles = files.filter(f => f.name.endsWith('.json'));
+      return Promise.all(jsonFiles.map(f => 
+        fetch('/' + f.path + cacheBuster).then(res => res.json())
+      ));
+    })
+    .catch(err => {
+      console.warn("Utilisation de la liste de réalisations par défaut (fallback).", err);
+      return Promise.all(defaultRealisations.map(id => 
+        fetch(`/data/realisations/${id}.json${cacheBuster}`).then(res => res.json())
+      ));
+    })
+    .then(projects => {
+      allRealisations = projects;
+      renderPortfolio('all');
+    });
 
   function renderPortfolio(categoryFilter) {
     const portfolioContainer = document.getElementById('portfolio-container');
@@ -602,7 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          alert(`Félicitations ${name} !\n\nVotre demande de diagnostic payant pour [${issue}] a été transmise avec succès à devis@bestservicesandhouse.site.\n\nLe montant total calculé est de [${formattedPrice}] à régler lors de l'inspection de notre ingénieur.\n\nUn technicien BSH va vous contacter sous 24h.`);
+          alert(`Félicitations ${name} !\n\nVotre demande de diagnostic payant pour [${issue}] a été transmise avec succès à devis@bestservicesandhouse.site.\n\nLe montant total calculé est de [${formattedPrice}] à régler lors de l'inspection de notre ingénieur.\n\nUn temps record de 24h.`);
           diagForm.reset();
           if (typeof calculateDiagTotal === 'function') calculateDiagTotal();
         } else {

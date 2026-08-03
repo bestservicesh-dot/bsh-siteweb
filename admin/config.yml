@@ -127,6 +127,8 @@ collections:
   - name: "services"
     label: "🏗️ Pages de Services & Photos"
     folder: "data/services"
+    extension: "json" # Indique à Decap CMS de chercher et d'écrire des fichiers .json
+    format: "json"    # Indique le format d'écriture JSON
     create: true
     slug: "{{slug}}"
     editor:
@@ -149,6 +151,8 @@ collections:
   - name: "realisations"
     label: "📷 Réalisations (Mots & Multi-images)"
     folder: "data/realisations"
+    extension: "json" # Indique à Decap CMS d'écrire en .json
+    format: "json"    # Indique le format JSON
     create: true
     slug: "{{slug}}"
     editor:
@@ -168,6 +172,8 @@ collections:
   - name: "blog"
     label: "✍️ Blog, Conseils & Fiches PDF"
     folder: "data/blog"
+    extension: "json" # Indique à Decap CMS d'écrire en .json
+    format: "json"    # Indique le format JSON
     create: true
     slug: "{{slug}}"
     editor:

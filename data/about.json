@@ -1,6 +1,17 @@
 {
+  "history_title": "Notre histoire",
+  "history_text_1": "Fondée à Abomey-Calavi, BSH (Best Services and House) est née de la volonté de proposer des services BTP de qualité supérieure au Bénin. Notre fondateur, animé par la passion du bâtiment et l'excellence, a rassemblé une équipe de professionnels expérimentés pour répondre aux besoins croissants en construction et rénovation dans la région.",
+  "history_text_2": "Aujourd'hui, après plus de 5 ans d'activité et plus de 150 projets réalisés, BSH s'est imposée comme une référence dans le secteur du BTP au Bénin. Notre clientèle, composée de particuliers, d'entreprises et d'institutions, nous fait confiance pour la qualité de nos réalisations et notre professionnalisme.",
+  "mission_title": "Notre mission",
   "mission_text": "Offrir à chaque client des solutions de construction et de rénovation adaptées à ses besoins, son budget et ses ambitions, tout en garantissant la qualité, la durabilité et le respect des délais.",
   "vision_title": "Notre vision",
+  "vision_text": "Devenir l'entreprise BTP de référence en Afrique de l'Ouest, reconnue pour son excellence, son innovation et son engagement envers le développement durable.",
+  "promoter_title": "Le mot du Promoteur",
+  "promoter_name": "Samson",
+  "promoter_text": "En tant que promoteur de BSH, mon engagement premier est de vous offrir des prestations d'excellence adaptées à vos exigences de budget et de qualité. Bâtir au Bénin nécessite du sérieux, de la rigueur et de l'innovation technique. Nous mettons tout en œuvre pour faire de vos rêves de construction une réalité solide, pérenne et sécurisée.",
+  "promoter_photo": "/assets/images/uploads/promoteur.png",
+  "values_title": "Nos valeurs",
+  "values_subtitle": "Les principes fondamentaux qui guident chacune de nos actions chez BSH.",
   "values": [
     {
       "icon": "⚖️",
@@ -32,16 +43,5 @@
       "title": "Respect",
       "description": "Le respect de nos engagements, de nos clients, de nos ouvriers sur chantiers, de votre budget ainsi que des normes environnementales locales du Bénin."
     }
-  ],
-  "vision_text": "Devenir l'entreprise BTP de référence en Afrique de l'Ouest, reconnue pour son excellence, son innovation et son engagement envers le développement durable.",
-  "promoter_photo": "/assets/images/uploads/promoteur.png",
-  "mission_title": "Notre mission",
-  "history_text_1": "Fondée à Abomey-Calavi, BSH (Best Services and House) est née de la volonté de proposer des services BTP de qualité supérieure au Bénin. Notre fondateur, monsieur HOUGBE Samson, animé par la passion du bâtiment et l'excellence, a rassemblé une équipe de professionnels expérimentés pour répondre aux besoins croissants en construction et rénovation dans la région Ouest africaine.",
-  "promoter_title": "Le mot du Promoteur",
-  "history_text_2": "Aujourd'hui, après plus de 14 ans d'activité dans le secteur du BTP, monsieur HOUGBE Samson  a voulu incarner et transmettre ses expériences technico-professionnelles par le biais de BSH qu'il a fondée. Cette compagnie s'impose désormais comme une référence dans le secteur du BTP au Bénin. Notre clientèle, composée de particuliers, d'entreprises et d'institutions, nous fait confiance pour la qualité de nos réalisations et notre professionnalisme.",
-  "history_title": "Notre histoire",
-  "values_subtitle": "Les principes fondamentaux qui guident chacune de nos actions chez BSH.",
-  "promoter_name": "Samson HOUGBE",
-  "promoter_text": "En tant que promoteur de BSH, mon engagement premier est de vous offrir des prestations d'excellence adaptées à vos exigences de budget et de qualité. Bâtir au Bénin nécessite du sérieux, de la rigueur et de l'innovation technique. Nous mettons tout en œuvre pour faire de vos rêves de construction une réalité solide, pérenne et sécurisée.",
-  "values_title": "Nos valeurs"
+  ]
 }

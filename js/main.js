@@ -501,7 +501,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- FORMULAIRE DE DIAGNOSTIC GRATUIT DU BÂTIMENT ---
+  // ---------------------------------------------------------
+  // 6. CHARGEMENT DES COMMUNIQUES & AVIS (NEW!)
+  // ---------------------------------------------------------
+  fetch('/data/communiques.json' + cacheBuster)
+    .then(res => res.json())
+    .then(data => {
+      const commTitle = document.getElementById('comm-main-title');
+      const commSubtitle = document.getElementById('comm-main-subtitle');
+      if (commTitle && data.title) commTitle.textContent = data.title;
+      if (commSubtitle && data.subtitle) commSubtitle.textContent = data.subtitle;
+
+      const commContainer = document.getElementById('comm-container');
+      if (commContainer && data.items) {
+        commContainer.innerHTML = '';
+        data.items.forEach(item => {
+          let actionBtn = '';
+          if (item.link) {
+            actionBtn = `<a href="${item.link}" class="btn btn-outline" style="padding: 6px 15px; font-size: 0.85rem; margin-top: 10px; display: inline-block;">${item.link_text || 'En savoir plus'} →</a>`;
+          }
+          commContainer.innerHTML += `
+            <div class="comm-card">
+              <div class="comm-date">${item.date}</div>
+              <h3>${item.title}</h3>
+              <p class="comm-content">${item.content}</p>
+              ${actionBtn}
+            </div>
+          `;
+        });
+      }
+    })
+    .catch(err => console.warn("Attention : Fallback communiqués.", err));
+
+  // --- FORMULAIRE DE DIAGNOSTIC PAYANT DU BÂTIMENT ---
   const diagForm = document.getElementById('diagnosticForm');
   if (diagForm) {
     diagForm.addEventListener('submit', (e) => {
@@ -519,19 +551,44 @@ document.addEventListener("DOMContentLoaded", () => {
       const location = document.getElementById('diagLocation').value;
       const issue = document.getElementById('diagIssue').value;
       const desc = document.getElementById('diagDesc').value;
+      const zoneSelect = document.getElementById('diagZone');
+      const reportCheckbox = document.getElementById('diagReport');
+
+      // Calculer le prix total
+      let price = parseInt(zoneSelect.value);
+      let withReportText = "Non demandé";
+      if (reportCheckbox.checked) {
+        price += 60000;
+        withReportText = "Demandé (+60 000F)";
+      }
+
+      const formattedPrice = price.toLocaleString('fr-FR') + " FCFA";
+
+      // Alerte de confirmation de paiement à la validation
+      const confirmText = `🚨 CONFIRMATION DE PRESTATION PAYANTE BSH 🚨\n\n` +
+                          `Vous vous apprêtez à soumettre une demande de diagnostic technique pour votre bâtiment.\n\n` +
+                          `• Forfait diagnostic : ${zoneSelect.options[zoneSelect.selectedIndex].text}\n` +
+                          `• Rapport de diagnostic écrit : ${withReportText}\n` +
+                          `• TOTAL DES FRAIS À RÉGLER SUR SITE : ${formattedPrice}\n\n` +
+                          `Rappel : Les demandes d'estimations de devis classiques restent 100% gratuites.\n\n` +
+                          `Souhaitez-vous confirmer votre demande de diagnostic payante ?`;
+
+      if (!confirm(confirmText)) {
+        return; // Annuler la soumission si non confirmé
+      }
 
       const submitBtn = diagForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.textContent;
       submitBtn.disabled = true;
-      submitBtn.textContent = "Envoi de votre demande de diagnostic...";
+      submitBtn.textContent = "⌛ Envoi de votre demande de diagnostic...";
 
       const payload = {
         fullName: name,
         phoneNumber: phone,
         emailAddress: "diagnostic@bestservicesandhouse.site",
         cityLocation: location,
-        serviceType: `Diagnostic Bâtiment - ${issue}`,
-        projectDescription: desc
+        serviceType: `Diagnostic Bâtiment - ${issue} - MONTANT DU DIAGNOSTIC : ${formattedPrice}`,
+        projectDescription: `Problème : ${issue}\nFrais de diagnostic calculés : ${formattedPrice}\nRapport détaillé écrit : ${withReportText}\n\nDescription des dégâts :\n${desc}`
       };
 
       fetch('/api/devis', {
@@ -542,15 +599,16 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          alert(`Félicitations ${name} !\n\nVotre demande d'étude de diagnostic gratuit pour [${issue}] a été transmise avec succès à devis@bestservicesandhouse.site.\n\nNos ingénieurs BSH vous contacteront sous 24h pour planifier l'intervention à domicile.`);
+          alert(`Félicitations ${name} !\n\nVotre demande de diagnostic payant pour [${issue}] a été transmise avec succès à devis@bestservicesandhouse.site.\n\nLe montant total calculé est de [${formattedPrice}] à régler lors de l'inspection de notre ingénieur.\n\nUn technicien BSH va vous contacter sous 24h.`);
           diagForm.reset();
+          if (typeof calculateDiagTotal === 'function') calculateDiagTotal();
         } else {
           throw new Error(data.error || "Erreur serveur");
         }
       })
       .catch(err => {
-        alert("Votre demande de diagnostic a été validée ! Vous allez être redirigé vers WhatsApp pour finaliser.");
-        const msg = encodeURIComponent(`*DEMANDE DE DIAGNOSTIC GRATUIT*\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Lieu :* ${location}\n🚨 *Problème :* ${issue}\n\n📝 *Description :*\n${desc}`);
+        alert("Votre demande de diagnostic payant a été validée ! Vous allez être redirigé vers WhatsApp pour finaliser.");
+        const msg = encodeURIComponent(`*DEMANDE DE DIAGNOSTIC PAYANT BSH*\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Lieu :* ${location}\n🚨 *Problème :* ${issue}\n📊 *Rapport écrit :* ${withReportText}\n💵 *MONTANT À RÉGLER :* ${formattedPrice}\n\n📝 *Description :*\n${desc}`);
         window.open(`https://wa.me/2290148524590?text=${msg}`, '_blank');
       })
       .finally(() => {

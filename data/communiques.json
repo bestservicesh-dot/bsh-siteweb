@@ -1,0 +1,20 @@
+{
+  "title": "📢 Communiqués & Avis Officiels",
+  "subtitle": "Suivez les dernières actualités, annonces et notes d'information de la direction de BSH.",
+  "items": [
+    {
+      "date": "2026-07-23",
+      "title": "Lancement officiel de la nouvelle plateforme web BSH !",
+      "content": "La direction générale de Best Services and House (BSH) est ravie d'annoncer le lancement officiel de sa plateforme web unifiée. Désormais, accédez à nos services BTP, gérez vos demandes de devis and diagnostics de bâtiment, and explorez nos offres immobilières directement en ligne en toute sécurité.",
+      "link": "/a-propos.html",
+      "link_text": "En savoir plus"
+    },
+    {
+      "date": "2026-07-15",
+      "title": "Opération Zéro Goutte : Prolongation de la campagne d'étanchéité",
+      "content": "Face à la forte demande et pour vous aider à sécuriser vos toitures-terrasses and dalles de béton avant la grande saison pluvieuse au Bénin, BSH prolonge sa campagne nationale 'Opération Zéro Goutte'. Bénéficiez de tarifs préférentiels sur tous les travaux d'étanchéité.",
+      "link": "/service-details.html?id=etancheite",
+      "link_text": "Découvrir la campagne"
+    }
+  ]
+}

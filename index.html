@@ -161,7 +161,7 @@
       line-height: 1.6;
     }
     
-    /* Diagnostic Form Section */
+    /* Diagnostic Form Section & Tarifs */
     .diag-box {
       max-width: 900px;
       margin: 0 auto;
@@ -170,6 +170,59 @@
       padding: 45px;
       border-radius: 16px;
       box-shadow: var(--shadow-lg);
+    }
+    .diag-pricing-tag {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-left: 10px;
+    }
+    .diag-total-card {
+      background-color: #f8fafc;
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 25px;
+      box-shadow: var(--shadow-sm);
+    }
+    .diag-total-val {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    
+    /* Communiqué Section */
+    .comm-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+      border-left: 4px solid var(--accent);
+    }
+    .comm-date {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .comm-card h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .comm-content {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
     }
   </style>
   
@@ -291,6 +344,26 @@
     </div>
   </section>
 
+  <!-- COMMUNIQUÉ SECTION (NEW!) -->
+  <section class="section" id="communiques" style="padding-bottom: 40px;">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="comm-main-title">📢 Communiqués & Notes d'Information</h2>
+        <p id="comm-main-subtitle">Suivez l'actualité officielle et les communiqués de BSH Bénin.</p>
+      </div>
+
+      <div id="comm-container" style="max-width: 800px; margin: 0 auto;">
+        <!-- Rempli dynamiquement (Fallbacks statiques) -->
+        <div class="comm-card">
+          <div class="comm-date">23 Juillet 2026</div>
+          <h3>Lancement officiel de la nouvelle plateforme web BSH !</h3>
+          <p class="comm-content">La direction générale de Best Services and House (BSH) est ravie d'annoncer le lancement officiel de sa plateforme web unifiée. Désormais, accédez à nos services BTP, gérez vos demandes de devis et diagnostics de bâtiment, et explorez nos offres immobilières directement en ligne en toute sécurité.</p>
+          <a href="/a-propos.html" class="btn btn-outline" style="padding: 6px 15px; font-size: 0.85rem;">En savoir plus</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- STATS / METRICS SECTION -->
   <div class="container">
     <section class="stats">
@@ -336,70 +409,6 @@
             <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 150 000 FCFA / m²</div>
             <a href="service-details.html?id=construction-batiment" class="service-link">En savoir plus →</a>
           </div>
-
-          <div class="service-card" id="service-renovation">
-            <div class="service-icon">🔨</div>
-            <h3>Rénovation de bâtiment</h3>
-            <p>Rénovation complète ou partielle : modernisation de façades, extensions, remise à neuf de vos espaces de vie.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sur devis personnalisé</div>
-            <a href="service-details.html?id=renovation" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-etancheite">
-            <div class="service-icon">💧</div>
-            <h3>Étanchéité (Opération Zéro Goutte)</h3>
-            <p>Solutions d'étanchéité professionnelles pour toitures, terrasses, fondations et murs. Garantie décennale anti-infiltration.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 5 000 FCFA / m²</div>
-            <a href="service-details.html?id=etancheite" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-reparation-toiture">
-            <div class="service-icon">🏠</div>
-            <h3>Réparation de toiture</h3>
-            <p>Diagnostic de charpente, réparation, étanchéité et remplacement de tôles de toiture. Intervention rapide en cas de fuite.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sur diagnostic gratuit</div>
-            <a href="service-details.html?id=reparation-toiture" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-pavage-assainissement">
-            <div class="service-icon">🛣️</div>
-            <h3>Pavage et assainissement</h3>
-            <p>Pavage de cours de villas, allées et espaces publics. Travaux de drainage, caniveaux et raccordements.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 4 500 FCFA / m²</div>
-            <a href="service-details.html?id=pavage-assainissement" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-carrelage">
-            <div class="service-icon">🧱</div>
-            <h3>Carrelage & Finitions</h3>
-            <p>Pose de carrelage sol, mural, faïences et marbre de haute qualité pour toutes vos pièces d'eau et salons.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 2 500 FCFA / m²</div>
-            <a href="service-details.html?id=carrelage" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-peinture-decoration">
-            <div class="service-icon">🎨</div>
-            <h3>Peinture et décoration</h3>
-            <p>Peinture intérieure, extérieure et décoration personnalisée. Enduits, stucs et finitions soignées durables.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 1 500 FCFA / m²</div>
-            <a href="service-details.html?id=peinture-decoration" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-reparation-fissures">
-            <div class="service-icon">🔧</div>
-            <h3>Réparation de fissures</h3>
-            <p>Diagnostic de fissures structurelles et réparation de dalles, murs porteurs et fondations.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sur diagnostic technique</div>
-            <a href="service-details.html?id=reparation-fissures" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-isolation">
-            <div class="service-icon">🔇</div>
-            <h3>Isolation thermique & acoustique</h3>
-            <p>Isolation thermique sous toiture et isolation phonique de murs pour un confort et des économies d'énergie.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 8 000 FCFA / m²</div>
-            <a href="service-details.html?id=isolation" class="service-link">En savoir plus →</a>
-          </div>
         </div>
 
         <!-- BANNIÈRE DE CAMPAGNE OPÉRATION ZÉRO GOUTTE -->
@@ -425,22 +434,6 @@
             <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 150 000 FCFA</div>
             <a href="service-details.html?id=creation-site-web" class="service-link">En savoir plus →</a>
           </div>
-
-          <div class="service-card" id="service-conception-graphique">
-            <div class="service-icon">🎨</div>
-            <h3>Conception Graphique & Imprimerie</h3>
-            <p>Création d'identités visuelles (logos, chartes graphiques) et travaux d'imprimerie (cartes d'affaires, flyers, calendriers, affiches).</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sur commande de maquette</div>
-            <a href="service-details.html?id=conception-graphique" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-enquetes-digitales">
-            <div class="service-icon">📊</div>
-            <h3>Enquêtes Digitales & Sondages</h3>
-            <p>Création de formulaires interactifs, traitement de données d'enquêtes de satisfaction et sondages en ligne.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sur cahier des charges</div>
-            <a href="service-details.html?id=enquetes-digitales" class="service-link">En savoir plus →</a>
-          </div>
         </div>
       </div>
 
@@ -454,30 +447,6 @@
             <p>Entretien régulier de bâtiments commerciaux, nettoyage complet de fin de chantiers et désinfection de bureaux.</p>
             <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 25 000 FCFA / prestation</div>
             <a href="service-details.html?id=entretien-nettoyage" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-quincaillerie-evenementiel">
-            <div class="service-icon">🎪</div>
-            <h3>Quincaillerie & Événementiel</h3>
-            <p>Vente de fournitures techniques et de quincaillerie BTP, et organisation d'événements clé en main.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Sur devis personnalisé</div>
-            <a href="service-details.html?id=quincaillerie-evenementiel" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-savons-produits-entretien">
-            <div class="service-icon">🧼</div>
-            <h3>Savons & produits d'entretien</h3>
-            <p>Fabrication et distribution de savons liquides, détergents écologiques et produits d'entretien à domicile.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">À partir de 1 000 FCFA</div>
-            <a href="service-details.html?id=savons-produits-entretien" class="service-link">En savoir plus →</a>
-          </div>
-
-          <div class="service-card" id="service-distribution-fruits-legumes">
-            <div class="service-icon">🥑</div>
-            <h3>Distribution de fruits & légumes</h3>
-            <p>Distribution de paniers de fruits frais et légumes biologiques locaux, du producteur à votre table.</p>
-            <div class="service-price" style="font-weight: 700; color: var(--accent); margin-bottom: 15px; font-size: 0.95rem;">Selon la commande</div>
-            <a href="service-details.html?id=distribution-fruits-legumes" class="service-link">En savoir plus →</a>
           </div>
         </div>
       </div>
@@ -551,13 +520,13 @@
     </div>
   </section>
 
-  <!-- FORMULAIRE DE DIAGNOSTIC GRATUIT DU BÂTIMENT (NEW!) -->
+  <!-- FORMULAIRE DE DIAGNOSTIC PAYANT DU BÂTIMENT (NEW PRICING!) -->
   <section class="section" id="diagnostic">
     <div class="container">
       <div class="diag-box">
         <div class="section-header" style="margin-bottom: 30px;">
-          <h2>Demander un Diagnostic Gratuit de Bâtiment</h2>
-          <p>Infiltrations d'eau, fissures, dégradation de peinture ? Remplissez ce formulaire d'urgence pour faire intervenir nos experts gratuitement chez vous au Bénin.</p>
+          <h2>Demander un Diagnostic de Bâtiment (Prestation Payante)</h2>
+          <p>Infiltrations d'eau, fissures, humidité ? Faites inspecter votre bâtiment par nos ingénieurs experts. <strong style="color: var(--accent);">Rappel : Les demandes de devis de travaux restent 100% gratuites !</strong></p>
         </div>
 
         <form id="diagnosticForm">
@@ -578,10 +547,10 @@
           <div class="form-row">
             <div class="form-group">
               <label for="diagLocation">Lieu du bâtiment (Ville, Quartier) *</label>
-              <input type="text" id="diagLocation" class="form-control" placeholder="Ex: Abomey-Calavi, Zogbadjè" required>
+              <input type="text" id="diagLocation" class="form-control" placeholder="Ex: Fidjrossè, Calavi Zogbadjè" required>
             </div>
             <div class="form-group">
-              <label for="diagIssue">Type de problème constaté *</label>
+              <label for="diagIssue">Problème constaté *</label>
               <select id="diagIssue" class="form-control" required>
                 <option value="" disabled selected>Sélectionnez un problème...</option>
                 <option value="Infiltration d'eau / Étanchéité">Infiltration d'eau / Humidité</option>
@@ -593,13 +562,36 @@
             </div>
           </div>
 
+          <div class="form-row">
+            <div class="form-group">
+              <label for="diagZone">Zone de l'intervention (Frais de déplacement) *</label>
+              <select id="diagZone" class="form-control" required onchange="calculateDiagTotal()">
+                <option value="10000" selected>Cotonou, Abomey-Calavi et environs (10 000 F)</option>
+                <option value="20000">Hors de Cotonou (20 000 F)</option>
+              </select>
+            </div>
+            <div class="form-group" style="display: flex; align-items: center; padding-top: 25px;">
+              <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 600;">
+                <input type="checkbox" id="diagReport" style="width: 20px; height: 20px; accent-color: var(--accent);" onchange="calculateDiagTotal()">
+                Je souhaite un rapport de diagnostic détaillé rédigé (+ 60 000 F)
+              </label>
+            </div>
+          </div>
+
           <div class="form-group">
-            <label for="diagDesc">Décrivez brièvement le problème constaté *</label>
-            <textarea id="diagDesc" class="form-control" rows="4" placeholder="Depuis quand observez-vous ce problème ? Quelles sont les pièces touchées ?" required></textarea>
+            <label for="diagDesc">Description des dégâts observés *</label>
+            <textarea id="diagDesc" class="form-control" rows="4" placeholder="Quels sont les détails (murs mouillés, fissures larges, etc.) ?" required></textarea>
+          </div>
+
+          <!-- Affichage dynamique du total de diagnostic -->
+          <div class="diag-total-card">
+            <span class="clock-label">Total des frais de diagnostic à régler :</span>
+            <div class="diag-total-val" id="diagTotalDisplay">10 000 FCFA</div>
+            <small style="color: var(--text-muted); display: block; margin-top: 5px;">Le règlement s'effectue lors de l'intervention sur site.</small>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.1rem;">
-            🛡️ Soumettre ma Demande de Diagnostic Gratuit
+            🛡️ Soumettre ma Demande de Diagnostic Technique
           </button>
         </form>
       </div>
@@ -741,13 +733,37 @@
     </div>
   </footer>
 
-  <!-- FLOATING WHATSAPP WIDGET (NEW!) -->
+  <!-- FLOATING WHATSAPP WIDGET -->
   <a href="https://wa.me/2290148524590" class="whatsapp-link" target="_blank" rel="noopener" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 2rem; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
     💚
   </a>
 
   <!-- Core Javascript -->
   <script src="js/main.js"></script>
+
+  <!-- CALCULATE DYNAMIC DIAGNOSTIC PRICE -->
+  <script>
+    function calculateDiagTotal() {
+      const zoneSelect = document.getElementById('diagZone');
+      const reportCheckbox = document.getElementById('diagReport');
+      const totalDisplay = document.getElementById('diagTotalDisplay');
+      
+      if (!zoneSelect || !reportCheckbox || !totalDisplay) return;
+
+      let total = parseInt(zoneSelect.value); // 10000 ou 20000
+      if (reportCheckbox.checked) {
+        total += 60000; // + 60000 pour le rapport détaillé
+      }
+
+      // Formater l'affichage
+      totalDisplay.textContent = total.toLocaleString('fr-FR') + " FCFA";
+    }
+    
+    // Lancer le calcul initial au chargement
+    document.addEventListener("DOMContentLoaded", () => {
+      calculateDiagTotal();
+    });
+  </script>
 
   <!-- HORLOGE NUMÉRIQUE PRESTIGIEUSE DU BÉNIN EN INLINE HTML (INDÉSTRUCTIBLE !) -->
   <script>

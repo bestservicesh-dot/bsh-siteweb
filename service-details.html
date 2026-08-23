@@ -51,15 +51,15 @@
       font-size: 1.15rem;
       line-height: 1.8;
       color: var(--text-muted);
-      margin-bottom: 20px;
-      white-space: pre-line; /* Conserver les sauts de lignes */
+      margin-bottom: 30px;
+      white-space: pre-line; /* Conserver les sauts de lignes pour les paragraphes de description */
     }
     .srv-price-box {
       background-color: #fef3c7;
       border-left: 5px solid var(--accent);
       padding: 20px;
       border-radius: 8px;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
     }
     .srv-price-title {
       font-size: 0.9rem;
@@ -183,14 +183,7 @@
         <div id="srvPrice" class="srv-price-value">Chargement du tarif...</div>
       </div>
 
-      <!-- Bouton Lien Personnel / Vidéo Externe (NEW!) -->
-      <div id="customLinkBox" style="display: none; text-align: center; margin: 25px 0 35px 0;">
-        <a id="srvCustomLink" href="#" target="_blank" rel="noopener" class="btn btn-outline" style="padding: 12px 25px; width: 100%; border-color: var(--accent); color: var(--primary); font-weight: 700; border-width: 2px; border-radius: 8px;">
-          🔗 Voir notre Guide / Vidéo explicative
-        </a>
-      </div>
-
-      <!-- Galerie photos du service -->
+      <!-- Galerie photos du service (NEW!) -->
       <div id="gallerySection" style="display: none;">
         <h3 class="srv-gallery-title">📸 Galerie Photos du Service</h3>
         <div class="srv-gallery-grid" id="srvGalleryContainer">
@@ -259,17 +252,6 @@
           document.getElementById('srvDesc').textContent = service.description;
           document.getElementById('srvPrice').textContent = service.price || "Sur devis personnalisé";
 
-          // Afficher le bouton de lien personnel s'il est configuré dans l'Admin (NEW!)
-          if (service.custom_link) {
-            const linkBox = document.getElementById('customLinkBox');
-            const linkBtn = document.getElementById('srvCustomLink');
-            if (linkBox && linkBtn) {
-              linkBtn.href = service.custom_link;
-              linkBtn.textContent = service.custom_link_text ? "🔗 " + service.custom_link_text : "🔗 Voir notre Guide / Vidéo explicative";
-              linkBox.style.display = 'block';
-            }
-          }
-
           // Générer la galerie de photos si existante et remplie
           if (service.images && service.images.length > 0) {
             const gallerySection = document.getElementById('gallerySection');
@@ -279,6 +261,7 @@
             let validImages = 0;
             
             service.images.forEach(imgUrl => {
+              // Si c'est un objet (Decap CMS structure parfois comme {"image": "url"}) ou une simple chaîne
               const url = typeof imgUrl === 'string' ? imgUrl : (imgUrl.image || '');
               if (url) {
                 validImages++;

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://www.bestservicesandhouse.site/realisations.html">
   <title>Nos Réalisations | BSH - Projets BTP au Bénin</title>
   <meta name="description" content="Découvrez nos projets et chantiers de construction, rénovation, étanchéité et pavage réalisés à Cotonou et au Bénin.">
   <link rel="stylesheet" href="css/style.css">
@@ -27,6 +28,7 @@
       font-size: 1.1rem;
     }
   </style>
+  <meta name="robots" content="index, follow">
 </head>
 <body>
 
@@ -61,9 +63,8 @@
         <li><a href="index.html#services">Nos Services</a></li>
         <li><a href="a-propos.html">À Propos</a></li>
         <li><a href="realisations.html" style="color: var(--accent);">Nos Réalisations</a></li>
-        <li><a href="opportunites.html">Opportunités</a></li>
-        <li><a href="blog.html">Blog & PDF</a></li>
-        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="index.html#temoignages">Témoignages</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
         <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
       </ul>
     </div>
@@ -92,7 +93,67 @@
 
       <!-- Grid des projets -->
       <div class="portfolio-grid" id="standalone-portfolio-container">
-        <p style="text-align: center; grid-column: 1/-1;">Chargement de vos réalisations...</p>
+        <!-- 9 projets par défaut (remplacés dynamiquement par JS) -->
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Villa moderne">
+            <span class="portfolio-category-badge">Construction</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Villa résidentielle moderne</h4>
+            <p>📍 Cotonou, 2025</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Immeuble commercial">
+            <span class="portfolio-category-badge">Construction</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Immeuble commercial R+3</h4>
+            <p>📍 Abomey-Calavi, 2025</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80" alt="Rénovation maison familiale">
+            <span class="portfolio-category-badge">Rénovation</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Rénovation maison familiale</h4>
+            <p>📍 Porto-Novo, 2024</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1632759162443-112f4002d99d?auto=format&fit=crop&w=600&q=80" alt="Étanchéité terrasse">
+            <span class="portfolio-category-badge">Étanchéité</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Étanchéité toiture terrasse</h4>
+            <p>📍 Cotonou, 2025</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1502005229762-fc1b2381f0db?auto=format&fit=crop&w=600&q=80" alt="Carrelage villa">
+            <span class="portfolio-category-badge">Finitions</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Carrelage et peinture villa</h4>
+            <p>📍 Godomey, 2024</p>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Pavage cour">
+            <span class="portfolio-category-badge">Pavage</span>
+          </div>
+          <div class="portfolio-info">
+            <h4>Pavage cour et allée</h4>
+            <p>📍 Calavi, 2025</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -129,102 +190,40 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Chargement dynamique du portfolio complet (Folder Collection 100% Dynamique !)
+    // Chargement dynamique du portfolio complet
     document.addEventListener("DOMContentLoaded", () => {
       let itemsList = [];
-      const cacheBuster = "?v=" + Date.now();
 
-      const defaultRealisations = [
-        "villa-cotonou",
-        "auditorium-natitingou",
-        "piscine-natitingou",
-        "geomembrane-cotonou",
-        "pavage-ouagadougou",
-        "siteweb-calavi"
-      ];
-
-      const container = document.getElementById('standalone-portfolio-container');
-      if (container) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Chargement de vos réalisations...</p>';
-
-        // 1. Interroger dynamiquement GitHub pour lister les chantiers dans data/realisations
-        fetch('https://api.github.com/repos/bestservicesh-dot/bsh-siteweb/contents/data/realisations')
-          .then(res => {
-            if (!res.ok) throw new Error("API GitHub indisponible.");
-            return res.json();
-          })
-          .then(files => {
-            const jsonFiles = files.filter(f => f.name.endsWith('.json'));
-            return Promise.all(jsonFiles.map(f => 
-              fetch('/' + f.path + cacheBuster).then(res => res.json())
-            ));
-          })
-          .catch(err => {
-            console.warn("Utilisation de la liste de réalisations par défaut (fallback).", err);
-            // Charger la liste par défaut
-            return Promise.all(defaultRealisations.map(id => 
-              fetch(`/data/realisations/${id}.json${cacheBuster}`).then(res => res.json())
-            ));
-          })
-          .then(projects => {
-            itemsList = projects;
+      fetch('/data/realisations.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+          if (data.items) {
+            itemsList = data.items;
             render(itemsList);
-          });
-      }
+          }
+        })
+        .catch(err => console.warn("Attention : Réalisations chargées depuis la version statique HTML.", err));
 
       function render(items) {
+        const container = document.getElementById('standalone-portfolio-container');
         if (!container) return;
         container.innerHTML = '';
         
-        if (items.length === 0) {
-          container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--text-muted);">Aucune réalisation publiée pour le moment.</p>';
-          return;
-        }
-
         items.forEach(proj => {
           container.innerHTML += `
             <div class="portfolio-card">
-              <div class="portfolio-img-wrapper" style="cursor: pointer;" onclick="viewProjectGallery('${proj.id}')">
-                <img src="${proj.main_image}" alt="${proj.title}">
+              <div class="portfolio-img-wrapper">
+                <img src="${proj.image}" alt="${proj.title}">
                 <span class="portfolio-category-badge">${proj.category}</span>
               </div>
               <div class="portfolio-info">
                 <h4>${proj.title}</h4>
                 <p>📍 ${proj.city}</p>
-                <button class="btn btn-outline" style="width:100%; margin-top:15px; padding:6px; font-size:0.85rem;" onclick="viewProjectGallery('${proj.id}')">
-                  📸 Voir la galerie photos
-                </button>
               </div>
             </div>
           `;
         });
       }
-
-      // Fonction globale pour visualiser la galerie multi-images du projet
-      window.viewProjectGallery = function(id) {
-        const project = itemsList.find(p => p.id === id);
-        if (!project) return;
-
-        let imagesHTML = "";
-        let imagesCount = 0;
-        if (project.images && project.images.length > 0) {
-          project.images.forEach((img, index) => {
-            const url = typeof img === 'string' ? img : (img.image || '');
-            if (url) {
-              imagesCount++;
-              imagesHTML += `• Photo ${imagesCount} : ${url}\n`;
-            }
-          });
-        }
-
-        alert(
-          `📸 GALERIE PHOTOS - ${project.title.toUpperCase()} 📸\n\n` +
-          `• Catégorie : ${project.category}\n` +
-          `• Ville : ${project.city}\n` +
-          `• Description : ${project.description}\n\n` +
-          `Photos additionnelles chargées dans l'Admin (${imagesCount}) :\n${imagesHTML || 'Aucune photo supplémentaire.'}`
-        );
-      };
 
       // Gestion des boutons filtres
       const filterButtons = document.querySelectorAll('.filter-btn');

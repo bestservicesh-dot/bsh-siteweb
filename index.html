@@ -600,10 +600,10 @@
         <kkiapay-widget
           id="kkiapay-diagnostic"
           amount="10000"
-          key="951b57308db511f1af94251966ede9f1"
+          key="3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f"
           callback="https://www.bestservicesandhouse.site/paiement-confirme.html"
           theme="#E8820C"
-          sandbox="true"
+          sandbox="false"
           data="diagnostic-batiment"
           style="display:none;"
         ></kkiapay-widget>
@@ -802,12 +802,12 @@
   <!-- ===== KKIAPAY DIAGNOSTIC INTEGRATION ===== -->
   <script>
     // ================= CONFIGURATION (à modifier ici) =================
-    const KKIA_PUBLIC_KEY = '951b57308db511f1af94251966ede9f1';
+    const KKIA_PUBLIC_KEY = '3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f';
     const KKIA_CALLBACK   = 'https://www.bestservicesandhouse.site/paiement-confirme.html';
     // ⚠️ LA LIGNE IMPORTANTE :
     //    true  = MODE TEST (paiement simulé)   → à utiliser pour tester
     //    false = PRODUCTION (paiement réel)    → à utiliser pour encaisser
-    const KKIA_SANDBOX    = true;
+    const KKIA_SANDBOX    = false;
     // Frais du rapport écrit approfondi (source unique de vérité)
     const RAPPORT_ECRIT_FRAIS = 10000;   // +10 000 FCFA
     // ==================================================================

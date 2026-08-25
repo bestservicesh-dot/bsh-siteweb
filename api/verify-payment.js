@@ -23,18 +23,16 @@
 // La clé PUBLIQUE peut figurer ici (elle est déjà visible dans le site).
 // La clé PRIVÉE et la clé SECRÈTE ne doivent JAMAIS être dans le navigateur.
 //
-//  ⚠️ ATTENTION : les deux clés ci-dessous (tpk_ / tsk_) sont des clés de
-//     TEST (sandbox). Pour ce faire, KKIA_SANDBOX doit rester à true.
-//     Pour encaisser de VRAIS paiements, remplacez-les par vos clés de
-//     PRODUCTION (sans préfixe « t ») et passez KKIA_SANDBOX à false.
-const KKIA_PUBLIC_KEY  = process.env.KKIA_PUBLIC_KEY  || '951b57308db511f1af94251966ede9f1';
-const KKIA_PRIVATE_KEY = process.env.KKIA_PRIVATE_KEY || 'tpk_951b7e408db511f1af94251966ede9f1';
-const KKIA_SECRET_KEY  = process.env.KKIA_SECRET_KEY  || 'tsk_951b7e418db511f1af94251966ede9f1';
+//  ✅ Ces clés sont celles de PRODUCTION (paiements réels).
+//     La clé PUBLIQUE peut figurer ici (visible dans le site).
+//     La clé PRIVÉE et la clé SECRÈTE ne doivent JAMAIS être dans le navigateur.
+const KKIA_PUBLIC_KEY  = process.env.KKIA_PUBLIC_KEY  || '3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f';
+const KKIA_PRIVATE_KEY = process.env.KKIA_PRIVATE_KEY || 'pk_23be8fde10b8966aee39e747817472c34ac8fedb598d2848259528498d5f44c7';
+const KKIA_SECRET_KEY  = process.env.KKIA_SECRET_KEY  || 'sk_881bda695fcb7cbe9139f82de9541a07e9906fcda9e02f20cef88466a38fd668';
 // true = mode test (sandbox), false = production (paiements réels)
-// ⚠️ Défaut = true (test), car vos clés actuelles sont des clés de test.
-//    Pour encaisser de VRAIS paiements : passez à false.
+// ✅ Dernière ligne : le site est en PRODUCTION (false).
 const KKIA_SANDBOX     = (process.env.KKIA_SANDBOX === undefined)
-                          ? true
+                          ? false
                           : (process.env.KKIA_SANDBOX === 'true');
 // ======================================================
 

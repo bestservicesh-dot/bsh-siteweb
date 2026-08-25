@@ -603,7 +603,7 @@
           key="951b57308db511f1af94251966ede9f1"
           callback="https://www.bestservicesandhouse.site/paiement-confirme.html"
           theme="#E8820C"
-          sandbox="false"
+          sandbox="true"
           data="diagnostic-batiment"
           style="display:none;"
         ></kkiapay-widget>
@@ -801,24 +801,39 @@
 
   <!-- ===== KKIAPAY DIAGNOSTIC INTEGRATION ===== -->
   <script>
-    // ---- Mise à jour dynamique du montant KkiaPay selon la zone + rapport ----
-    function syncKkiapayAmount() {
+    // ================= CONFIGURATION (à modifier ici) =================
+    const KKIA_PUBLIC_KEY = '951b57308db511f1af94251966ede9f1';
+    const KKIA_CALLBACK   = 'https://www.bestservicesandhouse.site/paiement-confirme.html';
+    // ⚠️ LA LIGNE IMPORTANTE :
+    //    true  = MODE TEST (paiement simulé)   → à utiliser pour tester
+    //    false = PRODUCTION (paiement réel)    → à utiliser pour encaisser
+    const KKIA_SANDBOX    = true;
+    // Frais du rapport écrit approfondi (source unique de vérité)
+    const RAPPORT_ECRIT_FRAIS = 10000;   // +10 000 FCFA
+    // ==================================================================
+
+    // ---- Montant total du diagnostic (écran + widget + KkiaPay) ----
+    function totalDiagnostic() {
       const zoneSelect = document.getElementById('diagZone');
       const reportCheckbox = document.getElementById('diagReport');
-      const widget = document.getElementById('kkiapay-diagnostic');
-      if (!zoneSelect || !widget) return;
-      let total = parseInt(zoneSelect.value);
-      if (reportCheckbox && reportCheckbox.checked) total += 10000;
-      widget.setAttribute('amount', total);
+      let total = parseInt(zoneSelect.value, 10) || 0;
+      if (reportCheckbox && reportCheckbox.checked) total += RAPPORT_ECRIT_FRAIS;
+      return total;
     }
 
-    // Appel à chaque changement
-    document.getElementById('diagZone') && document.getElementById('diagZone').addEventListener('change', () => {
-      calculateDiagTotal(); syncKkiapayAmount();
-    });
-    document.getElementById('diagReport') && document.getElementById('diagReport').addEventListener('change', () => {
-      calculateDiagTotal(); syncKkiapayAmount();
-    });
+    // ---- Mettre à jour l'affichage et le widget KkiaPay ----
+    function syncKkiapayAmount() {
+      const total = totalDiagnostic();
+      const widget = document.getElementById('kkiapay-diagnostic');
+      if (widget) {
+        widget.setAttribute('amount', total);
+        widget.setAttribute('sandbox', KKIA_SANDBOX ? 'true' : 'false');
+      }
+      if (typeof calculateDiagTotal === 'function') calculateDiagTotal();
+    }
+    document.getElementById('diagZone') && document.getElementById('diagZone').addEventListener('change', syncKkiapayAmount);
+    document.getElementById('diagReport') && document.getElementById('diagReport').addEventListener('change', syncKkiapayAmount);
+    syncKkiapayAmount(); // init au chargement
 
     // ---- Interception du formulaire diagnostic → ouvrir KkiaPay ----
     const diagForm2 = document.getElementById('diagnosticForm');
@@ -837,11 +852,10 @@
           alert('⚠️ Veuillez remplir tous les champs obligatoires avant de procéder au paiement.');
           return;
         }
-        // Mettre à jour montant
-        syncKkiapayAmount();
-        const zoneText = document.getElementById('diagZone').options[document.getElementById('diagZone').selectedIndex].text;
         const withReport = document.getElementById('diagReport') && document.getElementById('diagReport').checked;
-        const total = parseInt(document.getElementById('diagZone').value) + (withReport ? 10000 : 0);
+        const total = totalDiagnostic();
+        const zoneText = document.getElementById('diagZone').options[document.getElementById('diagZone').selectedIndex].text;
+
         // Confirmer avant paiement
         const ok = confirm(
           `📋 CONFIRMATION DE VOTRE DEMANDE DE DIAGNOSTIC BSH\n\n` +
@@ -851,38 +865,37 @@
           `Cliquez OK pour procéder au paiement sécurisé en ligne (MTN MoMo, Moov Money, Visa, Mastercard).`
         );
         if (!ok) return;
-        // Sauvegarder les données du formulaire en sessionStorage pour la page de confirmation
-        sessionStorage.setItem('diag_client', JSON.stringify({ name, phone, location, issue, desc, total, withReport, zoneText }));
+
+        // Sauvegarder les infos client pour la page de confirmation
+        sessionStorage.setItem('diag_client', JSON.stringify({
+          name, phone, location, issue, desc, total, withReport, zoneText
+        }));
+
         // Ouvrir le widget KkiaPay
         openKkiapayWidget({
           amount: total,
-          key: '951b57308db511f1af94251966ede9f1',
-          sandbox: false,
+          key: KKIA_PUBLIC_KEY,
+          sandbox: KKIA_SANDBOX,
           theme: '#E8820C',
-          callback: 'https://www.bestservicesandhouse.site/paiement-confirme.html',
+          callback: KKIA_CALLBACK,
           data: `diagnostic|${name}|${phone}|${issue}|${total}`
         });
       });
     }
 
-    // ---- Écouter la réponse KkiaPay (succès/échec) ----
+    // ---- Après paiement → redirection vers la page de confirmation qui,
+    //      elle, VÉRIFIE la transaction côté serveur (garde anti-fraude). ----
     addSuccessListener(function(response) {
       const stored = JSON.parse(sessionStorage.getItem('diag_client') || '{}');
-      // Envoyer les données au serveur (WhatsApp fallback)
-      const msg = encodeURIComponent(
-        `✅ PAIEMENT CONFIRMÉ — Diagnostic BSH\n\n` +
-        `👤 ${stored.name || ''}\n📞 ${stored.phone || ''}\n📍 ${stored.location || ''}\n` +
-        `🔍 ${stored.issue || ''}\n📝 ${stored.desc || ''}\n` +
-        `💳 Montant payé : ${(stored.total || 0).toLocaleString('fr-FR')} FCFA\n` +
-        `📄 Rapport rédigé : ${stored.withReport ? 'Oui' : 'Non'}\n` +
-        `🔑 Réf. transaction : ${response.transactionId}`
-      );
-      alert(`✅ Paiement de ${(stored.total||0).toLocaleString('fr-FR')} FCFA confirmé !\n\nRéf. : ${response.transactionId}\n\nNos techniciens vous contacteront sous 24h pour planifier l'inspection.`);
-      window.location.href = `https://wa.me/2290148524590?text=${msg}`;
+      const total = (stored && stored.total) || 0;
+      const txId = (response && response.transactionId) || '';
+      window.location.href = KKIA_CALLBACK +
+        '?transaction_id=' + encodeURIComponent(txId) +
+        '&montant=' + total;
     });
 
     addFailedListener(function(response) {
-      alert('❌ Le paiement a échoué ou a été annulé.\n\nVeuillez réessayer ou nous contacter via WhatsApp au +229 01 48 52 45 90.\n\nErreur : ' + (response.message || 'inconnue'));
+      alert('❌ Le paiement a échoué ou a été annulé.\n\nVeuillez réessayer ou nous contacter via WhatsApp au +229 01 48 52 45 90.\n\nErreur : ' + (response && response.message ? response.message : 'inconnue'));
     });
   </script>
 </body>

@@ -3,67 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paiement Confirmé | BSH</title>
+  <title>Confirmation de Paiement | BSH</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    body { background: var(--bg-light, #f1f5f9); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    body { background: var(--bg-light, #f1f5f9); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; margin:0; padding: 20px; }
     .confirm-card {
-      background: white;
-      border-radius: 20px;
-      padding: 60px 48px;
-      max-width: 560px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-      animation: fadeUp 0.5s ease;
+      background: white; border-radius: 20px; padding: 52px 44px; max-width: 560px; width: 100%;
+      text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.1); animation: fadeUp 0.5s ease;
     }
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-    .success-icon { font-size: 5rem; margin-bottom: 24px; }
-    h1 { font-size: 2rem; color: #0f2640; margin-bottom: 12px; }
-    .ref-box {
-      background: #f0fdf4;
-      border: 2px solid #86efac;
-      border-radius: 12px;
-      padding: 16px 24px;
-      margin: 24px 0;
-      font-size: 0.95rem;
-      color: #166534;
-      font-weight: 600;
-    }
-    .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; }
-    .detail-row:last-child { border-bottom: none; }
-    .detail-label { color: #64748b; }
-    .detail-value { font-weight: 700; color: #0f2640; }
-    .amount-big { font-size: 2.5rem; font-weight: 900; color: #E8820C; margin: 20px 0; }
-    .cta-group { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
-    .btn-wa { background: #25D366; color: white; border: none; border-radius: 10px; padding: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none; display: block; }
-    .btn-home { background: #0f2640; color: white; border: none; border-radius: 10px; padding: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none; display: block; }
-    .footer-note { margin-top: 24px; font-size: 0.8rem; color: #94a3b8; }
+    .big-icon { font-size: 4.5rem; margin-bottom: 20px; }
+    h1 { font-size: 1.9rem; color: #0f2640; margin: 0 0 12px; }
+    .sub { color:#64748b; margin-bottom: 20px; line-height:1.6; }
+    .ref-box { background:#f0fdf4; border:2px solid #86efac; border-radius:12px; padding:16px; margin:20px 0; color:#166534; font-weight:600; word-break:break-all; }
+    .ref-box.err { background:#fef2f2; border-color:#fecaca; color:#b91c1c; }
+    .detail-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f0f0f0; font-size:0.9rem; }
+    .detail-row:last-child { border-bottom:none; }
+    .detail-label { color:#64748b; }
+    .detail-value { font-weight:700; color:#0f2640; }
+    .amount-big { font-size:2.4rem; font-weight:900; color:#E8820C; margin:18px 0; }
+    .cta-group { display:flex; flex-direction:column; gap:12px; margin-top:28px; }
+    .btn-wa, .btn-home, .btn-retry { display:block; border:none; border-radius:10px; padding:14px; font-size:1rem; font-weight:700; cursor:pointer; text-decoration:none; text-align:center; }
+    .btn-wa { background:#25D366; color:#fff; }
+    .btn-home { background:#0f2640; color:#fff; }
+    .btn-retry { background:#E8820C; color:#fff; }
+    .spinner { width:46px; height:46px; margin: 0 auto 18px; border:5px solid #e2e8f0; border-top-color:#E8820C; border-radius:50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .footer-note { margin-top:24px; font-size:0.78rem; color:#94a3b8; line-height:1.5; }
+    .hidden { display:none !important; }
+    .status-ok { color:#166534; font-weight:700; }
+    .status-no { color:#b91c1c; font-weight:700; }
   </style>
 </head>
 <body>
   <div class="confirm-card">
-    <div class="success-icon">✅</div>
-    <h1>Paiement Confirmé !</h1>
-    <p style="color:#64748b; margin-bottom: 16px;">Votre paiement a été traité avec succès par KkiaPay. Voici le récapitulatif de votre transaction.</p>
 
-    <div class="ref-box" id="refBox">Chargement des détails...</div>
+    <!-- État : vérification en cours -->
+    <div id="loadingView">
+      <div class="spinner"></div>
+      <h1>Vérification en cours…</h1>
+      <p class="sub">Nous confirmons votre paiement auprès de KkiaPay.<br>Merci de patienter quelques secondes.</p>
+    </div>
 
-    <div id="detailsContainer"></div>
-    <div class="amount-big" id="amountDisplay"></div>
+    <!-- État : succès (uniquement après vérification serveur) -->
+    <div id="successView" class="hidden">
+      <div class="big-icon">✅</div>
+      <h1>Paiement confirmé !</h1>
+      <p class="sub">Votre paiement a été vérifié et confirmé par KkiaPay. Voici le récapitulatif.</p>
+      <div class="ref-box" id="refBox"></div>
+      <div id="detailsContainer"></div>
+      <div class="amount-big" id="amountDisplay"></div>
+      <p style="color:#374151; font-size:0.95rem; line-height:1.6;">
+        🏗️ Un technicien BSH vous contactera sous <strong>24h</strong> pour planifier l'intervention.<br>
+        Conservez votre numéro de transaction comme preuve de paiement.
+      </p>
+      <div class="cta-group">
+        <a id="waLink" href="https://wa.me/2290148524590" class="btn-wa" target="_blank" rel="noopener">📱 Suivre sur WhatsApp</a>
+        <a href="index.html" class="btn-home">🏠 Retour à l'accueil</a>
+      </div>
+    </div>
 
-    <p style="color:#374151; font-size: 0.95rem; line-height:1.6;">
-      🏗️ Un technicien BSH vous contactera sous <strong>24h</strong> pour planifier l'intervention.<br>
-      Conservez votre numéro de transaction comme preuve de paiement.
-    </p>
-
-    <div class="cta-group">
-      <a id="waLink" href="https://wa.me/2290148524590" class="btn-wa" target="_blank" rel="noopener">
-        📱 Suivre sur WhatsApp
-      </a>
-      <a href="index.html" class="btn-home">🏠 Retour à l'accueil</a>
+    <!-- État : échec / non confirmé -->
+    <div id="failureView" class="hidden">
+      <div class="big-icon">⚠️</div>
+      <h1>Paiement non confirmé</h1>
+      <p class="sub">Nous n'avons pas pu confirmer votre paiement auprès de KkiaPay.<br>
+         Cela peut arriver si la transaction a été annulée, échouée, ou si le numéro de référence est invalide.</p>
+      <div class="ref-box err" id="errBox"></div>
+      <div class="cta-group">
+        <a href="index.html#diagnostic" class="btn-retry">🔄 Réessayer le paiement</a>
+        <a href="https://wa.me/2290148524590?text=Bonjour%20BSH%2C%20je%20rencontre%20un%20probl%C3%A8me%20avec%20un%20paiement." class="btn-wa" target="_blank" rel="noopener">📱 Contacter le support BSH</a>
+        <a href="index.html" class="btn-home">🏠 Retour à l'accueil</a>
+      </div>
     </div>
 
     <div class="footer-note">
@@ -73,49 +86,124 @@
   </div>
 
   <script>
-    // Récupérer les paramètres URL de KkiaPay
+    // ============================================================
+    //   VÉRIFICATION SÉCURISÉE DU PAIEMENT (côté serveur)
+    //   On ne fait PAS confiance à l'URL : on appelle
+    //   /api/verify-payment qui interroge le serveur KkiaPay.
+    // ============================================================
+
     const params = new URLSearchParams(window.location.search);
-    const transactionId = params.get('transaction_id') || params.get('transactionId') || 'N/A';
-    const status = params.get('status') || 'success';
-    const amount = params.get('amount') || '';
+    const transactionId = params.get('transaction_id') || params.get('transactionId') || params.get('tid') || '';
+    // Montant transmis en paramètre (affichage); la valeur de référence est celle du serveur.
+    const urlAmount = params.get('montant') || params.get('amount') || '';
 
-    // Récupérer les données client du sessionStorage
     let client = {};
-    try { client = JSON.parse(sessionStorage.getItem('diag_client') || '{}'); } catch(e){}
+    try { client = JSON.parse(sessionStorage.getItem('diag_client') || '{}'); } catch(e) {}
 
-    const displayAmount = amount || (client.total ? client.total.toLocaleString('fr-FR') : '—');
+    const VERIFY_ENDPOINT = '/api/verify-payment';
 
-    document.getElementById('refBox').innerHTML =
-      `🔐 Référence de transaction : <strong>${transactionId}</strong>`;
+    function show(id) {
+      ['loadingView','successView','failureView'].forEach(v => document.getElementById(v).classList.toggle('hidden', v !== id));
+    }
 
-    document.getElementById('amountDisplay').textContent = displayAmount + ' FCFA';
+    async function verify() {
+      // 1) On exige au moins un identifiant de transaction
+      if (!transactionId) {
+        document.getElementById('errBox').textContent = 'Aucune référence de transaction reçue. Impossible de vérifier le paiement.';
+        show('failureView');
+        return;
+      }
 
-    const details = [
-      ['Client', client.name || '—'],
-      ['Téléphone', client.phone || '—'],
-      ['Lieu du bâtiment', client.location || '—'],
-      ['Problème', client.issue || '—'],
-      ['Zone', client.zoneText || '—'],
-      ['Rapport rédigé', client.withReport ? 'Oui (+10 000 FCFA)' : 'Non'],
-      ['Statut', status === 'success' ? '✅ Payé' : status],
-      ['Date', new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit' })],
-    ];
+      show('loadingView');
 
-    document.getElementById('detailsContainer').innerHTML = details.map(([l,v]) =>
-      `<div class="detail-row"><span class="detail-label">${l}</span><span class="detail-value">${v}</span></div>`
-    ).join('');
+      try {
+        const res = await fetch(`${VERIFY_ENDPOINT}?transaction_id=${encodeURIComponent(transactionId)}`);
+        const data = await res.json();
 
-    // Lien WhatsApp avec résumé
-    const msg = encodeURIComponent(
-      `✅ PAIEMENT CONFIRMÉ — Diagnostic BSH\n\n` +
-      `👤 ${client.name||'—'}\n📞 ${client.phone||'—'}\n📍 ${client.location||'—'}\n` +
-      `🔍 ${client.issue||'—'}\n💳 Montant : ${displayAmount} FCFA\n` +
-      `🔑 Réf : ${transactionId}\n📄 Rapport : ${client.withReport ? 'Oui' : 'Non'}`
-    );
-    document.getElementById('waLink').href = `https://wa.me/2290148524590?text=${msg}`;
+        // ✅ Succès UNIQUEMENT si le serveur a confirmé status == SUCCESS
+        if (data.success === true && data.status === 'SUCCESS') {
+          renderSuccess(data);
+          notifyTeam(data);
+        } else {
+          const reason = data.error || data.status || 'Transaction non confirmée';
+          document.getElementById('errBox').textContent = `Réf. ${transactionId} — ${reason}`;
+          show('failureView');
+        }
+      } catch (err) {
+        document.getElementById('errBox').textContent = 'Impossible de contacter le serveur de vérification. Merci de réessayer.';
+        show('failureView');
+      }
+    }
 
-    // Nettoyer le sessionStorage
-    sessionStorage.removeItem('diag_client');
+    function renderSuccess(data) {
+      const amount = (typeof data.amount === 'number') ? data.amount : (parseInt(urlAmount) || client.total || null);
+
+      document.getElementById('refBox').innerHTML =
+        `🔐 Référence de transaction : <strong>${data.transactionId || transactionId}</strong>`;
+
+      if (amount) {
+        document.getElementById('amountDisplay').textContent = Number(amount).toLocaleString('fr-FR') + ' FCFA';
+      } else {
+        document.getElementById('amountDisplay').textContent = 'Montant confirmé';
+      }
+
+      const statusText = '<span class="status-ok">✅ Payé</span>';
+      const source = data.source || 'KkiaPay';
+      const details = [
+        ['Client', client.name || '—'],
+        ['Téléphone', client.phone || '—'],
+        ['Lieu du bâtiment', client.location || '—'],
+        ['Problème', client.issue || '—'],
+        ['Zone', client.zoneText || '—'],
+        ['Rapport rédigé', client.withReport ? 'Oui (+10 000 FCFA)' : 'Non'],
+        ['Moyen de paiement', source],
+        ['Statut', statusText],
+      ];
+
+      document.getElementById('detailsContainer').innerHTML = details.map(([l,v]) =>
+        `<div class="detail-row"><span class="detail-label">${l}</span><span class="detail-value">${v}</span></div>`
+      ).join('');
+
+      // Lien WhatsApp avec résumé
+      const msg = encodeURIComponent(
+        `✅ PAIEMENT CONFIRMÉ — Diagnostic BSH\n\n` +
+        `👤 ${client.name||'—'}\n📞 ${client.phone||'—'}\n📍 ${client.location||'—'}\n` +
+        `🔍 ${client.issue||'—'}\n💳 Montant : ${amount ? (Number(amount).toLocaleString('fr-FR') + ' FCFA') : ''}\n` +
+        `🔑 Réf : ${data.transactionId || transactionId}\n📄 Rapport : ${client.withReport ? 'Oui' : 'Non'}`
+      );
+      document.getElementById('waLink').href = `https://wa.me/2290148524590?text=${msg}`;
+
+      show('successView');
+      sessionStorage.removeItem('diag_client');
+    }
+
+    // Envoi de l'ordre à l'équipe (e-mail via la fonction /api/devis existante)
+    function notifyTeam(data) {
+      if (!client.name) return; // pas d'infos client → on ne notifie pas
+      const amount = (typeof data.amount === 'number') ? data.amount : (parseInt(urlAmount) || 0);
+      const payload = {
+        fullName: client.name,
+        phoneNumber: client.phone || '',
+        emailAddress: 'diagnostic@bestservicesandhouse.site',
+        cityLocation: client.location || '',
+        serviceType: `Diagnostic Bâtiment payé en ligne - ${client.issue||''} - Réf: ${data.transactionId || transactionId}`,
+        projectDescription:
+          `✅ PAIEMENT VÉRIFIÉ (KkiaPay)\n` +
+          `Problème : ${client.issue||''}\n` +
+          `Montant payé : ${Number(amount).toLocaleString('fr-FR')} FCFA\n` +
+          `Référence transaction : ${data.transactionId || transactionId}\n` +
+          `Source : ${data.source||''}\n` +
+          `Rapport détaillé écrit : ${client.withReport ? 'Demandé (+10 000 FCFA)' : 'Non demandé'}\n\n` +
+          `Description des dégâts :\n${client.desc||''}`
+      };
+      fetch('/api/devis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(() => {});
+    }
+
+    verify();
   </script>
 </body>
 </html>

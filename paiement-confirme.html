@@ -35,6 +35,26 @@
     .hidden { display:none !important; }
     .status-ok { color:#166534; font-weight:700; }
     .status-no { color:#b91c1c; font-weight:700; }
+
+    /* ===== Reçu de paiement ===== */
+    #receipt { text-align:left; border:2px dashed #cbd5e1; border-radius:14px; padding:22px 24px; margin:24px 0; background:#fcfdff; }
+    #receipt .receipt-head { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #0f2640; padding-bottom:12px; margin-bottom:14px; }
+    #receipt .receipt-head h2 { margin:0; font-size:1.15rem; color:#0f2640; }
+    #receipt .receipt-no { font-size:0.85rem; color:#64748b; margin-top:4px; }
+    #receipt table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+    #receipt table td { padding:6px 0; color:#334155; }
+    #receipt table td.val { text-align:right; font-weight:700; color:#0f2640; }
+    #receipt .line-items td { border-top:1px solid #e2e8f0; padding:8px 0; }
+    #receipt .total-row td { border-top:2px solid #0f2640; padding-top:12px; font-weight:900; font-size:1.05rem; color:#E8820C; }
+    #receipt .receipt-footer { margin-top:16px; font-size:0.72rem; color:#94a3b8; border-top:1px dashed #e2e8f0; padding-top:10px; }
+    .btn-print { display:block; width:100%; border:none; border-radius:10px; padding:14px; font-size:1rem; font-weight:700; cursor:pointer; background:#0f2640; color:#fff; margin-top:4px; }
+    .email-note { font-size:0.78rem; color:#64748b; margin-top:8px; text-align:center; }
+
+    @media print {
+      body * { visibility: hidden; }
+      #receipt, #receipt * { visibility: visible; }
+      #receipt { position:absolute; top:0; left:0; width:100%; border:none; margin:0; }
+    }
   </style>
 </head>
 <body>
@@ -51,18 +71,46 @@
     <div id="successView" class="hidden">
       <div class="big-icon">✅</div>
       <h1>Paiement confirmé !</h1>
-      <p class="sub">Votre paiement a été vérifié et confirmé par KkiaPay. Voici le récapitulatif.</p>
+      <p class="sub">Votre paiement a été vérifié et confirmé par KkiaPay. Voici votre reçu.</p>
       <div class="ref-box" id="refBox"></div>
-      <div id="detailsContainer"></div>
-      <div class="amount-big" id="amountDisplay"></div>
+
+      <!-- ===== REÇU DE PAIEMENT (imprimable / téléchargeable en PDF) ===== -->
+      <div id="receipt">
+        <div class="receipt-head">
+          <div>
+            <h2>🧾 Reçu de Paiement</h2>
+            <div class="receipt-no" id="receiptNo"></div>
+          </div>
+          <div style="text-align:right; font-size:0.8rem; color:#64748b;">
+            BSH — Best Services and House<br>
+            <span id="receiptDate"></span>
+          </div>
+        </div>
+        <table>
+          <tr><td>Référence transaction</td><td class="val" id="receiptTx" style="word-break:break-all;"></td></tr>
+          <tr><td>Moyen de paiement</td><td class="val" id="receiptMethod"></td></tr>
+          <tr><td>Statut</td><td class="val" style="color:#166534;">✅ Payé</td></tr>
+          <tr><td>Client</td><td class="val" id="receiptClient"></td></tr>
+          <tr><td>Téléphone</td><td class="val" id="receiptPhone"></td></tr>
+          <tr><td>Lieu du bâtiment</td><td class="val" id="receiptLocation"></td></tr>
+        </table>
+        <table id="receiptItems" style="margin-top:10px;"></table>
+        <div class="receipt-footer">
+          BSH – Best Services and House | RCCM N° RB/ABC/26 A 140817 | IFU N° 0201710115389<br>
+          Abomey-Calavi, Bénin | +229 01 48 52 45 90 | contact@bestservicesandhouse.site
+        </div>
+      </div>
+
       <p style="color:#374151; font-size:0.95rem; line-height:1.6;">
         🏗️ Un technicien BSH vous contactera sous <strong>24h</strong> pour planifier l'intervention.<br>
-        Conservez votre numéro de transaction comme preuve de paiement.
+        Conservez ce reçu comme preuve de paiement.
       </p>
       <div class="cta-group">
+        <button type="button" class="btn-print" onclick="window.print()">🖨️ Télécharger / Imprimer le reçu (PDF)</button>
         <a id="waLink" href="https://wa.me/2290148524590" class="btn-wa" target="_blank" rel="noopener">📱 Suivre sur WhatsApp</a>
         <a href="index.html" class="btn-home">🏠 Retour à l'accueil</a>
       </div>
+      <p class="email-note" id="emailNote"></p>
     </div>
 
     <!-- État : échec / non confirmé -->
@@ -124,6 +172,7 @@
         if (data.success === true && data.status === 'SUCCESS') {
           renderSuccess(data);
           notifyTeam(data);
+          sendReceipt(data);
         } else {
           const reason = data.error || data.status || 'Transaction non confirmée';
           document.getElementById('errBox').textContent = `Réf. ${transactionId} — ${reason}`;
@@ -135,34 +184,49 @@
       }
     }
 
+    // ---- Génère un numéro de reçu lisible à partir de l'ID de transaction ----
+    function buildReceiptNumber(txId) {
+      const clean = String(txId || '').replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+      return 'BSH-REC-' + (clean ? clean.slice(-10) : Date.now().toString().slice(-10));
+    }
+
+    function fmtFCFA(n) {
+      return Number(n || 0).toLocaleString('fr-FR') + ' FCFA';
+    }
+
     function renderSuccess(data) {
       const amount = (typeof data.amount === 'number') ? data.amount : (parseInt(urlAmount) || client.total || null);
+      const txId = data.transactionId || transactionId;
+      const source = data.source || 'KkiaPay';
+      const receiptNo = buildReceiptNumber(txId);
 
       document.getElementById('refBox').innerHTML =
-        `🔐 Référence de transaction : <strong>${data.transactionId || transactionId}</strong>`;
+        `🔐 Référence de transaction : <strong>${txId}</strong>`;
 
-      if (amount) {
-        document.getElementById('amountDisplay').textContent = Number(amount).toLocaleString('fr-FR') + ' FCFA';
-      } else {
-        document.getElementById('amountDisplay').textContent = 'Montant confirmé';
-      }
+      // ===== Remplissage du reçu de paiement =====
+      document.getElementById('receiptNo').textContent = 'N° ' + receiptNo;
+      document.getElementById('receiptDate').textContent = new Date().toLocaleString('fr-FR');
+      document.getElementById('receiptTx').textContent = txId;
+      document.getElementById('receiptMethod').textContent = source;
+      document.getElementById('receiptClient').textContent = client.name || '—';
+      document.getElementById('receiptPhone').textContent = client.phone || '—';
+      document.getElementById('receiptLocation').textContent = client.location || '—';
 
-      const statusText = '<span class="status-ok">✅ Payé</span>';
-      const source = data.source || 'KkiaPay';
-      const details = [
-        ['Client', client.name || '—'],
-        ['Téléphone', client.phone || '—'],
-        ['Lieu du bâtiment', client.location || '—'],
-        ['Problème', client.issue || '—'],
-        ['Zone', client.zoneText || '—'],
-        ['Rapport rédigé', client.withReport ? 'Oui (+10 000 FCFA)' : 'Non'],
-        ['Moyen de paiement', source],
-        ['Statut', statusText],
+      const zoneAmount = (client.total && client.withReport) ? (client.total - 10000) : (client.total || amount || 0);
+      const items = [
+        ['Diagnostic de bâtiment — ' + (client.issue || 'Prestation'), zoneAmount],
       ];
+      if (client.withReport) items.push(['Rapport de diagnostic approfondi rédigé', 10000]);
 
-      document.getElementById('detailsContainer').innerHTML = details.map(([l,v]) =>
-        `<div class="detail-row"><span class="detail-label">${l}</span><span class="detail-value">${v}</span></div>`
+      let itemsHtml = items.map(([label, val]) =>
+        `<tr class="line-items"><td>${label}</td><td class="val">${fmtFCFA(val)}</td></tr>`
       ).join('');
+      itemsHtml += `<tr class="total-row"><td>TOTAL PAYÉ</td><td class="val">${fmtFCFA(amount || client.total)}</td></tr>`;
+      document.getElementById('receiptItems').innerHTML = itemsHtml;
+
+      document.getElementById('emailNote').textContent = client.email
+        ? `📧 Une copie de ce reçu a également été envoyée à ${client.email}.`
+        : `💡 Astuce : renseignez votre email lors d'une prochaine demande pour recevoir votre reçu par email.`;
 
       // Lien WhatsApp avec résumé
       const msg = encodeURIComponent(
@@ -201,6 +265,31 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       }).catch(() => {});
+    }
+
+    // ---- Délivrance du reçu de paiement au client (email) ----
+    function sendReceipt(data) {
+      const amount = (typeof data.amount === 'number') ? data.amount : (parseInt(urlAmount) || client.total || 0);
+      const payload = {
+        client: {
+          name: client.name || '',
+          phone: client.phone || '',
+          email: client.email || '',
+          location: client.location || '',
+          issue: client.issue || '',
+          total: client.total || amount,
+          withReport: !!client.withReport,
+          zoneText: client.zoneText || '',
+        },
+        amount,
+        transactionId: data.transactionId || transactionId,
+        paymentMethod: data.source || 'KkiaPay',
+      };
+      fetch('/api/send-receipt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(() => {}); // Le reçu affiché/imprimable à l'écran reste disponible même en cas d'échec d'envoi.
     }
 
     verify();

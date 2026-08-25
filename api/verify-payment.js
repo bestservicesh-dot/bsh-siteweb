@@ -9,32 +9,29 @@
  *     Route finale : https://www.bestservicesandhouse.site/api/verify-payment
  *
  *  Cette fonction s'exécute sur le SERVEUR : elle ne communique JAMAIS vos
- *  clés privée/ secrète au navigateur.
+ *  clés privée/secrète au navigateur.
  *
  *  ⚠️  Aucune dépendance à installer : Vercel exécute Node 18+, `fetch` est natif.
  *
- *  CONFIGURATION : ci-dessous (section "CLÉS KKIAPAY"). Vous pouvez soit
- *  coller vos clés directement ici, soit utiliser les variables
- *  d'environnement Vercel : KKIA_PUBLIC_KEY, KKIA_PRIVATE_KEY,
- *  KKIA_SECRET_KEY, KKIA_SANDBOX.
+ *  CONFIGURATION : les clés doivent être définies UNIQUEMENT via les
+ *  variables d'environnement Vercel (Project Settings → Environment
+ *  Variables), jamais écrites en dur dans ce fichier :
+ *    - KKIA_PUBLIC_KEY
+ *    - KKIA_PRIVATE_KEY
+ *    - KKIA_SECRET_KEY
+ *    - KKIA_SANDBOX  ("true" pour le mode test, absent/"false" en production)
  */
 
-// ============ CLÉS KKIAPAY (à renseigner) ============
-// La clé PUBLIQUE peut figurer ici (elle est déjà visible dans le site).
-// La clé PRIVÉE et la clé SECRÈTE ne doivent JAMAIS être dans le navigateur.
-//
-//  ✅ Ces clés sont celles de PRODUCTION (paiements réels).
-//     La clé PUBLIQUE peut figurer ici (visible dans le site).
-//     La clé PRIVÉE et la clé SECRÈTE ne doivent JAMAIS être dans le navigateur.
-const KKIA_PUBLIC_KEY  = process.env.KKIA_PUBLIC_KEY  || '3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f';
-const KKIA_PRIVATE_KEY = process.env.KKIA_PRIVATE_KEY || 'pk_23be8fde10b8966aee39e747817472c34ac8fedb598d2848259528498d5f44c7';
-const KKIA_SECRET_KEY  = process.env.KKIA_SECRET_KEY  || 'sk_881bda695fcb7cbe9139f82de9541a07e9906fcda9e02f20cef88466a38fd668';
+// ============ CLÉS KKIAPAY (variables d'environnement UNIQUEMENT) ============
+// La clé PUBLIQUE, la clé PRIVÉE et la clé SECRÈTE ne doivent JAMAIS être
+// écrites en dur dans le code source. Configurez-les dans Vercel :
+// Project Settings → Environment Variables.
+const KKIA_PUBLIC_KEY  = process.env.KKIA_PUBLIC_KEY  || '';
+const KKIA_PRIVATE_KEY = process.env.KKIA_PRIVATE_KEY || '';
+const KKIA_SECRET_KEY  = process.env.KKIA_SECRET_KEY  || '';
 // true = mode test (sandbox), false = production (paiements réels)
-// ✅ Dernière ligne : le site est en PRODUCTION (false).
-const KKIA_SANDBOX     = (process.env.KKIA_SANDBOX === undefined)
-                          ? false
-                          : (process.env.KKIA_SANDBOX === 'true');
-// ======================================================
+const KKIA_SANDBOX     = process.env.KKIA_SANDBOX === 'true';
+// ==============================================================================
 
 const LIVE_BASE    = 'https://api.kkiapay.me';
 const SANDBOX_BASE = 'https://api-sandbox.kkiapay.me';
@@ -59,11 +56,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'transaction_id manquant' });
   }
 
-  // ---- Vérifier que les clés sont bien renseignées ----
-  if (KKIA_PRIVATE_KEY.includes('PASTEZ') || KKIA_SECRET_KEY.includes('PASTEZ')) {
+  // ---- Vérifier que les clés sont bien renseignées (variables d'environnement) ----
+  if (!KKIA_PUBLIC_KEY || !KKIA_PRIVATE_KEY || !KKIA_SECRET_KEY) {
     return res.status(500).json({
       success: false,
-      error: 'Clés privée/secrète KkiaPay non configurées. Ouvrez api/verify-payment.js et renseignez-les.',
+      error: 'Clés KkiaPay non configurées. Définissez KKIA_PUBLIC_KEY, KKIA_PRIVATE_KEY et KKIA_SECRET_KEY dans les variables d\'environnement Vercel (Project Settings → Environment Variables), puis redéployez.',
     });
   }
 

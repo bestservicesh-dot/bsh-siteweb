@@ -546,6 +546,13 @@
 
           <div class="form-row">
             <div class="form-group">
+              <label for="diagEmail">Adresse Email (pour recevoir votre reçu)</label>
+              <input type="email" id="diagEmail" class="form-control" placeholder="Ex: nom@exemple.com (facultatif)">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
               <label for="diagLocation">Lieu du bâtiment (Ville, Quartier) *</label>
               <input type="text" id="diagLocation" class="form-control" placeholder="Ex: Fidjrossè, Calavi Zogbadjè" required>
             </div>
@@ -845,6 +852,7 @@
         // Validation basique
         const name = document.getElementById('diagName').value.trim();
         const phone = document.getElementById('diagPhone').value.trim();
+        const email = document.getElementById('diagEmail') ? document.getElementById('diagEmail').value.trim() : '';
         const location = document.getElementById('diagLocation').value.trim();
         const issue = document.getElementById('diagIssue').value;
         const desc = document.getElementById('diagDesc').value.trim();
@@ -868,7 +876,7 @@
 
         // Sauvegarder les infos client pour la page de confirmation
         sessionStorage.setItem('diag_client', JSON.stringify({
-          name, phone, location, issue, desc, total, withReport, zoneText
+          name, phone, email, location, issue, desc, total, withReport, zoneText
         }));
 
         // Ouvrir le widget KkiaPay

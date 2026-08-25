@@ -597,8 +597,15 @@
             <small style="color: var(--text-muted); display: block; margin-top: 5px;">Le paiement en ligne est sécurisé via KkiaPay (MTN MoMo, Moov Money, Visa, Mastercard).</small>
           </div>
 
+          <div class="form-group" style="display:flex; align-items:flex-start; gap:10px; margin-top:14px;">
+            <input type="checkbox" id="diagAcceptCGU" style="width:20px; height:20px; margin-top:2px; accent-color: var(--accent);" required>
+            <label for="diagAcceptCGU" style="font-size:0.88rem; color:var(--text-muted); cursor:pointer;">
+              J'ai lu et j'accepte les <a href="/conditions-generales.html" target="_blank" rel="noopener">Conditions Générales d'Utilisation et de Vente</a> ainsi que la <a href="/politique-confidentialite.html" target="_blank" rel="noopener">Politique de Confidentialité</a> de BSH. *
+            </label>
+          </div>
+
           <!-- Bouton de validation du formulaire (sans paiement direct) -->
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.1rem;" id="diagSubmitBtn">
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.1rem; margin-top: 10px;" id="diagSubmitBtn">
             🛡️ Valider & Payer mon Diagnostic en Ligne
           </button>
         </form>
@@ -749,6 +756,7 @@
       <div class="footer-bottom" style="border-top: 1px solid #1e293b; padding-top: 20px; margin-top: 20px;">
         <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
         <p>Conçu avec excellence pour le Bénin.</p>
+        <p style="margin-top:8px;"><a href="/mentions-legales.html" style="color:#94a3b8;">Mentions légales</a> &middot; <a href="/politique-confidentialite.html" style="color:#94a3b8;">Politique de confidentialité</a> &middot; <a href="/conditions-generales.html" style="color:#94a3b8;">CGU/CGV</a></p>
       </div>
     </div>
   </footer>
@@ -858,6 +866,11 @@
         const desc = document.getElementById('diagDesc').value.trim();
         if (!name || !phone || !location || !issue || !desc) {
           alert('⚠️ Veuillez remplir tous les champs obligatoires avant de procéder au paiement.');
+          return;
+        }
+        const acceptCGU = document.getElementById('diagAcceptCGU') && document.getElementById('diagAcceptCGU').checked;
+        if (!acceptCGU) {
+          alert('⚠️ Veuillez accepter les Conditions Générales d\'Utilisation et de Vente ainsi que la Politique de Confidentialité avant de procéder au paiement.');
           return;
         }
         const withReport = document.getElementById('diagReport') && document.getElementById('diagReport').checked;

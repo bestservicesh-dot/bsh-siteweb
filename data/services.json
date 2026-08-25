@@ -30,7 +30,7 @@
       "title": "Distribution de fruits & légumes",
       "description": "Distribution de paniers de fruits frais et légumes biologiques locaux, du producteur à votre table.",
       "price": "Selon la commande",
-      "link": "service-details.html?id=distribution-fruits-legumes"
+      "link": "https://bsh-fruleg.vercel.app/"
     }
   ],
   "digital_services": [

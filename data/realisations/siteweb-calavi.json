@@ -1,11 +1,12 @@
 {
   "id": "siteweb-calavi",
-  "title": "Construction de site web",
-  "category": "Autres",
-  "city": "Calavi",
-  "main_image": "https://www.bestservicesandhouse.site/assets/images/uploads/site-web-bsh.png",
-  "description": "Conception et déploiement du site internet officiel de BSH, entièrement optimisé pour le SEO and relié au CMS de gestion.",
+  "title": "Création du site web BSH",
+  "category": "Numérique",
+  "city": "Abomey-Calavi",
+  "main_image": "/assets/images/uploads/site-web-bsh.png",
+  "description": "Conception et développement du site web institutionnel de BSH. Site vitrine multi-pages, responsive, avec SEO optimisé et espace admin intégré.",
   "images": [
-    "https://www.bestservicesandhouse.site/assets/images/uploads/site-web-bsh.png"
+    "/assets/images/uploads/site-web-bsh.png",
+    "/assets/images/uploads/logo-de-bsh.png"
   ]
 }

@@ -1,11 +1,13 @@
 {
   "id": "piscine-natitingou",
-  "title": "Construction de piscine",
-  "category": "Construction",
+  "title": "Construction de piscine, puisards et fosse septique",
+  "category": "Finitions",
   "city": "Natitingou",
-  "main_image": "https://www.bestservicesandhouse.site/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.08.jpeg",
-  "description": "Conception, fouilles, coulage de béton armé and revêtement mosaïque d'une piscine d'extérieur haut de gamme.",
+  "main_image": "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.08.jpeg",
+  "description": "Construction d'une piscine privée avec puisards et fosse septique, réalisée dans le cadre du chantier ARTJB à Natitingou.",
   "images": [
-    "https://www.bestservicesandhouse.site/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.08.jpeg"
+    "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.08.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.11.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.05.jpeg"
   ]
 }

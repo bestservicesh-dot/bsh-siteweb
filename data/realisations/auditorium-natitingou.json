@@ -1,11 +1,15 @@
 {
   "id": "auditorium-natitingou",
-  "title": "Grand Auditorium de 600m²",
+  "title": "Construction d'un Auditorium de 600m² et murs de clôture — ARTJB Natitingou",
   "category": "Construction",
   "city": "Natitingou",
-  "main_image": "https://www.bestservicesandhouse.site/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.03.jpeg",
-  "description": "Étude et construction d'un complexe d'auditorium de grande envergure avec charpente métallique and isolation acoustique.",
+  "main_image": "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.03.jpeg",
+  "description": "Construction complète d'un auditorium de 600m², murs de clôture, bureaux, salles de bain et extension de bâtiments pour l'ARTJB. Livraison en 45 jours calendaires.",
   "images": [
-    "https://www.bestservicesandhouse.site/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.03.jpeg"
+    "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.03.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.04.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.05.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.08.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.11.jpeg"
   ]
 }

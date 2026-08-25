@@ -3,16 +3,38 @@
   "subtitle": "Suivez les dernières actualités, annonces et notes d'information de la direction de BSH.",
   "items": [
     {
+      "date": "2026-08-23",
+      "badge": "🆕 Nouveau",
+      "badge_color": "#16a34a",
+      "title": "Intégration du paiement en ligne KkiaPay sur le site BSH",
+      "content": "La direction de BSH a le plaisir d'annoncer l'intégration du système de paiement en ligne sécurisé KkiaPay sur son site web. Désormais, nos clients peuvent régler leurs frais de diagnostic de bâtiment, rapports techniques et services numériques directement en ligne via MTN MoMo, Moov Money, Visa ou Mastercard, en toute sécurité.",
+      "link": "/#diagnostic",
+      "link_text": "Payer un diagnostic"
+    },
+    {
+      "date": "2026-08-10",
+      "badge": "📋 Tarification",
+      "badge_color": "#E8820C",
+      "title": "Nouveau barème tarifaire du Diagnostic de Bâtiment",
+      "content": "BSH informe sa clientèle de la mise à jour de son barème de diagnostic de bâtiment. Le diagnostic sur site est fixé à 10 000 FCFA pour Cotonou et Abomey-Calavi, et à 20 000 FCFA pour les zones hors de ces villes. Le rapport écrit approfondi reste disponible en option à 10 000 FCFA supplémentaires. Le paiement s'effectue désormais en ligne via KkiaPay.",
+      "link": "/#diagnostic",
+      "link_text": "Commander un diagnostic"
+    },
+    {
       "date": "2026-07-23",
-      "title": "Lancement officiel de la nouvelle plateforme web BSH !",
-      "content": "La direction générale de Best Services and House (BSH) est ravie d'annoncer le lancement officiel de sa plateforme web unifiée. Désormais, accédez à nos services BTP, gérez vos demandes de devis and diagnostics de bâtiment, and explorez nos offres immobilières directement en ligne en toute sécurité.",
+      "badge": "🚀 Lancement",
+      "badge_color": "#1B0F8C",
+      "title": "Lancement officiel de la nouvelle plateforme web BSH",
+      "content": "La direction générale de Best Services and House (BSH) est ravie d'annoncer le lancement officiel de sa plateforme web unifiée. Accédez à tous nos services BTP, gérez vos demandes de devis et diagnostics en ligne, explorez nos réalisations avec galerie photos, et restez informés de nos actualités.",
       "link": "/a-propos.html",
       "link_text": "En savoir plus"
     },
     {
       "date": "2026-07-15",
-      "title": "Opération Zéro Goutte : Prolongation de la campagne d'étanchéité",
-      "content": "Face à la forte demande et pour vous aider à sécuriser vos toitures-terrasses et dalles de béton avant la grande saison pluvieuse au Bénin, BSH prolonge sa campagne nationale 'Opération Zéro Goutte'. Bénéficiez de tarifs préférentiels sur tous les travaux d'étanchéité. Demandez votre diagnostic en toute tranquillité. BSH, votre partenaire de concrétisation!",
+      "badge": "💧 Campagne",
+      "badge_color": "#0ea5e9",
+      "title": "Opération Zéro Goutte : Campagne préventive d'étanchéité",
+      "content": "BSH prolonge sa campagne nationale 'Opération Zéro Goutte'. Protégez vos dalles, toitures-terrasses et fondations avant la grande saison pluvieuse. Bénéficiez de tarifs préférentiels et d'une garantie de 10 ans sur tous les travaux d'étanchéité. Demandez votre diagnostic en ligne dès maintenant.",
       "link": "/service-details.html?id=etancheite",
       "link_text": "Découvrir la campagne"
     }

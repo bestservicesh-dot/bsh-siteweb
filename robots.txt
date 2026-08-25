@@ -1,16 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /api/
-Disallow: /connexion.html
 
-User-agent: Googlebot
-Allow: /
-Disallow: /admin/
-Disallow: /api/
-
-User-agent: Bingbot
-Allow: /
-
-# Sitemap
 Sitemap: https://www.bestservicesandhouse.site/sitemap.xml

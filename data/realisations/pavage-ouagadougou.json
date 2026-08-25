@@ -1,11 +1,12 @@
 {
   "id": "pavage-ouagadougou",
-  "title": "Pavage de la cour",
+  "title": "Pavage de cours pour particuliers",
   "category": "Pavage",
   "city": "Ouagadougou",
-  "main_image": "https://www.bestservicesandhouse.site/assets/images/uploads/capture.png",
-  "description": "Travaux de terrassement, nivellement, and pose de pavés autobloquants d'une grande cour d'entreprise.",
+  "main_image": "/assets/images/uploads/capture.png",
+  "description": "Pavage de cours et allées pour plusieurs particuliers à Ouagadougou, Burkina Faso. Travaux réalisés lors de la mission BSH au Burkina.",
   "images": [
-    "https://www.bestservicesandhouse.site/assets/images/uploads/capture.png"
+    "/assets/images/uploads/capture.png",
+    "/assets/images/uploads/whatsapp-image-2024-07-22-at-13.03.13-2-.jpeg"
   ]
 }

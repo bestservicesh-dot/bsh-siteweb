@@ -3,32 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="canonical" href="https://www.bestservicesandhouse.site/realisations.html">
   <title>Nos Réalisations | BSH - Projets BTP au Bénin</title>
-  <meta name="description" content="Découvrez nos projets et chantiers de construction, rénovation, étanchéité et pavage réalisés à Cotonou et au Bénin.">
+  <meta name="description" content="Découvrez nos projets et chantiers de construction, rénovation, étanchéité et pavage réalisés à Cotonou et au Bénin. Galerie photos complète.">
+  <link rel="canonical" href="https://www.bestservicesandhouse.site/realisations.html">
+  <meta property="og:title" content="Nos Réalisations | BSH - Projets BTP au Bénin">
+  <meta property="og:image" content="https://www.bestservicesandhouse.site/assets/images/uploads/logo-de-bsh.png">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    /* Spécifique à la page des réalisations */
+    /* === HERO === */
     .real-hero {
       background: linear-gradient(135deg, var(--primary) 40%, var(--primary-light) 100%);
-      color: var(--bg-white);
-      padding: 60px 0;
-      text-align: center;
+      color: #fff; padding: 70px 0; text-align: center;
     }
-    .real-hero h1 {
-      font-size: 2.5rem;
-      font-weight: 850;
-      margin-bottom: 10px;
+    .real-hero h1 { font-size: 2.6rem; font-weight: 850; margin-bottom: 12px; }
+    .real-hero p { color: #94a3b8; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* === FILTER PILLS === */
+    .portfolio-filter {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-bottom: 40px;
     }
-    .real-hero p {
-      color: #94a3b8;
-      font-size: 1.1rem;
+    .filter-btn {
+      padding: 9px 22px; border-radius: 50px;
+      border: 2px solid var(--border-color, #e2e8f0);
+      background: white; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; transition: all 0.2s; color: var(--text-dark, #1e293b);
     }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent, #E8820C); color: white; border-color: var(--accent, #E8820C);
+    }
+
+    /* === GRID === */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .portfolio-card {
+      background: white; border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      overflow: hidden; transition: transform 0.25s, box-shadow 0.25s;
+      border: 1px solid #e2e8f0;
+    }
+    .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.13); }
+    .portfolio-img-wrapper { position: relative; height: 230px; overflow: hidden; cursor: pointer; }
+    .portfolio-img-wrapper img {
+      width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s;
+    }
+    .portfolio-card:hover .portfolio-img-wrapper img { transform: scale(1.06); }
+    .portfolio-category-badge {
+      position: absolute; top: 14px; right: 14px;
+      background: var(--accent, #E8820C); color: white;
+      font-size: 0.78rem; font-weight: 800; padding: 4px 12px; border-radius: 30px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .photos-count-badge {
+      position: absolute; bottom: 12px; left: 12px;
+      background: rgba(0,0,0,0.6); color: white;
+      font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+    }
+    .portfolio-info { padding: 20px; }
+    .portfolio-info h4 { font-size: 1rem; font-weight: 800; color: #0f2640; margin-bottom: 6px; line-height: 1.4; }
+    .portfolio-info p { font-size: 0.85rem; color: #64748b; margin-bottom: 14px; }
+    .portfolio-info .desc-text { font-size: 0.88rem; color: #475569; line-height: 1.5; margin-bottom: 14px; }
+    .btn-gallery {
+      width: 100%; padding: 9px; border: 2px solid var(--primary, #0f2640);
+      border-radius: 8px; background: transparent; color: var(--primary, #0f2640);
+      font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-gallery:hover { background: var(--primary, #0f2640); color: white; }
+
+    /* === LIGHTBOX === */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.93); align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    #lightbox.open { display: flex; }
+    .lb-close {
+      position: absolute; top: 20px; right: 24px; font-size: 2.5rem;
+      color: white; cursor: pointer; line-height: 1; z-index: 10001; font-weight: 300;
+    }
+    .lb-img-wrap { position: relative; max-width: 90vw; max-height: 75vh; }
+    #lbImg { max-width: 90vw; max-height: 75vh; border-radius: 8px; object-fit: contain; display: block; }
+    .lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15); border: none; color: white;
+      font-size: 2rem; width: 48px; height: 48px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; z-index: 10002;
+    }
+    .lb-nav:hover { background: rgba(255,255,255,0.3); }
+    .lb-prev { left: -64px; }
+    .lb-next { right: -64px; }
+    .lb-info {
+      color: white; text-align: center; margin-top: 18px; max-width: 700px; padding: 0 20px;
+    }
+    .lb-info h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 4px; }
+    .lb-info p { color: #94a3b8; font-size: 0.9rem; }
+    .lb-counter { color: #cbd5e1; font-size: 0.85rem; margin-top: 8px; }
+    .lb-thumbs {
+      display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; justify-content: center;
+      max-width: 90vw; overflow-x: auto; padding: 4px;
+    }
+    .lb-thumb {
+      width: 56px; height: 56px; border-radius: 8px; object-fit: cover;
+      cursor: pointer; opacity: 0.55; border: 2px solid transparent; transition: all 0.2s;
+    }
+    .lb-thumb.active, .lb-thumb:hover { opacity: 1; border-color: var(--accent, #E8820C); }
+
+    /* === LOADING SKELETON === */
+    .skeleton { background: linear-gradient(90deg, #f0f4f8 25%, #e2e8f0 50%, #f0f4f8 75%);
+      background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 12px; }
+    @keyframes shimmer { 0% {background-position: 200% 0;} 100% {background-position: -200% 0;} }
+    .skel-card { height: 320px; margin-bottom: 8px; }
   </style>
-  <meta name="robots" content="index, follow">
 </head>
 <body>
 
@@ -36,134 +126,87 @@
   <div class="top-bar">
     <div class="container top-bar-content">
       <div class="top-bar-left">
-        <a href="tel:+2290148524590" class="phone-link">📞 <span class="phone-text">+229 01 48 52 45 90</span></a>
-        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 <span class="email-text">contact@bestservicesandhouse.site</span></a>
+        <a href="tel:+2290148524590" class="phone-link">📞 +229 01 48 52 45 90</a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 contact@bestservicesandhouse.site</a>
       </div>
-      <div class="top-bar-right">
-        <span class="address-text">📍 Abomey-Calavi, Bénin</span>
-      </div>
+      <div class="top-bar-right"><span class="address-text">📍 Abomey-Calavi, Bénin</span></div>
     </div>
   </div>
 
-  <!-- NAVIGATION HEADER -->
+  <!-- NAV -->
   <header class="header">
     <div class="container navbar">
       <a href="index.html" class="logo-container">
         <div class="logo-text">BSH<span>.</span></div>
       </a>
-      
-      <button class="nav-toggle" id="navToggle" aria-label="Menu principal">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal"><span></span><span></span><span></span></button>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html#accueil">Accueil</a></li>
         <li><a href="index.html#services">Nos Services</a></li>
         <li><a href="a-propos.html">À Propos</a></li>
-        <li><a href="realisations.html" style="color: var(--accent);">Nos Réalisations</a></li>
-        <li><a href="index.html#temoignages">Témoignages</a></li>
-        <li><a href="index.html#faq">FAQ</a></li>
-        <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
+        <li><a href="realisations.html" style="color:var(--accent);">Nos Réalisations</a></li>
+        <li><a href="opportunites.html">Opportunités</a></li>
+        <li><a href="blog.html">Blog & PDF</a></li>
+        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding:8px 18px; margin-left:10px;">Devis Gratuit</a></li>
       </ul>
     </div>
   </header>
 
-  <!-- REALISATIONS HERO -->
+  <!-- HERO -->
   <div class="real-hero">
     <div class="container">
-      <h1>Nos réalisations</h1>
-      <p>Découvrez une sélection de nos projets réalisés à Cotonou, Abomey-Calavi, Porto-Novo et dans tout le Bénin.</p>
+      <h1>Nos Réalisations</h1>
+      <p>Découvrez une sélection de nos projets réalisés à Cotonou, Abomey-Calavi, Natitingou et dans tout le Bénin. Cliquez sur une photo pour voir la galerie complète.</p>
     </div>
   </div>
 
-  <!-- PORTFOLIO SECTION -->
+  <!-- PORTFOLIO -->
   <section class="section">
     <div class="container">
-      <!-- Filtres du portfolio -->
-      <div class="portfolio-filter">
+      <div class="portfolio-filter" id="filterBar">
         <button class="filter-btn active" data-filter="all">Tous</button>
         <button class="filter-btn" data-filter="Construction">Construction</button>
         <button class="filter-btn" data-filter="Rénovation">Rénovation</button>
         <button class="filter-btn" data-filter="Étanchéité">Étanchéité</button>
         <button class="filter-btn" data-filter="Finitions">Finitions</button>
         <button class="filter-btn" data-filter="Pavage">Pavage</button>
+        <button class="filter-btn" data-filter="Numérique">Numérique</button>
       </div>
-
-      <!-- Grid des projets -->
-      <div class="portfolio-grid" id="standalone-portfolio-container">
-        <!-- 9 projets par défaut (remplacés dynamiquement par JS) -->
-        <div class="portfolio-card">
-          <div class="portfolio-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Villa moderne">
-            <span class="portfolio-category-badge">Construction</span>
-          </div>
-          <div class="portfolio-info">
-            <h4>Villa résidentielle moderne</h4>
-            <p>📍 Cotonou, 2025</p>
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <div class="portfolio-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Immeuble commercial">
-            <span class="portfolio-category-badge">Construction</span>
-          </div>
-          <div class="portfolio-info">
-            <h4>Immeuble commercial R+3</h4>
-            <p>📍 Abomey-Calavi, 2025</p>
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <div class="portfolio-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80" alt="Rénovation maison familiale">
-            <span class="portfolio-category-badge">Rénovation</span>
-          </div>
-          <div class="portfolio-info">
-            <h4>Rénovation maison familiale</h4>
-            <p>📍 Porto-Novo, 2024</p>
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <div class="portfolio-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1632759162443-112f4002d99d?auto=format&fit=crop&w=600&q=80" alt="Étanchéité terrasse">
-            <span class="portfolio-category-badge">Étanchéité</span>
-          </div>
-          <div class="portfolio-info">
-            <h4>Étanchéité toiture terrasse</h4>
-            <p>📍 Cotonou, 2025</p>
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <div class="portfolio-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1502005229762-fc1b2381f0db?auto=format&fit=crop&w=600&q=80" alt="Carrelage villa">
-            <span class="portfolio-category-badge">Finitions</span>
-          </div>
-          <div class="portfolio-info">
-            <h4>Carrelage et peinture villa</h4>
-            <p>📍 Godomey, 2024</p>
-          </div>
-        </div>
-        <div class="portfolio-card">
-          <div class="portfolio-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Pavage cour">
-            <span class="portfolio-category-badge">Pavage</span>
-          </div>
-          <div class="portfolio-info">
-            <h4>Pavage cour et allée</h4>
-            <p>📍 Calavi, 2025</p>
-          </div>
-        </div>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <!-- Skeletons while loading -->
+        <div class="skeleton skel-card"></div>
+        <div class="skeleton skel-card"></div>
+        <div class="skeleton skel-card"></div>
+        <div class="skeleton skel-card"></div>
+        <div class="skeleton skel-card"></div>
+        <div class="skeleton skel-card"></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA FOOTER -->
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Galerie photos">
+    <div class="lb-close" id="lbClose" title="Fermer">×</div>
+    <div class="lb-img-wrap">
+      <button class="lb-nav lb-prev" id="lbPrev" aria-label="Photo précédente">‹</button>
+      <img id="lbImg" src="" alt="Photo du projet">
+      <button class="lb-nav lb-next" id="lbNext" aria-label="Photo suivante">›</button>
+    </div>
+    <div class="lb-info">
+      <h3 id="lbTitle"></h3>
+      <p id="lbDesc"></p>
+      <div class="lb-counter" id="lbCounter"></div>
+    </div>
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </div>
+
+  <!-- CTA -->
   <section class="cta-banner">
     <div class="container">
       <h2>Votre projet sera notre prochaine réalisation</h2>
       <p>Contactez-nous pour un devis gratuit et rejoignez nos clients satisfaits.</p>
-      <div class="hero-actions" style="justify-content: center;">
+      <div class="hero-actions" style="justify-content:center;">
         <a href="devis.html" class="btn btn-primary">Demander un devis</a>
         <a href="https://wa.me/2290148524590" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
       </div>
@@ -172,76 +215,150 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container" style="text-align: center;">
-      <div class="logo-text" style="color: #fff; margin-bottom: 15px; justify-content: center; display: flex;">BSH<span>.</span></div>
-      <p style="max-width: 500px; margin: 0 auto 20px auto; color: #94a3b8; font-size: 0.9rem;">Best Services and House (BSH) est votre partenaire de confiance au Bénin pour tous travaux de BTP, construction gros œuvre, étanchéité, carrelage, pavage et rénovation.</p>
-      <div class="social-links" style="margin: 0 auto 25px auto; display: flex; gap: 10px; justify-content: center;">
-        <a href="https://facebook.com/bestservicesandhouse" class="facebook-link" target="_blank" rel="noopener" title="Facebook" style="font-weight: bold; font-family: sans-serif;">f</a>
-        <a href="https://linkedin.com/company/bestservicesandhouse" class="linkedin-link" target="_blank" rel="noopener" title="LinkedIn" style="font-weight: bold; font-family: sans-serif;">in</a>
-        <a href="https://instagram.com/bestservicesandhouse" class="instagram-link" target="_blank" rel="noopener" title="Instagram" style="font-weight: bold; font-family: sans-serif;">ig</a>
-        <a href="https://tiktok.com/@bestservicesandhouse" class="tiktok-link" target="_blank" rel="noopener" title="TikTok" style="font-weight: bold; font-family: sans-serif;">tk</a>
-      </div>
-      <div class="footer-bottom" style="border-top: 1px solid #1e293b; padding-top: 20px;">
-        <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
-        <p>📍 Abomey-Calavi, Bénin</p>
+    <div class="container" style="text-align:center;">
+      <div class="logo-text" style="color:#fff; margin-bottom:15px; justify-content:center; display:flex;">BSH<span>.</span></div>
+      <p style="max-width:500px; margin:0 auto 20px; color:#94a3b8; font-size:0.9rem;">Best Services and House (BSH) — Construction, Rénovation, Étanchéité au Bénin.</p>
+      <div class="footer-bottom" style="border-top:1px solid #1e293b; padding-top:20px;">
+        <p>© 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>📍 Abomey-Calavi, Bénin | RCCM N° RB/ABC/26 A 140817 | IFU N° 0201710115389</p>
       </div>
     </div>
   </footer>
 
+  <a href="https://wa.me/2290148524590" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
   <script src="js/main.js"></script>
   <script>
-    // Chargement dynamique du portfolio complet
-    document.addEventListener("DOMContentLoaded", () => {
-      let itemsList = [];
+  (function() {
+    const grid = document.getElementById('portfolioGrid');
+    const filterBar = document.getElementById('filterBar');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbDesc = document.getElementById('lbDesc');
+    const lbCounter = document.getElementById('lbCounter');
+    const lbThumbs = document.getElementById('lbThumbs');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
 
-      fetch('/data/realisations.json?v=' + Date.now())
-        .then(res => res.json())
-        .then(data => {
-          if (data.items) {
-            itemsList = data.items;
-            render(itemsList);
-          }
+    let allProjects = [];
+    let currentImages = [];
+    let currentIdx = 0;
+
+    // Default realisation IDs
+    const defaultIds = ['villa-cotonou','auditorium-natitingou','piscine-natitingou','geomembrane-cotonou','pavage-ouagadougou','siteweb-calavi'];
+
+    function loadProjects() {
+      const cb = '?v=' + Date.now();
+      fetch('https://api.github.com/repos/bestservicesh-dot/bsh-siteweb/contents/data/realisations')
+        .then(r => { if(!r.ok) throw new Error('GitHub API unavailable'); return r.json(); })
+        .then(files => {
+          const jsons = files.filter(f => f.name.endsWith('.json'));
+          return Promise.all(jsons.map(f => fetch('/data/realisations/' + f.name + cb).then(r => r.json())));
         })
-        .catch(err => console.warn("Attention : Réalisations chargées depuis la version statique HTML.", err));
+        .catch(() => Promise.all(defaultIds.map(id => fetch('/data/realisations/' + id + '.json' + cb).then(r => r.json()))))
+        .then(projects => { allProjects = projects; renderGrid(projects); });
+    }
 
-      function render(items) {
-        const container = document.getElementById('standalone-portfolio-container');
-        if (!container) return;
-        container.innerHTML = '';
-        
-        items.forEach(proj => {
-          container.innerHTML += `
-            <div class="portfolio-card">
-              <div class="portfolio-img-wrapper">
-                <img src="${proj.image}" alt="${proj.title}">
-                <span class="portfolio-category-badge">${proj.category}</span>
-              </div>
-              <div class="portfolio-info">
-                <h4>${proj.title}</h4>
-                <p>📍 ${proj.city}</p>
-              </div>
-            </div>
-          `;
+    function getImages(proj) {
+      let imgs = [];
+      if (proj.main_image) imgs.push(proj.main_image);
+      if (proj.images && proj.images.length) {
+        proj.images.forEach(img => {
+          const url = typeof img === 'string' ? img : (img.image || '');
+          if (url && url !== proj.main_image) imgs.push(url);
         });
       }
+      return imgs.length ? imgs : ['/assets/images/uploads/logo-de-bsh.png'];
+    }
 
-      // Gestion des boutons filtres
-      const filterButtons = document.querySelectorAll('.filter-btn');
-      filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
+    function renderGrid(projects) {
+      if (!projects.length) {
+        grid.innerHTML = '<p style="text-align:center; grid-column:1/-1; color:#64748b;">Aucune réalisation publiée pour le moment.</p>';
+        return;
+      }
+      grid.innerHTML = projects.map((proj, pi) => {
+        const imgs = getImages(proj);
+        const mainImg = imgs[0];
+        const count = imgs.length;
+        return `<div class="portfolio-card" data-category="${proj.category}" data-idx="${pi}">
+          <div class="portfolio-img-wrapper" onclick="openLightbox(${pi}, 0)">
+            <img src="${mainImg}" alt="${proj.title}" loading="lazy">
+            <span class="portfolio-category-badge">${proj.category}</span>
+            ${count > 1 ? `<span class="photos-count-badge">📸 ${count} photos</span>` : ''}
+          </div>
+          <div class="portfolio-info">
+            <h4>${proj.title}</h4>
+            <p>📍 ${proj.city || 'Bénin'}</p>
+            ${proj.description ? `<p class="desc-text">${proj.description}</p>` : ''}
+            ${count > 1 ? `<button class="btn-gallery" onclick="openLightbox(${pi}, 0)">📸 Voir les ${count} photos</button>` : `<button class="btn-gallery" onclick="openLightbox(${pi}, 0)">🔍 Voir la photo</button>`}
+          </div>
+        </div>`;
+      }).join('');
+    }
 
-          const cat = btn.getAttribute('data-filter');
-          if (cat === 'all') {
-            render(itemsList);
-          } else {
-            const filtered = itemsList.filter(i => i.category.toLowerCase() === cat.toLowerCase());
-            render(filtered);
-          }
+    // Global open lightbox
+    window.openLightbox = function(projIdx, imgIdx) {
+      const proj = allProjects[projIdx];
+      if (!proj) return;
+      currentImages = getImages(proj);
+      currentIdx = imgIdx || 0;
+      lbTitle.textContent = proj.title;
+      lbDesc.textContent = (proj.description || '') + (proj.city ? ' — 📍 ' + proj.city : '');
+      renderLightbox();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    function renderLightbox() {
+      lbImg.src = currentImages[currentIdx];
+      lbImg.alt = 'Photo ' + (currentIdx + 1);
+      lbCounter.textContent = (currentIdx + 1) + ' / ' + currentImages.length;
+      lbPrev.style.display = currentImages.length > 1 ? 'flex' : 'none';
+      lbNext.style.display = currentImages.length > 1 ? 'flex' : 'none';
+      // Thumbnails
+      lbThumbs.innerHTML = currentImages.map((url, i) =>
+        `<img src="${url}" class="lb-thumb ${i===currentIdx?'active':''}" onclick="gotoImg(${i})" alt="Photo ${i+1}" loading="lazy">`
+      ).join('');
+    }
+
+    window.gotoImg = function(i) { currentIdx = i; renderLightbox(); };
+
+    lbPrev.onclick = () => { currentIdx = (currentIdx - 1 + currentImages.length) % currentImages.length; renderLightbox(); };
+    lbNext.onclick = () => { currentIdx = (currentIdx + 1) % currentImages.length; renderLightbox(); };
+    lbClose.onclick = closeLightbox;
+    lightbox.onclick = (e) => { if (e.target === lightbox) closeLightbox(); };
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') { currentIdx = (currentIdx - 1 + currentImages.length) % currentImages.length; renderLightbox(); }
+      if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % currentImages.length; renderLightbox(); }
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+
+    // Filter
+    filterBar.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.filter;
+        const cards = grid.querySelectorAll('.portfolio-card');
+        cards.forEach(card => {
+          card.style.display = (cat === 'all' || card.dataset.category.toLowerCase() === cat.toLowerCase()) ? '' : 'none';
         });
       });
     });
+
+    loadProjects();
+  })();
   </script>
 </body>
 </html>

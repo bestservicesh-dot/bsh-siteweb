@@ -188,8 +188,6 @@ collections:
       - { label: "Contenu détaillé de l'article", name: "content", widget: "markdown" }
       - { label: "Fiche Technique PDF à télécharger (Optionnel)", name: "pdf_file", widget: "file", required: false }
       - { label: "Téléchargement du PDF réservé aux membres connectés", name: "is_premium", widget: "boolean", default: true }
-<<<<<<< HEAD
-=======
 
   - name: "boutique"
     label: "🛒 Boutique — Logiciels & Articles"
@@ -241,4 +239,3 @@ collections:
               - { label: "Texte descriptif", name: "description", widget: "text", required: false }
               - { label: "Texte du bouton (CTA)", name: "cta", widget: "string", required: false }
               - { label: "Publicité active", name: "actif", widget: "boolean", default: true }
->>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)

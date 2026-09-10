@@ -304,6 +304,10 @@
         <li><a href="index.html#services">Nos Services</a></li>
         <li><a href="a-propos.html">À Propos</a></li>
         <li><a href="realisations.html">Nos Réalisations</a></li>
+<<<<<<< HEAD
+=======
+        <li><a href="boutique.html">🛒 Boutique</a></li>
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
         <li><a href="opportunites.html">Opportunités</a></li>
         <li><a href="connexion.html">Espace Client</a></li>
         <li><a href="devis.html" class="btn btn-primary" style="padding: 8px 18px; margin-left: 10px;">Demander un Devis</a></li>
@@ -344,6 +348,120 @@
     </div>
   </section>
 
+<<<<<<< HEAD
+=======
+  <!-- ═══════════════════════════════════════════
+       ESPACE PUBLICITÉ — Carrousel automatique
+       Géré depuis Admin → Publicités
+  ═══════════════════════════════════════════ -->
+  <section id="pub-carousel-section" style="padding:0; overflow:hidden; display:none;">
+    <div id="pubCarousel" style="position:relative; width:100%; height:340px; background:#0f2640; overflow:hidden;">
+      <!-- Slides injectés dynamiquement -->
+    </div>
+    <!-- Indicateurs -->
+    <div id="pubDots" style="position:absolute; bottom:14px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:20;"></div>
+    <!-- Navigation -->
+    <button id="pubPrev" onclick="bshPubNav(-1)" aria-label="Publicité précédente" style="position:absolute;top:50%;left:14px;transform:translateY(-50%);background:rgba(0,0,0,0.45);border:none;color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.3rem;z-index:20;display:none;">‹</button>
+    <button id="pubNext" onclick="bshPubNav(1)"  aria-label="Publicité suivante"   style="position:absolute;top:50%;right:14px;transform:translateY(-50%);background:rgba(0,0,0,0.45);border:none;color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.3rem;z-index:20;display:none;">›</button>
+  </section>
+  <style>
+    #pub-carousel-section { position:relative; }
+    .pub-slide {
+      position:absolute; inset:0; width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transition:opacity 0.7s ease; pointer-events:none;
+      text-decoration:none;
+    }
+    .pub-slide.active { opacity:1; pointer-events:all; }
+    .pub-slide img {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    }
+    .pub-slide-overlay {
+      position:relative; z-index:5;
+      background:rgba(10,20,40,0.58);
+      color:#fff; text-align:center;
+      padding:32px 28px; border-radius:14px;
+      max-width:600px; backdrop-filter:blur(2px);
+    }
+    .pub-slide-overlay h3 { font-size:1.8rem; font-weight:900; margin-bottom:8px; }
+    .pub-slide-overlay p  { font-size:1rem; color:#e2e8f0; margin-bottom:18px; line-height:1.5; }
+    .pub-slide-cta {
+      background:var(--accent,#E8820C); color:#fff; padding:10px 28px;
+      border-radius:50px; font-weight:700; font-size:0.95rem;
+      text-decoration:none; display:inline-block;
+    }
+    .pub-dot {
+      width:10px; height:10px; border-radius:50%;
+      background:rgba(255,255,255,0.4); border:none; cursor:pointer;
+      transition:background 0.3s; padding:0;
+    }
+    .pub-dot.active { background:#E8820C; }
+    @media(max-width:640px){
+      #pubCarousel { height:220px; }
+      .pub-slide-overlay h3 { font-size:1.2rem; }
+      .pub-slide-overlay p  { font-size:0.85rem; }
+    }
+  </style>
+  <script>
+  (function(){
+    let pubItems=[], pubIdx=0, pubTimer=null;
+    const sec = document.getElementById('pub-carousel-section');
+    const car = document.getElementById('pubCarousel');
+    const dots= document.getElementById('pubDots');
+    const prevBtn=document.getElementById('pubPrev');
+    const nextBtn=document.getElementById('pubNext');
+
+    fetch('/data/publicites.json?v='+Date.now())
+      .then(r=>r.json())
+      .then(data=>{
+        const actifs = (data.items||[]).filter(x=>x.actif!==false);
+        if(!data.enabled || !actifs.length){ sec.style.display='none'; return; }
+        sec.style.display='';
+        pubItems = actifs;
+        const interval = (data.interval||5)*1000;
+
+        // Build slides
+        pubItems.forEach((item,i)=>{
+          const a = document.createElement('a');
+          a.href = item.lien||'#'; a.className='pub-slide'+(i===0?' active':'');
+          a.setAttribute('aria-label', item.title||'Publicité BSH');
+          a.innerHTML=`
+            <img src="${item.image||''}" alt="${item.title||''}" loading="${i===0?'eager':'lazy'}">
+            <div class="pub-slide-overlay">
+              <h3>${item.title||''}</h3>
+              <p>${item.description||''}</p>
+              ${item.cta?`<span class="pub-slide-cta">${item.cta}</span>`:''}
+            </div>`;
+          car.appendChild(a);
+
+          const dot=document.createElement('button');
+          dot.className='pub-dot'+(i===0?' active':'');
+          dot.setAttribute('aria-label','Slide '+(i+1));
+          dot.onclick=()=>goTo(i);
+          dots.appendChild(dot);
+        });
+
+        if(pubItems.length>1){
+          prevBtn.style.display=''; nextBtn.style.display='';
+          pubTimer=setInterval(()=>goTo((pubIdx+1)%pubItems.length),interval);
+        }
+      })
+      .catch(()=>{ sec.style.display='none'; });
+
+    function goTo(n){
+      car.querySelectorAll('.pub-slide').forEach((s,i)=>s.classList.toggle('active',i===n));
+      dots.querySelectorAll('.pub-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+      pubIdx=n;
+    }
+
+    window.bshPubNav=function(dir){
+      clearInterval(pubTimer);
+      goTo((pubIdx+dir+pubItems.length)%pubItems.length);
+    };
+  })();
+  </script>
+
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
   <!-- COMMUNIQUÉ SECTION (NEW!) -->
   <section class="section" id="communiques" style="padding-bottom: 40px;">
     <div class="container">
@@ -546,6 +664,7 @@
 
           <div class="form-row">
             <div class="form-group">
+<<<<<<< HEAD
               <label for="diagEmail">Adresse Email (pour recevoir votre reçu)</label>
               <input type="email" id="diagEmail" class="form-control" placeholder="Ex: nom@exemple.com (facultatif)">
             </div>
@@ -553,6 +672,8 @@
 
           <div class="form-row">
             <div class="form-group">
+=======
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
               <label for="diagLocation">Lieu du bâtiment (Ville, Quartier) *</label>
               <input type="text" id="diagLocation" class="form-control" placeholder="Ex: Fidjrossè, Calavi Zogbadjè" required>
             </div>
@@ -597,6 +718,7 @@
             <small style="color: var(--text-muted); display: block; margin-top: 5px;">Le paiement en ligne est sécurisé via KkiaPay (MTN MoMo, Moov Money, Visa, Mastercard).</small>
           </div>
 
+<<<<<<< HEAD
           <div class="form-group" style="display:flex; align-items:flex-start; gap:10px; margin-top:14px;">
             <input type="checkbox" id="diagAcceptCGU" style="width:20px; height:20px; margin-top:2px; accent-color: var(--accent);" required>
             <label for="diagAcceptCGU" style="font-size:0.88rem; color:var(--text-muted); cursor:pointer;">
@@ -606,6 +728,10 @@
 
           <!-- Bouton de validation du formulaire (sans paiement direct) -->
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.1rem; margin-top: 10px;" id="diagSubmitBtn">
+=======
+          <!-- Bouton de validation du formulaire (sans paiement direct) -->
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.1rem;" id="diagSubmitBtn">
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
             🛡️ Valider & Payer mon Diagnostic en Ligne
           </button>
         </form>
@@ -722,6 +848,10 @@
             <li><a href="index.html#accueil">Accueil</a></li>
             <li><a href="a-propos.html">À Propos</a></li>
             <li><a href="realisations.html">Nos Réalisations</a></li>
+<<<<<<< HEAD
+=======
+            <li><a href="boutique.html">🛒 Boutique</a></li>
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
             <li><a href="opportunites.html">Opportunités</a></li>
             <li><a href="connexion.html">Espace Client</a></li>
           </ul>
@@ -756,7 +886,10 @@
       <div class="footer-bottom" style="border-top: 1px solid #1e293b; padding-top: 20px; margin-top: 20px;">
         <p>&copy; 2026 BSH (Best Services and House). Tous droits réservés.</p>
         <p>Conçu avec excellence pour le Bénin.</p>
+<<<<<<< HEAD
         <p style="margin-top:8px;"><a href="/mentions-legales.html" style="color:#94a3b8;">Mentions légales</a> &middot; <a href="/politique-confidentialite.html" style="color:#94a3b8;">Politique de confidentialité</a> &middot; <a href="/conditions-generales.html" style="color:#94a3b8;">CGU/CGV</a></p>
+=======
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
       </div>
     </div>
   </footer>
@@ -860,7 +993,10 @@
         // Validation basique
         const name = document.getElementById('diagName').value.trim();
         const phone = document.getElementById('diagPhone').value.trim();
+<<<<<<< HEAD
         const email = document.getElementById('diagEmail') ? document.getElementById('diagEmail').value.trim() : '';
+=======
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
         const location = document.getElementById('diagLocation').value.trim();
         const issue = document.getElementById('diagIssue').value;
         const desc = document.getElementById('diagDesc').value.trim();
@@ -868,11 +1004,14 @@
           alert('⚠️ Veuillez remplir tous les champs obligatoires avant de procéder au paiement.');
           return;
         }
+<<<<<<< HEAD
         const acceptCGU = document.getElementById('diagAcceptCGU') && document.getElementById('diagAcceptCGU').checked;
         if (!acceptCGU) {
           alert('⚠️ Veuillez accepter les Conditions Générales d\'Utilisation et de Vente ainsi que la Politique de Confidentialité avant de procéder au paiement.');
           return;
         }
+=======
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
         const withReport = document.getElementById('diagReport') && document.getElementById('diagReport').checked;
         const total = totalDiagnostic();
         const zoneText = document.getElementById('diagZone').options[document.getElementById('diagZone').selectedIndex].text;
@@ -889,7 +1028,11 @@
 
         // Sauvegarder les infos client pour la page de confirmation
         sessionStorage.setItem('diag_client', JSON.stringify({
+<<<<<<< HEAD
           name, phone, email, location, issue, desc, total, withReport, zoneText
+=======
+          name, phone, location, issue, desc, total, withReport, zoneText
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
         }));
 
         // Ouvrir le widget KkiaPay
@@ -910,9 +1053,35 @@
       const stored = JSON.parse(sessionStorage.getItem('diag_client') || '{}');
       const total = (stored && stored.total) || 0;
       const txId = (response && response.transactionId) || '';
+<<<<<<< HEAD
       window.location.href = KKIA_CALLBACK +
         '?transaction_id=' + encodeURIComponent(txId) +
         '&montant=' + total;
+=======
+      // Stocker toutes les données pour le reçu
+      const receiptData = {
+        name:          stored.name       || '',
+        phone:         stored.phone      || '',
+        location:      stored.location   || '',
+        issue:         stored.issue      || '',
+        desc:          stored.desc       || '',
+        zoneText:      stored.zoneText   || '',
+        withReport:    stored.withReport || false,
+        total:         total,
+        transactionId: txId,
+        amount:        response.amount   || total,
+        currency:      response.currency || 'XOF',
+        status:        'SUCCESS',
+        paymentMethod: response.paymentMethod || response.payment_method || 'Mobile Money',
+        phone_number:  response.phone_number  || response.phoneNumber   || stored.phone || '',
+        paidAt:        new Date().toISOString(),
+        service:       'Diagnostic de bâtiment',
+      };
+      sessionStorage.setItem('bsh_receipt', JSON.stringify(receiptData));
+      sessionStorage.removeItem('diag_client');
+      // Rediriger vers la page de reçu (qui fait aussi la vérification serveur)
+      window.location.href = '/recu-paiement.html?transaction_id=' + encodeURIComponent(txId) + '&montant=' + total;
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)
     });
 
     addFailedListener(function(response) {

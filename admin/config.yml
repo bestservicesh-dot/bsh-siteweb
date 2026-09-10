@@ -188,3 +188,57 @@ collections:
       - { label: "Contenu détaillé de l'article", name: "content", widget: "markdown" }
       - { label: "Fiche Technique PDF à télécharger (Optionnel)", name: "pdf_file", widget: "file", required: false }
       - { label: "Téléchargement du PDF réservé aux membres connectés", name: "is_premium", widget: "boolean", default: true }
+<<<<<<< HEAD
+=======
+
+  - name: "boutique"
+    label: "🛒 Boutique — Logiciels & Articles"
+    folder: "data/boutique"
+    extension: "json"
+    format: "json"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "ID Unique du produit (sans espace, ex: logiciel-stock)", name: "id", widget: "string" }
+      - { label: "Nom du produit", name: "title", widget: "string" }
+      - label: "Catégorie"
+        name: "category"
+        widget: "select"
+        options: ["Logiciel", "Article / PDF", "Formation", "Template", "Autre"]
+      - { label: "Prix (FCFA, ex: 15000)", name: "price", widget: "number", value_type: "int" }
+      - { label: "Image de couverture du produit", name: "image", widget: "image" }
+      - { label: "Résumé court (affiché sur la carte)", name: "summary", widget: "text" }
+      - { label: "Description complète (fiche produit)", name: "description", widget: "text" }
+      - { label: "Fichier à télécharger (ZIP, PDF, EXE…)", name: "fichier", widget: "file", required: false }
+      - label: "Tags / Mots-clés"
+        name: "tags"
+        widget: "list"
+        field: { label: "Tag", name: "tag", widget: "string" }
+      - { label: "Produit publié (visible sur la boutique)", name: "published", widget: "boolean", default: true }
+
+  - name: "publicites"
+    label: "📣 Espace Publicité (Carrousel Accueil)"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - file: "data/publicites.json"
+        label: "Gérer les Publicités (Carrousel 5s)"
+        name: "pubs_config"
+        fields:
+          - { label: "Activer le carrousel publicitaire", name: "enabled", widget: "boolean", default: true }
+          - { label: "Durée d'affichage par slide (secondes)", name: "interval", widget: "number", value_type: "int", default: 5 }
+          - label: "Publicités (slides)"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID unique (sans espace)", name: "id", widget: "string" }
+              - { label: "Titre de la publicité", name: "title", widget: "string" }
+              - { label: "Image de la publicité", name: "image", widget: "image" }
+              - { label: "Lien au clic (URL relative ou absolue)", name: "lien", widget: "string" }
+              - { label: "Texte descriptif", name: "description", widget: "text", required: false }
+              - { label: "Texte du bouton (CTA)", name: "cta", widget: "string", required: false }
+              - { label: "Publicité active", name: "actif", widget: "boolean", default: true }
+>>>>>>> 3fdbb6d (feat: recu PDF KkiaPay, boutique numerique, carrousel publicites)

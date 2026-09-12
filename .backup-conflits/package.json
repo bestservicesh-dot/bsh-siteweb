@@ -1,0 +1,10 @@
+{
+  "name": "bsh-siteweb",
+  "version": "1.0.0",
+  "description": "Site vitrine BSH avec espace d'administration et formulaires dynamiques",
+  "main": "index.html",
+  "dependencies": {
+    "nodemailer": "^6.9.13",
+    "multiparty": "^4.2.3"
+  }
+}

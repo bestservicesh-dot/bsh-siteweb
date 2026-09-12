@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Adjovi K.",
+    "role": "Propriétaire — Cotonou",
+    "rating": 5,
+    "testimonial": "BSH a construit notre maison familiale à Cotonou. Travail impeccable, respect des délais et du budget. Je recommande vivement cette entreprise sérieuse et professionnelle.",
+    "initials": "AK",
+    "published": true,
+    "body": "",
+    "slug": "adjovi-k"
+  },
+  {
+    "name": "Fatimatou S.",
+    "role": "Propriétaire — Porto-Novo",
+    "rating": 5,
+    "testimonial": "Problème d'étanchéité résolu en un temps record. Depuis les travaux de BSH, plus aucune infiltration. Très satisfaite du rapport qualité-prix.",
+    "initials": "FS",
+    "published": true,
+    "body": "",
+    "slug": "fatimatou-s"
+  },
+  {
+    "name": "Marc D.",
+    "role": "Directeur d'entreprise — Calavi",
+    "rating": 5,
+    "testimonial": "Excellent travail de rénovation sur notre immeuble de bureaux. L'équipe est compétente, à l'écoute et les finitions sont de grande qualité. Merci BSH !",
+    "initials": "MD",
+    "published": true,
+    "body": "",
+    "slug": "marc-d"
+  }
+]

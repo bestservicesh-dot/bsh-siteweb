@@ -1,0 +1,24 @@
+{
+  "title": "Annonces Immobilières",
+  "subtitle": "Découvrez nos offres d'achat, de vente et de location de parcelles et de bâtiments au Bénin.",
+  "items": [
+    {
+      "title": "Parcelle sécurisée de 500m²",
+      "type": "Vente",
+      "property_type": "Parcelle / Terrain",
+      "price": "12 000 000 FCFA",
+      "location": "Abomey-Calavi, Quartier Zogbadjè",
+      "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80",
+      "description": "Superbe terrain de 500m² avec titre foncier et levé topographique, idéal pour la construction d'une villa résidentielle ou d'un immeuble de rapports."
+    },
+    {
+      "title": "Appartement de standing R+1",
+      "type": "Location",
+      "property_type": "Appartement",
+      "price": "150 000 FCFA / mois",
+      "location": "Cotonou, Quartier Fidjrossè",
+      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80",
+      "description": "Bel appartement 3 pièces tout confort à louer à 5 minutes de la plage de Fidjrossè. Chambres climatisées, grand salon, garage sécurisé."
+    }
+  ]
+}

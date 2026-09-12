@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reçu de Paiement | BSH – Best Services and House</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--pri:#0F2640;--acc:#E8820C;--grn:#16a34a;--gbg:#f0fdf4;--bdr:#e2e8f0;--mut:#64748b;--ink:#1e293b}
+    body{font-family:'Inter',sans-serif;background:#f1f5f9;min-height:100vh;padding:28px 14px 60px;color:var(--ink)}
+    /* ── Action bar ── */
+    .abar{max-width:760px;margin:0 auto 22px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .abar h2{font-size:1.05rem;font-weight:800;color:var(--pri)}
+    .bgrp{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:9px;font-size:0.88rem;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:opacity .18s,transform .14s}
+    .btn:hover{opacity:.86;transform:translateY(-1px)}
+    .b-pdf{background:var(--acc);color:#fff}
+    .b-prt{background:#475569;color:#fff}
+    .b-wa {background:#25D366;color:#fff}
+    .b-hm {background:var(--pri);color:#fff}
+    /* ── Card ── */
+    #receipt{max-width:760px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.1)}
+    /* Header */
+    .rh{background:linear-gradient(135deg,var(--pri) 0%,#1B3A5C 100%);padding:34px 38px 26px;display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap}
+    .rh-left .logo{font-family:'Montserrat',sans-serif;font-size:2.4rem;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1}
+    .rh-left .logo span{color:var(--acc)}
+    .rh-left .sub{font-size:.72rem;color:rgba(255,255,255,.5);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+    .rh-left .coords{margin-top:14px;font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.85}
+    .rh-right{text-align:right}
+    .pill{display:inline-flex;align-items:center;gap:5px;background:#22c55e;color:#fff;font-size:.76rem;font-weight:800;padding:5px 14px;border-radius:40px;text-transform:uppercase;letter-spacing:.4px}
+    .rh-right .dtype{color:rgba(255,255,255,.42);font-size:.68rem;text-transform:uppercase;letter-spacing:1.5px;margin-top:8px}
+    .rh-right .rnum{color:#fff;font-size:.82rem;font-weight:700;margin-top:3px}
+    /* QR */
+    .qr-wrap{margin-top:12px;display:flex;flex-direction:column;align-items:flex-end}
+    #qrCanvas{border:1px solid rgba(255,255,255,.15);border-radius:8px}
+    .qr-lbl{font-size:.62rem;color:rgba(255,255,255,.38);margin-top:4px;text-align:center}
+    /* Amount hero */
+    .amhero{background:linear-gradient(90deg,#f8fafc,var(--gbg));border-bottom:2px solid var(--bdr);padding:26px 38px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+    .am-block .lbl{font-size:.72rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+    .am-block .val{font-family:'Montserrat',sans-serif;font-size:2.8rem;font-weight:900;color:var(--acc);line-height:1}
+    .am-block .wds{font-size:.78rem;color:var(--mut);font-style:italic;margin-top:3px}
+    .tx-block{text-align:right}
+    .tx-block .txl{font-size:.68rem;text-transform:uppercase;color:var(--mut);letter-spacing:.8px}
+    .tx-block .txv{font-size:.98rem;font-weight:800;color:var(--grn);font-family:'Montserrat',sans-serif;margin-top:2px;word-break:break-all}
+    .tx-block .txm{font-size:.78rem;color:var(--mut);margin-top:3px}
+    .tx-block .txd{font-size:.72rem;color:var(--mut);margin-top:3px}
+    /* Body */
+    .rbody{padding:30px 38px}
+    .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:26px}
+    @media(max-width:560px){.rgrid{grid-template-columns:1fr}}
+    .iblock h4{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid var(--acc);display:inline-block}
+    .irow{display:flex;flex-direction:column;margin-bottom:8px}
+    .irow .il{font-size:.72rem;color:var(--mut);font-weight:600}
+    .irow .iv{font-size:.9rem;color:var(--ink);font-weight:700;margin-top:1px}
+    /* Table */
+    .ptbl{width:100%;border-collapse:collapse;margin-bottom:18px;font-size:.87rem}
+    .ptbl thead tr{background:var(--pri);color:#fff}
+    .ptbl thead th{padding:10px 14px;text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+    .ptbl thead th:last-child{text-align:right;border-radius:0 8px 0 0}
+    .ptbl thead th:first-child{border-radius:8px 0 0 0}
+    .ptbl tbody tr{border-bottom:1px solid var(--bdr)}
+    .ptbl tbody tr:nth-child(even){background:#f8fafc}
+    .ptbl tbody td{padding:11px 14px;vertical-align:top;color:var(--ink)}
+    .ptbl tbody td:last-child{text-align:right;font-weight:800;color:var(--pri)}
+    /* Total */
+    .trow{display:flex;justify-content:flex-end;margin-top:3px}
+    .tbox{background:var(--pri);color:#fff;border-radius:9px;padding:13px 22px;min-width:220px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .tbox .tl{font-size:.82rem;font-weight:700;opacity:.7}
+    .tbox .tv{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:900;color:var(--acc)}
+    /* Notice */
+    .notice{background:var(--gbg);border:1.5px solid #bbf7d0;border-radius:11px;padding:15px 19px;margin-top:22px;font-size:.85rem;color:#166534;line-height:1.6}
+    /* Signatures */
+    .sigrow{display:flex;justify-content:space-between;margin-top:32px;flex-wrap:wrap;gap:18px;align-items:flex-end}
+    .sig-lbl{font-size:.7rem;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:5px}
+    .sig-val{font-size:.88rem;font-weight:700;color:var(--ink)}
+    .stamp{text-align:center}
+    .stamp-c{width:76px;height:76px;border:3px solid var(--grn);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto;color:var(--grn)}
+    .stamp-c .si{font-size:1.5rem;line-height:1}
+    .stamp-c .st{font-size:.46rem;font-weight:800;text-transform:uppercase;letter-spacing:.4px;margin-top:1px}
+    .stamp-lbl{font-size:.64rem;color:var(--grn);font-weight:700;margin-top:4px;text-transform:uppercase;letter-spacing:.4px}
+    /* Footer */
+    .rfooter{background:#f8fafc;border-top:2px solid var(--bdr);padding:20px 38px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+    .rfooter .lg{font-size:.7rem;color:var(--mut);line-height:1.75}
+    .rfooter .lg strong{color:var(--pri)}
+    .rfooter .rn{text-align:right;font-size:.68rem;color:var(--mut);line-height:1.8}
+    /* Loading overlay */
+    #loadOverlay{position:fixed;inset:0;background:rgba(15,38,64,.92);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff}
+    .spin{width:50px;height:50px;border:5px solid rgba(255,255,255,.2);border-top-color:var(--acc);border-radius:50%;animation:sp .75s linear infinite;margin-bottom:18px}
+    @keyframes sp{to{transform:rotate(360deg)}}
+    #loadOverlay p{font-size:1rem;font-weight:600;opacity:.8}
+    #loadOverlay.hidden{display:none}
+    /* Print */
+    @media print{
+      body{background:#fff!important;padding:0!important}
+      .abar{display:none!important}
+      #receipt{box-shadow:none!important;border-radius:0!important;max-width:100%!important}
+      .rh,.ptbl thead tr,.tbox{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading overlay (vérification serveur) -->
+<div id="loadOverlay">
+  <div class="spin"></div>
+  <p>Vérification du paiement en cours…</p>
+</div>
+
+<!-- Action bar -->
+<div class="abar">
+  <h2>🧾 Reçu de paiement BSH</h2>
+  <div class="bgrp">
+    <button class="btn b-pdf" onclick="dlPDF()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Télécharger PDF
+    </button>
+    <button class="btn b-prt" onclick="window.print()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Imprimer
+    </button>
+    <a id="btnWa" href="https://wa.me/2290148524590" class="btn b-wa" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="index.html" class="btn b-hm">🏠 Accueil</a>
+  </div>
+</div>
+
+<!-- ═══ RECEIPT ═══ -->
+<div id="receipt">
+
+  <!-- Header -->
+  <div class="rh">
+    <div class="rh-left">
+      <div class="logo">BSH<span>.</span></div>
+      <div class="sub">Best Services &amp; House — BTP &amp; Services</div>
+      <div class="coords">
+        📍 Abomey-Calavi, Bénin<br>
+        📞 +229 01 48 52 45 90<br>
+        📧 contact@bestservicesandhouse.site<br>
+        🌐 www.bestservicesandhouse.site
+      </div>
+    </div>
+    <div class="rh-right">
+      <div class="pill">✅ Payé</div>
+      <div class="dtype" style="margin-top:10px;">Reçu officiel de paiement</div>
+      <div class="rnum" id="rcptNum">N° BSH-DIAG-…</div>
+      <div class="qr-wrap">
+        <canvas id="qrCanvas" width="88" height="88"></canvas>
+        <div class="qr-lbl">Scan de vérification</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Amount hero -->
+  <div class="amhero">
+    <div class="am-block">
+      <div class="lbl">Montant réglé</div>
+      <div class="val" id="amountDisplay">—</div>
+      <div class="wds" id="amountWords"></div>
+    </div>
+    <div class="tx-block">
+      <div class="txl">Réf. KkiaPay</div>
+      <div class="txv" id="txId">—</div>
+      <div class="txm" id="txMethod">—</div>
+      <div class="txd" id="txDate">—</div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="rbody">
+    <div class="rgrid">
+      <div class="iblock">
+        <h4>Client</h4>
+        <div class="irow"><span class="il">Nom complet</span><span class="iv" id="cName">—</span></div>
+        <div class="irow"><span class="il">Téléphone</span><span class="iv" id="cPhone">—</span></div>
+        <div class="irow"><span class="il">Lieu du bâtiment</span><span class="iv" id="cLocation">—</span></div>
+        <div class="irow"><span class="il">N° tél. paiement</span><span class="iv" id="cPayPhone">—</span></div>
+      </div>
+      <div class="iblock">
+        <h4>Prestataire</h4>
+        <div class="irow"><span class="il">Entreprise</span><span class="iv">BSH – Best Services and House</span></div>
+        <div class="irow"><span class="il">RCCM</span><span class="iv">N° RB/ABC/26 A 140817</span></div>
+        <div class="irow"><span class="il">IFU</span><span class="iv">N° 0201710115389</span></div>
+        <div class="irow"><span class="il">Processeur</span><span class="iv">KkiaPay (Certifié PCI DSS)</span></div>
+      </div>
+    </div>
+
+    <table class="ptbl">
+      <thead>
+        <tr><th>#</th><th>Désignation de la prestation</th><th>Zone</th><th>Montant (FCFA)</th></tr>
+      </thead>
+      <tbody id="prestBody"></tbody>
+    </table>
+
+    <div class="trow">
+      <div class="tbox">
+        <span class="tl">TOTAL PAYÉ</span>
+        <span class="tv" id="totalVal">—</span>
+      </div>
+    </div>
+
+    <div class="notice">
+      🏗️ <strong>Prochaine étape :</strong> Un technicien BSH vous contactera sous <strong>24 heures</strong>
+      pour planifier votre inspection sur site. Conservez ce reçu comme preuve officielle de paiement.
+      Citez votre référence KkiaPay en cas de besoin.<br><br>
+      ⚠️ <strong>Note :</strong> Ce reçu confirme le paiement des frais de diagnostic. Le rapport écrit (si commandé) sera remis après l'inspection.
+    </div>
+
+    <div class="sigrow">
+      <div>
+        <div class="sig-lbl">Date &amp; heure de paiement</div>
+        <div class="sig-val" id="signDate">—</div>
+      </div>
+      <div>
+        <div class="sig-lbl">Validé par</div>
+        <div class="sig-val">KkiaPay · BSH</div>
+      </div>
+      <div class="stamp">
+        <div class="stamp-c">
+          <div class="si">✔</div>
+          <div class="st">Payé</div>
+        </div>
+        <div class="stamp-lbl">Paiement vérifié</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="rfooter">
+    <div class="lg">
+      <strong>BSH – Best Services and House</strong><br>
+      RCCM N° RB/ABC/26 A 140817 | IFU N° 0201710115389<br>
+      Siège social : Abomey-Calavi, République du Bénin<br>
+      Paiement sécurisé traité par <strong>KkiaPay</strong>
+    </div>
+    <div class="rn">
+      <div>Ce document est généré automatiquement</div>
+      <div>après confirmation électronique du paiement</div>
+      <div style="margin-top:4px;font-weight:700;color:var(--pri);">www.bestservicesandhouse.site</div>
+    </div>
+  </div>
+
+</div><!-- #receipt -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+(function(){
+  const overlay = document.getElementById('loadOverlay');
+  const params  = new URLSearchParams(window.location.search);
+  const urlTxId = params.get('transaction_id') || params.get('transactionId') || '';
+  const urlAmt  = params.get('montant') || params.get('amount') || '';
+
+  // ── Charger données sessionStorage ──────────────────────────────────────────
+  let r = {};
+  try { r = JSON.parse(sessionStorage.getItem('bsh_receipt') || '{}'); } catch(e){}
+
+  // ── Fusionner avec les params URL ───────────────────────────────────────────
+  r.transactionId = r.transactionId || urlTxId || 'N/A';
+  r.amount  = r.amount  || parseInt(urlAmt) || r.total || 0;
+  r.total   = r.total   || r.amount;
+  r.paidAt  = r.paidAt  || new Date().toISOString();
+  r.service = r.service || 'Diagnostic de bâtiment';
+
+  // ── Vérification serveur (/api/verify-payment) ───────────────────────────────
+  async function verify() {
+    if (!urlTxId) { render(r); return; }  // pas de tx → on affiche quand même (données session)
+    try {
+      const resp = await fetch('/api/verify-payment?transaction_id=' + encodeURIComponent(urlTxId));
+      const data = await resp.json();
+      if (data.success) {
+        // Enrichir avec les données serveur (source, montant officiel…)
+        r.paymentMethod = data.source || r.paymentMethod || 'KkiaPay';
+        r.amount  = typeof data.amount === 'number' ? data.amount : r.amount;
+        r.total   = r.amount;
+        r.transactionId = data.transactionId || r.transactionId;
+      }
+    } catch(e) { /* pas grave, on affiche quand même */ }
+    render(r);
+  }
+
+  // ── Utilitaires ──────────────────────────────────────────────────────────────
+  function fmt(n){ return Number(n||0).toLocaleString('fr-FR') + ' FCFA'; }
+
+  function toWords(n){
+    n = parseInt(n); if(!n) return 'zéro';
+    const u=['','un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf'];
+    const t=['','','vingt','trente','quarante','cinquante','soixante','soixante','quatre-vingt','quatre-vingt'];
+    let s='';
+    if(n>=1000){const k=Math.floor(n/1000);s+=(k===1?'mille ':toWords(k)+' mille ');n%=1000;}
+    if(n>=100){const h=Math.floor(n/100);s+=(h===1?'cent ':u[h]+' cent ');n%=100;}
+    if(n>0){
+      if(n<20)s+=u[n];
+      else{
+        const ti=Math.floor(n/10),ui=n%10,ts=t[ti];
+        if(ti===7||ti===9)s+=ts+(ui===1?' et ':'-')+u[10+ui];
+        else if(ui===1&&ti!==8)s+=ts+' et un';
+        else s+=ts+(ui?'-'+u[ui]:'')+(ti===8&&!ui?'s':'');
+      }
+    }
+    return s.trim();
+  }
+
+  function fmtDate(iso){
+    try{
+      return new Date(iso).toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})+' (GMT+1, Cotonou)';
+    }catch(e){return iso||'—';}
+  }
+
+  function genNum(txId){
+    const ts = new Date().getFullYear()+''+String(new Date().getMonth()+1).padStart(2,'0');
+    return 'BSH-DIAG-'+ts+'-'+((txId||'XXXX').slice(-6).toUpperCase());
+  }
+
+  // ── Remplir le DOM ───────────────────────────────────────────────────────────
+  function render(d){
+    overlay.classList.add('hidden');
+    const rcptNum = genNum(d.transactionId);
+    const total   = parseInt(d.amount || d.total || 0);
+    const zonePrice   = total - (d.withReport ? 10000 : 0);
+    const reportPrice = d.withReport ? 10000 : 0;
+    const zoneName    = d.zoneText || (zonePrice===10000?'Cotonou / Abomey-Calavi':'Hors Cotonou');
+
+    document.getElementById('rcptNum').textContent    = 'N° '+rcptNum;
+    document.getElementById('amountDisplay').textContent = fmt(total);
+    document.getElementById('amountWords').textContent   = toWords(total)+' francs CFA';
+    document.getElementById('totalVal').textContent      = fmt(total);
+    document.getElementById('txId').textContent    = d.transactionId||'—';
+    document.getElementById('txMethod').textContent= '💳 '+(d.paymentMethod||'KkiaPay');
+    document.getElementById('txDate').textContent  = fmtDate(d.paidAt);
+    document.getElementById('signDate').textContent= fmtDate(d.paidAt);
+    document.getElementById('cName').textContent    = d.name     ||'—';
+    document.getElementById('cPhone').textContent   = d.phone    ||'—';
+    document.getElementById('cLocation').textContent= d.location ||'—';
+    document.getElementById('cPayPhone').textContent= d.phone_number||d.phone||'—';
+
+    // Tableau prestations
+    let rows = `<tr><td>1</td><td><strong>Diagnostic technique de bâtiment</strong><br><small style="color:#64748b">${d.issue||'Inspection sur site'}</small></td><td style="font-size:.82rem">${zoneName}</td><td>${fmt(zonePrice)}</td></tr>`;
+    if(d.withReport){
+      rows += `<tr><td>2</td><td><strong>Rapport de diagnostic écrit approfondi</strong><br><small style="color:#64748b">Rapport PDF remis après inspection</small></td><td>—</td><td>${fmt(reportPrice)}</td></tr>`;
+    }
+    document.getElementById('prestBody').innerHTML = rows;
+
+    // QR code
+    const qrTxt = ['BSH RECU PAIEMENT','N° '+rcptNum,'Ref: '+(d.transactionId||'N/A'),'Montant: '+fmt(total),'Client: '+(d.name||'N/A'),'www.bestservicesandhouse.site'].join('\n');
+    setTimeout(()=>{
+      try{
+        if(typeof QRCode!=='undefined') new QRCode(document.getElementById('qrCanvas'),{text:qrTxt,width:88,height:88,colorDark:'#0F2640',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+      }catch(e){}
+    },300);
+
+    // WhatsApp
+    const waMsg = encodeURIComponent(
+      '🧾 REÇU PAIEMENT BSH\n\nN° '+rcptNum+'\n👤 '+d.name+'\n📞 '+d.phone+
+      '\n📍 '+d.location+'\n💳 '+fmt(total)+'\n🔑 Réf: '+d.transactionId+
+      '\n📄 Rapport: '+(d.withReport?'Oui':'Non')+'\n✅ Confirmé par KkiaPay'
+    );
+    document.getElementById('btnWa').href = 'https://wa.me/2290148524590?text='+waMsg;
+
+    // Notif équipe
+    if(d.name) notifyTeam(d, total, rcptNum);
+
+    // Nettoyage
+    setTimeout(()=>sessionStorage.removeItem('bsh_receipt'), 2500);
+  }
+
+  function notifyTeam(d, total, rcptNum){
+    const payload = {
+      fullName: d.name||'',
+      phoneNumber: d.phone||'',
+      emailAddress: 'contact@bestservicesandhouse.site',
+      cityLocation: d.location||'',
+      serviceType: 'Diagnostic Bâtiment payé — '+rcptNum,
+      projectDescription: '✅ PAIEMENT VÉRIFIÉ (KkiaPay)\nRéf: '+d.transactionId+'\nMontant: '+total+' FCFA\nRapport: '+(d.withReport?'Oui':'Non')+'\nDesc: '+(d.desc||'')
+    };
+    fetch('/api/devis',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});
+  }
+
+  // ── PDF ──────────────────────────────────────────────────────────────────────
+  window.dlPDF = function(){
+    const btn = document.querySelector('.b-pdf');
+    btn.textContent='⏳ Génération…'; btn.disabled=true;
+    document.querySelector('.abar').style.display='none';
+    const {jsPDF}=window.jspdf;
+    html2canvas(document.getElementById('receipt'),{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false}).then(canvas=>{
+      const img=canvas.toDataURL('image/png');
+      const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+      const w=pdf.internal.pageSize.getWidth(), h=(canvas.height*w)/canvas.width;
+      pdf.addImage(img,'PNG',0,0,w,h);
+      const rnum=document.getElementById('rcptNum').textContent.replace('N° ','').trim()||'BSH-DIAG';
+      pdf.save('Recu_'+rnum+'.pdf');
+      document.querySelector('.abar').style.display='';
+      btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF';
+      btn.disabled=false;
+    }).catch(()=>{
+      document.querySelector('.abar').style.display='';
+      btn.textContent='⚠️ Réessayer';btn.disabled=false;
+      window.print();
+    });
+  };
+
+  verify();
+})();
+</script>
+</body>
+</html>

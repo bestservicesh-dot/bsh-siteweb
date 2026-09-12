@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique BSH — Logiciels & Articles Professionnels</title>
+  <meta name="description" content="Achetez nos logiciels, guides techniques et articles professionnels BSH. Paiement sécurisé KkiaPay — Téléchargement immédiat.">
+  <link rel="canonical" href="https://www.bestservicesandhouse.site/boutique.html">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .shop-hero{background:linear-gradient(135deg,#0F2640 0%,#1B3A5C 100%);color:#fff;padding:70px 0 50px;text-align:center}
+    .shop-hero h1{font-size:2.5rem;font-weight:900;margin-bottom:12px}
+    .shop-hero p{color:#94a3b8;font-size:1.05rem;max-width:560px;margin:0 auto}
+    .filter-bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:36px 0 32px}
+    .f-btn{padding:8px 20px;border-radius:50px;border:2px solid var(--border-color,#e2e8f0);background:#fff;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .2s;color:#1e293b}
+    .f-btn.active,.f-btn:hover{background:var(--accent,#E8820C);color:#fff;border-color:var(--accent,#E8820C)}
+    .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+    .prod-card{background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.07);overflow:hidden;border:1px solid #e2e8f0;transition:transform .22s,box-shadow .22s;display:flex;flex-direction:column}
+    .prod-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.13)}
+    .prod-img{position:relative;height:200px;overflow:hidden;background:#f1f5f9}
+    .prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .prod-card:hover .prod-img img{transform:scale(1.06)}
+    .cat-badge{position:absolute;top:12px;left:12px;background:#E8820C;color:#fff;font-size:.72rem;font-weight:800;padding:4px 11px;border-radius:30px;text-transform:uppercase}
+    .prod-body{padding:20px;flex:1;display:flex;flex-direction:column}
+    .prod-body h3{font-size:1rem;font-weight:800;color:#0f2640;margin-bottom:6px;line-height:1.4}
+    .prod-body .summary{font-size:.85rem;color:#64748b;line-height:1.5;margin-bottom:14px;flex:1}
+    .prod-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+    .tag{font-size:.72rem;font-weight:700;background:#EEF2FF;color:#4338CA;padding:3px 10px;border-radius:20px}
+    .prod-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .price{font-size:1.6rem;font-weight:900;color:#E8820C;font-family:'Montserrat',sans-serif}
+    .btn-buy{background:var(--accent,#E8820C);color:#fff;border:none;border-radius:9px;padding:10px 22px;font-weight:800;font-size:.9rem;cursor:pointer;transition:opacity .18s;display:inline-flex;align-items:center;gap:7px}
+    .btn-buy:hover{opacity:.88}
+    /* Modal produit */
+    #prodModal{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:20px}
+    #prodModal.open{display:flex}
+    .modal-box{background:#fff;border-radius:18px;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;padding:38px 36px;position:relative;animation:mup .3s ease}
+    @keyframes mup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:1.8rem;cursor:pointer;color:#64748b;line-height:1}
+    .modal-img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:20px;background:#f1f5f9}
+    .modal-box h2{font-size:1.3rem;font-weight:900;color:#0f2640;margin-bottom:10px}
+    .modal-box .mdesc{font-size:.9rem;color:#475569;line-height:1.65;margin-bottom:18px}
+    .modal-price-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+    .modal-price{font-size:2rem;font-weight:900;color:#E8820C;font-family:'Montserrat',sans-serif}
+    .modal-notice{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:13px 16px;font-size:.83rem;color:#166534;margin-bottom:18px}
+    .btn-pay-now{width:100%;padding:14px;background:#E8820C;color:#fff;border:none;border-radius:10px;font-size:1.05rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .18s}
+    .btn-pay-now:hover{opacity:.88}
+    /* Download page */
+    #dlPage{display:none;position:fixed;inset:0;z-index:9500;background:rgba(10,20,40,.95);align-items:center;justify-content:center;padding:20px}
+    #dlPage.open{display:flex}
+    .dl-box{background:#fff;border-radius:18px;max-width:480px;width:100%;padding:40px 36px;text-align:center;animation:mup .3s ease}
+    .dl-box .icon{font-size:4rem;margin-bottom:16px}
+    .dl-box h2{color:#0f2640;font-size:1.5rem;margin-bottom:10px}
+    .dl-box p{color:#64748b;margin-bottom:24px;line-height:1.6}
+    .btn-dl{display:inline-flex;align-items:center;gap:8px;background:#0f2640;color:#fff;padding:13px 30px;border-radius:10px;font-weight:800;font-size:1rem;text-decoration:none;margin-bottom:12px}
+    .btn-dl-wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 26px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;margin-left:8px}
+    .dl-ref{background:#f1f5f9;border-radius:8px;padding:10px 16px;font-size:.8rem;color:#475569;word-break:break-all;margin-bottom:20px}
+    /* Skeleton */
+    .skel{background:linear-gradient(90deg,#f0f4f8 25%,#e2e8f0 50%,#f0f4f8 75%);background-size:200% 100%;animation:shim 1.4s infinite;border-radius:14px;height:320px}
+    @keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <a href="tel:+2290148524590" class="phone-link">📞 +229 01 48 52 45 90</a>
+        <a href="mailto:contact@bestservicesandhouse.site" class="email-link">📧 contact@bestservicesandhouse.site</a>
+      </div>
+      <div class="top-bar-right"><span class="address-text">📍 Abomey-Calavi, Bénin</span></div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-container">
+        <div class="logo-text">BSH<span>.</span></div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu principal"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#services">Nos Services</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="realisations.html">Nos Réalisations</a></li>
+        <li><a href="boutique.html" style="color:var(--accent);">🛒 Boutique</a></li>
+        <li><a href="opportunites.html">Opportunités</a></li>
+        <li><a href="connexion.html">Espace Client</a></li>
+        <li><a href="devis.html" class="btn btn-primary" style="padding:8px 18px;margin-left:10px;">Demander un Devis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="shop-hero">
+    <div class="container">
+      <h1>🛒 Boutique BSH</h1>
+      <p>Logiciels, guides techniques et articles professionnels. Paiement sécurisé par KkiaPay — Téléchargement immédiat après confirmation.</p>
+    </div>
+  </div>
+
+  <!-- SHOP CONTENT -->
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar" id="filterBar">
+        <button class="f-btn active" data-filter="all">Tous les produits</button>
+        <button class="f-btn" data-filter="Logiciel">Logiciels</button>
+        <button class="f-btn" data-filter="Article / PDF">Articles & PDF</button>
+      </div>
+      <div class="shop-grid" id="shopGrid">
+        <div class="skel"></div>
+        <div class="skel"></div>
+        <div class="skel"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container" style="text-align:center">
+      <h2>Vous avez besoin d'un produit sur mesure ?</h2>
+      <p>Contactez-nous pour développer votre logiciel ou rédiger votre guide technique personnalisé.</p>
+      <a href="devis.html" class="btn btn-primary" style="margin-top:16px">Demander un devis</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" style="text-align:center">
+      <div class="logo-text" style="color:#fff;margin-bottom:15px;justify-content:center;display:flex">BSH<span>.</span></div>
+      <p style="max-width:500px;margin:0 auto 20px;color:#94a3b8;font-size:.9rem">Best Services and House (BSH) — BTP, Services & Solutions Numériques au Bénin.</p>
+      <div class="footer-bottom" style="border-top:1px solid #1e293b;padding-top:20px">
+        <p>© 2026 BSH (Best Services and House). Tous droits réservés.</p>
+        <p>RCCM N° RB/ABC/26 A 140817 | IFU N° 0201710115389</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <a href="https://wa.me/2290148524590" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- MODAL PRODUIT -->
+  <div id="prodModal" role="dialog" aria-modal="true" aria-label="Fiche produit">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <img id="mImg" src="" alt="" class="modal-img">
+      <div id="mCatBadge" style="display:inline-block;background:#E8820C;color:#fff;font-size:.72rem;font-weight:800;padding:4px 11px;border-radius:30px;text-transform:uppercase;margin-bottom:12px"></div>
+      <h2 id="mTitle">—</h2>
+      <div class="mdesc" id="mDesc">—</div>
+      <div class="modal-notice">
+        🔐 <strong>Paiement sécurisé</strong> via KkiaPay (MTN MoMo, Moov Money, Visa, Mastercard).<br>
+        📥 Votre lien de téléchargement est disponible immédiatement après confirmation du paiement.
+      </div>
+      <div class="modal-price-row">
+        <div class="modal-price" id="mPrice">—</div>
+        <div id="mTags" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+      </div>
+      <button class="btn-pay-now" id="mBtnPay">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        Payer maintenant — <span id="mBtnPrice">—</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE TÉLÉCHARGEMENT (après paiement réussi) -->
+  <div id="dlPage" role="dialog" aria-modal="true">
+    <div class="dl-box">
+      <div class="icon">✅</div>
+      <h2>Paiement confirmé !</h2>
+      <p>Votre paiement a été vérifié avec succès. Cliquez sur le bouton ci-dessous pour télécharger votre produit.</p>
+      <div class="dl-ref" id="dlRef">Réf. transaction : —</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:20px">
+        <a id="dlLink" href="#" class="btn-dl" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Télécharger maintenant
+        </a>
+        <a id="dlWa" href="https://wa.me/2290148524590" class="btn-dl-wa" target="_blank" rel="noopener">📱 Support WhatsApp</a>
+      </div>
+      <a href="recu-paiement.html" id="dlReceiptLink" class="btn" style="background:#475569;color:#fff;padding:10px 22px;border-radius:9px;font-weight:700;font-size:.88rem;text-decoration:none;display:inline-block">🧾 Voir mon reçu complet</a>
+      <div style="margin-top:16px"><button onclick="document.getElementById('dlPage').classList.remove('open')" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:.85rem">Fermer</button></div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <!-- KkiaPay SDK -->
+  <script src="https://cdn.kkiapay.me/k.js"></script>
+
+  <script>
+  (function(){
+    const grid    = document.getElementById('shopGrid');
+    const fBar    = document.getElementById('filterBar');
+    let allProds  = [];
+    let activeProd= null;
+    const KKIA_KEY = '3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f';
+
+    // ── Charger les produits depuis data/boutique/ ───────────────────────────
+    const prodIds=['logiciel-gestion-stock','guide-construction-benin','fiche-etancheite-pro'];
+
+    Promise.all(prodIds.map(id=>
+      fetch('/data/boutique/'+id+'.json?v='+Date.now())
+        .then(r=>r.json()).catch(()=>null)
+    )).then(prods=>{
+      allProds = prods.filter(Boolean).filter(p=>p.published!==false);
+      renderGrid(allProds);
+    }).catch(()=>{
+      grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#64748b;">Boutique temporairement indisponible. Revenez bientôt.</p>';
+    });
+
+    function fmt(n){ return Number(n||0).toLocaleString('fr-FR')+' FCFA'; }
+
+    function renderGrid(prods){
+      if(!prods.length){ grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#64748b;">Aucun produit disponible pour le moment.</p>'; return; }
+      grid.innerHTML = prods.map(p=>`
+        <div class="prod-card" data-cat="${p.category}">
+          <div class="prod-img">
+            <img src="${p.image||'/assets/images/uploads/logo-de-bsh.png'}" alt="${p.title}" loading="lazy">
+            <span class="cat-badge">${p.category}</span>
+          </div>
+          <div class="prod-body">
+            <h3>${p.title}</h3>
+            <div class="summary">${p.summary||''}</div>
+            <div class="prod-tags">${(p.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+            <div class="prod-footer">
+              <div class="price">${fmt(p.price)}</div>
+              <button class="btn-buy" onclick="openModal('${p.id}')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.57L23 6H6"/></svg>
+                Acheter
+              </button>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    // Filtre
+    fBar.querySelectorAll('.f-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        fBar.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const f=btn.dataset.filter;
+        grid.querySelectorAll('.prod-card').forEach(c=>c.style.display=(f==='all'||c.dataset.cat===f)?'':'none');
+      });
+    });
+
+    // Modal
+    window.openModal = function(id){
+      const p = allProds.find(x=>x.id===id);
+      if(!p) return;
+      activeProd = p;
+      document.getElementById('mImg').src        = p.image||'/assets/images/uploads/logo-de-bsh.png';
+      document.getElementById('mImg').alt        = p.title;
+      document.getElementById('mCatBadge').textContent = p.category;
+      document.getElementById('mTitle').textContent    = p.title;
+      document.getElementById('mDesc').textContent     = p.description||p.summary||'';
+      document.getElementById('mPrice').textContent    = fmt(p.price);
+      document.getElementById('mBtnPrice').textContent = fmt(p.price);
+      document.getElementById('mTags').innerHTML = (p.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+      document.getElementById('prodModal').classList.add('open');
+      document.body.style.overflow='hidden';
+    };
+    window.closeModal = function(){
+      document.getElementById('prodModal').classList.remove('open');
+      document.body.style.overflow='';
+    };
+    document.getElementById('prodModal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeModal(); });
+
+    // Paiement produit boutique
+    document.getElementById('mBtnPay').addEventListener('click',()=>{
+      if(!activeProd) return;
+      closeModal();
+      openKkiapayWidget({
+        amount: activeProd.price,
+        key: KKIA_KEY,
+        sandbox: false,
+        theme: '#E8820C',
+        callback: window.location.href,
+        data: 'boutique|'+activeProd.id+'|'+activeProd.price
+      });
+    });
+
+    // Succès paiement boutique
+    addSuccessListener(function(response){
+      if(!activeProd) return; // hors boutique (diagnostic), on ignore
+      const txId = (response && response.transactionId) || '';
+      const amt  = activeProd.price;
+      // Stocker pour le reçu
+      const rcptData = {
+        name: '', phone: response.phone_number||'',
+        location: 'Boutique BSH', issue: activeProd.title,
+        zoneText: 'Produit numérique', withReport: false,
+        total: amt, transactionId: txId,
+        amount: response.amount||amt, currency:'XOF', status:'SUCCESS',
+        paymentMethod: response.paymentMethod||'KkiaPay',
+        phone_number: response.phone_number||'',
+        paidAt: new Date().toISOString(), service: 'Boutique'
+      };
+      sessionStorage.setItem('bsh_receipt', JSON.stringify(rcptData));
+      // Afficher page téléchargement
+      document.getElementById('dlRef').textContent = 'Réf. transaction : '+(txId||'N/A');
+      document.getElementById('dlLink').href = activeProd.fichier || '#';
+      document.getElementById('dlLink').download = activeProd.title || 'produit-bsh';
+      const dlWaMsg=encodeURIComponent('✅ Achat boutique BSH\nProduit : '+activeProd.title+'\nMontant : '+Number(amt).toLocaleString('fr-FR')+' FCFA\nRéf: '+txId);
+      document.getElementById('dlWa').href='https://wa.me/2290148524590?text='+dlWaMsg;
+      document.getElementById('dlReceiptLink').href='recu-paiement.html?transaction_id='+encodeURIComponent(txId)+'&montant='+amt;
+      document.getElementById('dlPage').classList.add('open');
+      // Déclencher le téléchargement automatiquement
+      if(activeProd.fichier && activeProd.fichier !== '#'){
+        setTimeout(()=>{ const a=document.createElement('a');a.href=activeProd.fichier;a.download='';a.click(); },800);
+      }
+    });
+
+    addFailedListener(function(response){
+      alert('❌ Paiement échoué ou annulé.\n\nVeuillez réessayer ou nous contacter au +229 01 48 52 45 90.\n\nErreur : '+(response&&response.message?response.message:'inconnue'));
+    });
+
+    // Fermeture avec Echap
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeModal(); document.getElementById('dlPage').classList.remove('open'); } });
+  })();
+  </script>
+</body>
+</html>

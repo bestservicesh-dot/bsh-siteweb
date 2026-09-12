@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Administration — BSH Best Services and House</title>
+  
+  <!-- Styles pour un écran de chargement élégant -->
+  <style>
+    body {
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .loading-container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 90%;
+    }
+    .spinner {
+      border: 4px solid rgba(0,0,0,0.1);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border-left-color: #f59e0b;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    h2 {
+      color: #0f172a;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+    p {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Écran de chargement visible uniquement pendant le chargement du CMS -->
+  <div id="loading-screen" class="loading-container">
+    <div class="spinner"></div>
+    <h2>Administration BSH</h2>
+    <p>Chargement de l'interface de gestion sécurisée en cours, veuillez patienter...</p>
+    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 15px;">
+      Si la page reste blanche trop longtemps, essayez d'accéder à l'adresse exacte : <br>
+      <strong><a href="/admin/index.html" style="color: #f59e0b; text-decoration: none;">https://bsh-siteweb.vercel.app/admin/index.html</a></strong>
+    </p>
+  </div>
+
+  <!-- CDN jsDelivr + Fallback UNPKG (sans attribut integrity pour éviter tout blocage) -->
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.10.0/dist/decap-cms.js" crossorigin="anonymous" onerror="this.onerror=null;this.src='https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';"></script>
+  
+  <script>
+    // Cacher l'écran de chargement une fois que le CMS s'est initialisé
+    window.addEventListener('DOMContentLoaded', () => {
+      // Le CMS va prendre le dessus sur le body automatiquement
+      setTimeout(() => {
+        const loading = document.getElementById('loading-screen');
+        if (loading && window.CMS) {
+          loading.style.display = 'none';
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

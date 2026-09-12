@@ -1,0 +1,12 @@
+{
+  "id": "fiche-etancheite-pro",
+  "title": "Pack Fiches Techniques Étanchéité Professionnelles",
+  "category": "Article / PDF",
+  "price": 8000,
+  "image": "/assets/images/uploads/penguen-membran-300x300.jpg",
+  "summary": "Pack de 12 fiches techniques sur l'étanchéité : géomembranes, membranes bitumineuses, produits hydrofuges, applications pratiques.",
+  "description": "Rédigées par les techniciens BSH, ces fiches couvrent les produits Sika, Mapei, Penguen et les géomembranes HDPE. Parfait pour les professionnels BTP.",
+  "fichier": "/assets/fichiers/pack-fiches-etancheite.pdf",
+  "tags": ["Étanchéité", "Fiche Technique", "PDF", "BTP"],
+  "published": true
+}

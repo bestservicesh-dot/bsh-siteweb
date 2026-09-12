@@ -548,3 +548,239 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(err => console.warn("Attention : Fallback communiqués.", err));
 });
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODERNISATION BSH 2026 — Animations + Performance + UX
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+(function() {
+  'use strict';
+
+  /* ── 1. Skip-to-content link (accessibilité + SEO) ── */
+  const skipLink = document.createElement('a');
+  skipLink.href = '#main-content';
+  skipLink.className = 'skip-link';
+  skipLink.textContent = 'Aller au contenu principal';
+  document.body.prepend(skipLink);
+
+  /* Ajouter l'id main-content au premier section si absent */
+  const firstSection = document.querySelector('main, section, .hero-section, #accueil');
+  if (firstSection && !firstSection.id) firstSection.id = 'main-content';
+  else if (firstSection) { const el = firstSection; el.setAttribute('tabindex', '-1'); }
+
+  /* ── 2. Intersection Observer — Animations au scroll ── */
+  const observerOpts = { threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        scrollObserver.unobserve(e.target);
+      }
+    });
+  }, observerOpts);
+
+  /* Appliquer les classes d'animation aux éléments */
+  function addAnimations() {
+    const rules = [
+      { sel: '.section-header',   cls: 'fade-in',       delay: 0   },
+      { sel: '.service-card',     cls: 'fade-in',       delay: 80  },
+      { sel: '.stat-item',        cls: 'scale-in',      delay: 60  },
+      { sel: '.realisation-card', cls: 'fade-in',       delay: 80  },
+      { sel: '.about-img',        cls: 'fade-in-left',  delay: 0   },
+      { sel: '.about-content',    cls: 'fade-in-right', delay: 0   },
+      { sel: '.temoignage-card',  cls: 'fade-in',       delay: 80  },
+      { sel: '.blog-card',        cls: 'fade-in',       delay: 80  },
+      { sel: '.comm-card',        cls: 'fade-in',       delay: 60  },
+    ];
+    rules.forEach(({ sel, cls, delay }) => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        if (!el.classList.contains(cls)) {
+          el.classList.add(cls);
+          el.style.transitionDelay = (i * delay) + 'ms';
+          scrollObserver.observe(el);
+        }
+      });
+    });
+  }
+
+  /* ── 3. Compteur animé pour les statistiques ── */
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target || el.textContent.replace(/[^\d.]/g, ''));
+    const suffix = el.dataset.suffix || el.textContent.replace(/[\d.]/g, '');
+    const duration = 1800;
+    const step = 16;
+    const steps = duration / step;
+    let current = 0;
+    el.classList.add('counting');
+    const timer = setInterval(() => {
+      current += target / steps;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = (Number.isInteger(target) ? Math.floor(current) : current.toFixed(1)) + suffix;
+    }, step);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const numEl = e.target.querySelector('.stat-number, [data-counter]');
+        if (numEl && !numEl.dataset.animated) {
+          numEl.dataset.animated = '1';
+          const val = numEl.textContent.trim();
+          const num = parseFloat(val.replace(/[^\d.]/g, ''));
+          const sfx = val.replace(/[\d.]/g, '').trim();
+          numEl.dataset.target = num;
+          numEl.dataset.suffix = sfx;
+          animateCounter(numEl);
+        }
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat-item, .metric-card').forEach(el => counterObserver.observe(el));
+
+  /* ── 4. Image lazy blur-up ── */
+  const imgObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const img = e.target;
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
+          img.onload = () => img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', () => img.classList.add('loaded'));
+          if (img.complete) img.classList.add('loaded');
+        }
+        imgObserver.unobserve(img);
+      }
+    });
+  }, { rootMargin: '200px 0px' });
+
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    img.classList.add('img-lazy');
+    imgObserver.observe(img);
+  });
+
+  /* ── 5. Breadcrumb automatique dans les pages de service ── */
+  function injectBreadcrumb() {
+    const path = window.location.pathname;
+    if (!path.includes('/services/')) return;
+    const h1 = document.querySelector('h1');
+    if (!h1 || document.querySelector('.breadcrumb')) return;
+    const pageName = h1.textContent.replace(/[^\w\s\u00C0-\u024F&-]/gu, '').trim();
+    const bc = document.createElement('nav');
+    bc.setAttribute('aria-label', 'Fil d\'Ariane');
+    bc.innerHTML = `<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" itemprop="item"><span itemprop="name">Accueil</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/services/" itemprop="item"><span itemprop="name">Nos Services</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name" aria-current="page">${pageName}</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol>`;
+    h1.parentNode.insertBefore(bc, h1);
+  }
+
+  /* ── 6. Table of contents auto pour les articles de blog ── */
+  function autoTOC() {
+    if (!window.location.pathname.includes('/blog/')) return;
+    const headings = document.querySelectorAll('.blog-content h2, .article-content h2');
+    if (headings.length < 3) return;
+    const toc = document.createElement('nav');
+    toc.className = 'toc';
+    toc.setAttribute('aria-label', 'Table des matières');
+    toc.innerHTML = '<h3>📋 Sommaire</h3><ol></ol>';
+    const ol = toc.querySelector('ol');
+    headings.forEach((h, i) => {
+      const id = 'section-' + (i+1);
+      h.id = id;
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="#${id}">${h.textContent}</a>`;
+      ol.appendChild(li);
+    });
+    const firstH2 = document.querySelector('.blog-content h2, .article-content h2');
+    if (firstH2) firstH2.parentNode.insertBefore(toc, firstH2);
+  }
+
+  /* ── 7. Aria-current page dans la nav ── */
+  function setAriaCurrent() {
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      const href = a.getAttribute('href') || '';
+      const aPath = href.split('#')[0].replace(/\/$/, '') || '/';
+      if (aPath === path || (path === '/' && aPath === 'index.html')) {
+        a.setAttribute('aria-current', 'page');
+      }
+    });
+  }
+
+  /* ── 8. Amélioration formulaire devis : labels flottants ── */
+  document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(input => {
+    const label = input.previousElementSibling;
+    if (!label || label.tagName !== 'LABEL') return;
+    input.addEventListener('focus', () => label.classList.add('active'));
+    input.addEventListener('blur',  () => { if (!input.value) label.classList.remove('active'); });
+    if (input.value) label.classList.add('active');
+  });
+
+  /* ── 9. Smooth anchor scroll pour tous les liens internes ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.focus({ preventScroll: true });
+      }
+    });
+  });
+
+  /* ── 10. Méta title dynamique selon section visible ── */
+  const originalTitle = document.title;
+  const sectionTitles = {
+    'accueil':    'BSH Bénin | Construction BTP',
+    'services':   'Nos Services BTP | BSH Bénin',
+    'diagnostic': 'Diagnostic Bâtiment | BSH Bénin',
+    'realisations': 'Nos Réalisations | BSH Bénin',
+    'a-propos':   'À Propos de BSH | BTP Bénin',
+    'contact':    'Contactez BSH | Devis Gratuit',
+  };
+  const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        if (sectionTitles[id]) document.title = sectionTitles[id];
+        else document.title = originalTitle;
+      }
+    });
+  }, { threshold: 0.4 });
+  Object.keys(sectionTitles).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) titleObserver.observe(el);
+  });
+
+  /* ── Init ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    addAnimations();
+    injectBreadcrumb();
+    autoTOC();
+    setAriaCurrent();
+  });
+  // Fallback si DOMContentLoaded déjà passé
+  if (document.readyState !== 'loading') {
+    addAnimations();
+    injectBreadcrumb();
+    autoTOC();
+    setAriaCurrent();
+  }
+
+})();

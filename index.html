@@ -3,272 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSH | Entreprise BTP N°1 au Bénin — Construction & Rénovation</title>
-  <meta name="description" content="BSH (Best Services and House) est votre partenaire de confiance pour la construction, rénovation, étanchéité et travaux de finitions au Bénin.">
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
-  <!-- Google Fonts -->
+
+  <!-- ═══ SEO CORE ═══════════════════════════════════════════════════════════ -->
+  <title>BSH Bénin | Entreprise BTP Construction, Étanchéité & Rénovation à Cotonou</title>
+  <meta name="description" content="BSH (Best Services and House) — Entreprise BTP spécialisée en construction de bâtiments, étanchéité, rénovation, peinture et carrelage à Cotonou, Abomey-Calavi et dans tout le Bénin. Plus de 13 ans d'expérience. Devis gratuit.">
+  <meta name="keywords" content="entreprise BTP Bénin, construction bâtiment Cotonou, étanchéité toiture Bénin, rénovation Abomey-Calavi, travaux BTP Cotonou, matériaux construction Bénin, devis construction Bénin, entreprise construction Bénin, BSH Bénin, Best Services House Bénin, pavage Cotonou, carrelage Bénin, peinture Cotonou, diagnostic bâtiment Bénin">
+  <meta name="author" content="BSH – Best Services and House">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <link rel="canonical" href="https://www.bestservicesandhouse.site/">
+
+  <!-- ═══ GÉO-CIBLAGE BÉNIN ══════════════════════════════════════════════════ -->
+  <meta name="geo.region" content="BJ-AQ">
+  <meta name="geo.placename" content="Abomey-Calavi, Cotonou, Bénin">
+  <meta name="geo.position" content="6.4475;2.3522">
+  <meta name="ICBM" content="6.4475, 2.3522">
+  <meta name="language" content="French">
+  <meta name="content-language" content="fr-BJ">
+
+  <!-- ═══ OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ══════════════════════════ -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.bestservicesandhouse.site/">
+  <meta property="og:title" content="BSH Bénin | Construction, Étanchéité & Rénovation à Cotonou">
+  <meta property="og:description" content="Votre partenaire BTP de confiance au Bénin. Construction, étanchéité, rénovation, matériaux. 13 ans d'expérience. Devis gratuit sous 24h.">
+  <meta property="og:image" content="https://www.bestservicesandhouse.site/assets/images/uploads/logo-de-bsh.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="BSH – Best Services and House, entreprise BTP au Bénin">
+  <meta property="og:locale" content="fr_BJ">
+  <meta property="og:site_name" content="BSH – Best Services and House">
+
+  <!-- ═══ TWITTER / X CARD ═══════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.bestservicesandhouse.site/">
+  <meta name="twitter:title" content="BSH Bénin | BTP Construction & Rénovation Cotonou">
+  <meta name="twitter:description" content="Construction, étanchéité, rénovation & services BTP au Bénin. Devis gratuit. +229 01 48 52 45 90">
+  <meta name="twitter:image" content="https://www.bestservicesandhouse.site/assets/images/uploads/logo-de-bsh.png">
+
+  <!-- ═══ PERFORMANCE ═════════════════════════════════════════════════════════ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    /* Styles spécifiques pour le Carrousel de la bannière principale */
-    .hero-carousel {
-      position: relative;
-      height: 650px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      color: white;
-    }
-    
-    .carousel-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-      z-index: 1;
-    }
-    
-    .carousel-slide.active {
-      opacity: 1;
-      z-index: 2;
-    }
-    
-    /* Overlay sombre pour la lisibilité */
-    .carousel-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 30%, rgba(30, 41, 59, 0.8) 100%);
-      z-index: 3;
-    }
-    
-    .hero-carousel-content {
-      position: relative;
-      z-index: 4;
-      width: 100%;
-    }
-    
-    /* Horloge Numérique Premium du Bénin (GMT+1) */
-    .benin-clock-box {
-      display: inline-flex;
-      align-items: center;
-      gap: 15px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 2px solid var(--accent);
-      padding: 12px 26px;
-      border-radius: 50px;
-      margin-bottom: 25px;
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.45);
-      backdrop-filter: blur(8px);
-    }
-    .clock-label {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      font-weight: 800;
-      color: #cbd5e1;
-      letter-spacing: 0.05em;
-    }
-    .clock-time {
-      font-size: 1.4rem;
-      font-weight: 950;
-      color: var(--accent);
-      font-family: monospace;
-      letter-spacing: 2px;
-      text-shadow: 0 0 10px #f59e0b, 0 0 20px rgba(245, 158, 11, 0.5);
-    }
-    
-    /* Animation défilante du Slogan (Marquee) */
-    @keyframes marquee {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-100%, 0, 0); }
-    }
-    .marquee-container {
-      overflow: hidden;
-      white-space: nowrap;
-      margin-bottom: 35px;
-      background: rgba(15, 23, 42, 0.65);
-      padding: 12px 0;
-      border-top: 1px solid rgba(245, 158, 11, 0.4);
-      border-bottom: 1px solid rgba(245, 158, 11, 0.4);
-      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
-      border-radius: 8px;
-    }
-    .marquee-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: marquee 20s linear infinite;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #ffffff;
-      text-shadow: 0 0 10px #f59e0b, 0 0 20px #d97706, 0 0 35px rgba(245, 158, 11, 0.6);
-      font-family: 'Montserrat', sans-serif;
-      white-space: nowrap;
-    }
-    
-    /* Pôles d'Expertise */
-    .pole-section {
-      margin-bottom: 60px;
-    }
-    .pole-badge {
-      display: inline-block;
-      background-color: var(--primary);
-      color: var(--accent);
-      padding: 6px 16px;
-      border-radius: 30px;
-      font-weight: 800;
-      font-size: 0.9rem;
-      margin-bottom: 25px;
-    }
-    
-    /* Bannière Opération Zéro Goutte */
-    .campaign-banner {
-      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
-      border-left: 6px solid var(--accent);
-      padding: 40px;
-      border-radius: 16px;
-      color: white;
-      margin: 40px 0;
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-    .campaign-text {
-      flex: 1;
-      min-width: 280px;
-    }
-    .campaign-text h3 {
-      font-size: 1.75rem;
-      font-weight: 850;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-    .campaign-text p {
-      color: #cbd5e1;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    
-    /* Diagnostic Form Section & Tarifs */
-    .diag-box {
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--bg-white);
-      border: 1px solid var(--border-color);
-      padding: 45px;
-      border-radius: 16px;
-      box-shadow: var(--shadow-lg);
-    }
-    .diag-pricing-tag {
-      background: #fee2e2;
-      color: #991b1b;
-      padding: 4px 12px;
-      border-radius: 30px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin-left: 10px;
-    }
-    .diag-total-card {
-      background-color: #f8fafc;
-      border: 1px solid var(--border-color);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      margin-bottom: 25px;
-      box-shadow: var(--shadow-sm);
-    }
-    .diag-total-val {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--primary);
-    }
-    
-    /* Communiqué Section */
-    .comm-card {
-      background: var(--bg-white);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 25px;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 20px;
-      border-left: 4px solid var(--accent);
-    }
-    .comm-date {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .comm-card h3 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-    .comm-content {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-  </style>
-  
-  <!-- SEO Google Structured Data (JSON-LD) -->
+  <link rel="dns-prefetch" href="https://cdn.kkiapay.me">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <!-- ═══ FONTS ══════════════════════════════════════════════════════════════ -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- ═══ FAVICON ════════════════════════════════════════════════════════════ -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%230F2640'/><text x='50' y='66' text-anchor='middle' font-size='48' font-weight='900' fill='white' font-family='Arial'>BSH</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%230F2640'/><text x='50' y='66' text-anchor='middle' font-size='48' font-weight='900' fill='white' font-family='Arial'>BSH</text></svg>">
+  <meta name="theme-color" content="#0F2640">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- ═══ CSS ═════════════════════════════════════════════════════════════════ -->
+  <link rel="preload" as="image" href="assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.03.jpeg" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- ═══ STRUCTURED DATA — LocalBusiness + Services + FAQ + BreadcrumbList ══ -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "name": "BSH (Best Services and House) Bénin",
-    "image": "https://www.bestservicesandhouse.site/assets/images/uploads/logo-de-bsh.png",
-    "@id": "https://www.bestservicesandhouse.site/#business",
-    "url": "https://www.bestservicesandhouse.site/",
-    "telephone": "+2290148524590",
-    "email": "contact@bestservicesandhouse.site",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Abomey-Calavi, Cotonou",
-      "addressLocality": "Abomey-Calavi",
-      "addressRegion": "Atlantique",
-      "addressCountry": "BJ"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "6.4475",
-      "longitude": "2.3522"
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": ["HomeAndConstructionBusiness", "LocalBusiness", "GeneralContractor"],
+      "@id": "https://www.bestservicesandhouse.site/#business",
+      "name": "BSH – Best Services and House",
+      "legalName": "Best Services And House",
+      "alternateName": ["BSH Bénin", "Best Services House", "BSH Construction Bénin"],
+      "description": "Entreprise béninoise spécialisée en construction de bâtiments, étanchéité, rénovation, peinture, carrelage, pavage et fourniture de matériaux de construction. Plus de 13 ans d'expérience au Bénin.",
+      "url": "https://www.bestservicesandhouse.site/",
+      "logo": "https://www.bestservicesandhouse.site/assets/images/uploads/logo-de-bsh.png",
+      "image": [
+        "https://www.bestservicesandhouse.site/assets/images/uploads/logo-de-bsh.png",
+        "https://www.bestservicesandhouse.site/assets/images/uploads/whatsapp-image-2026-07-22-at-11.56.03.jpeg",
+        "https://www.bestservicesandhouse.site/assets/images/uploads/whatsapp-image-2026-07-05-at-20.40.27.jpeg"
       ],
-      "opens": "08:00",
-      "closes": "18:00"
+      "telephone": "+2290148524590",
+      "email": "contact@bestservicesandhouse.site",
+      "taxID": "0201710115389",
+      "vatID": "0201710115389",
+      "foundingDate": "2012",
+      "numberOfEmployees": {"@type": "QuantitativeValue", "minValue": 10, "maxValue": 50},
+      "priceRange": "FCFA",
+      "currenciesAccepted": "XOF",
+      "paymentAccepted": "Cash, MTN Mobile Money, Moov Money, Visa, Mastercard, KkiaPay",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Abomey-Calavi",
+        "addressLocality": "Abomey-Calavi",
+        "addressRegion": "Atlantique",
+        "postalCode": "229",
+        "addressCountry": "BJ"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 6.4475,
+        "longitude": 2.3522
+      },
+      "areaServed": [
+        {"@type": "City", "name": "Cotonou"},
+        {"@type": "City", "name": "Abomey-Calavi"},
+        {"@type": "City", "name": "Porto-Novo"},
+        {"@type": "City", "name": "Parakou"},
+        {"@type": "City", "name": "Natitingou"},
+        {"@type": "Country", "name": "Bénin"}
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services BTP BSH",
+        "itemListElement": [
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Construction de bâtiment","url":"https://www.bestservicesandhouse.site/services/construction-batiment.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Étanchéité et imperméabilisation","url":"https://www.bestservicesandhouse.site/services/etancheite.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Rénovation de bâtiment","url":"https://www.bestservicesandhouse.site/services/renovation.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Peinture et décoration","url":"https://www.bestservicesandhouse.site/services/peinture-decoration.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Carrelage","url":"https://www.bestservicesandhouse.site/services/carrelage.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Pavage et assainissement","url":"https://www.bestservicesandhouse.site/services/pavage-assainissement.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Réparation de toiture","url":"https://www.bestservicesandhouse.site/services/reparation-toiture.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Diagnostic de bâtiment","url":"https://www.bestservicesandhouse.site/#diagnostic"}, "price":"10000","priceCurrency":"XOF"},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Création de site web","url":"https://www.bestservicesandhouse.site/services/creation-site-web.html"}}
+        ]
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "07:30",
+        "closes": "18:30"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590398091216",
+        "https://www.linkedin.com/in/best-services-and-house-75745941b",
+        "https://www.instagram.com/bshbj229",
+        "https://www.tiktok.com/@bshbj229"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "47",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
     },
-    "sameAs": [
-      "https://www.facebook.com/profile.php?id=61590398091216",
-      "http://www.linkedin.com/in/best-services-and-house-75745941b",
-      "http://instagram.com/bshbj229",
-      "http://tiktok.com/@bshbj229"
-    ]
-  }
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Accueil","item":"https://www.bestservicesandhouse.site/"},
+        {"@type":"ListItem","position":2,"name":"Nos Services","item":"https://www.bestservicesandhouse.site/services/"},
+        {"@type":"ListItem","position":3,"name":"Réalisations","item":"https://www.bestservicesandhouse.site/realisations.html"},
+        {"@type":"ListItem","position":4,"name":"Boutique","item":"https://www.bestservicesandhouse.site/boutique.html"},
+        {"@type":"ListItem","position":5,"name":"Contact","item":"https://www.bestservicesandhouse.site/devis.html"}
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Combien coûte la construction d'une maison au Bénin ?","acceptedAnswer":{"@type":"Answer","text":"Le coût de construction varie selon le standing : 150 000 à 200 000 FCFA/m² pour un standard, 200 000 à 300 000 FCFA/m² pour un moyen standing, et 300 000 à 500 000 FCFA/m² pour du haut standing. Contactez BSH pour un devis gratuit personnalisé."}},
+        {"@type":"Question","name":"BSH intervient dans quelles zones au Bénin ?","acceptedAnswer":{"@type":"Answer","text":"BSH intervient dans tout le Bénin : Cotonou, Abomey-Calavi, Porto-Novo, Parakou, Natitingou, Bohicon et toutes les autres villes. Nous avons également réalisé des chantiers au Burkina Faso (mine IAMGOLD Essakane SA)."}},
+        {"@type":"Question","name":"Quel est le délai pour un diagnostic de bâtiment ?","acceptedAnswer":{"@type":"Answer","text":"Le diagnostic de bâtiment BSH est réalisé dans les 24 à 48h suivant la commande. Le rapport écrit approfondi est remis après l'inspection. Tarif : 10 000 FCFA pour Cotonou et Abomey-Calavi, 20 000 FCFA hors de ces zones."}},
+        {"@type":"Question","name":"Comment payer les services BSH en ligne ?","acceptedAnswer":{"@type":"Answer","text":"BSH accepte les paiements en ligne sécurisés via KkiaPay : MTN Mobile Money, Moov Money, Visa et Mastercard. Un reçu officiel PDF est émis immédiatement après chaque transaction."}},
+        {"@type":"Question","name":"BSH propose-t-il une garantie sur les travaux ?","acceptedAnswer":{"@type":"Answer","text":"Oui, BSH offre une garantie décennale sur le gros œuvre (construction) et une garantie de 10 ans sur les travaux d'étanchéité. Tous nos travaux sont réalisés selon les normes de construction béninoises et africaines."}},
+        {"@type":"Question","name":"Comment obtenir un devis de construction gratuit au Bénin ?","acceptedAnswer":{"@type":"Answer","text":"Obtenez votre devis gratuit en 48h en remplissant le formulaire sur notre site, en nous contactant par WhatsApp au +229 01 48 52 45 90, ou par email à contact@bestservicesandhouse.site. Nous nous déplaçons gratuitement sur site pour évaluer votre projet."}}
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.bestservicesandhouse.site/#website",
+      "url": "https://www.bestservicesandhouse.site/",
+      "name": "BSH – Best Services and House",
+      "description": "Entreprise BTP spécialisée en construction, étanchéité et rénovation au Bénin",
+      "publisher": {"@id": "https://www.bestservicesandhouse.site/#business"},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {"@type": "EntryPoint", "urlTemplate": "https://www.bestservicesandhouse.site/blog.html?q={search_term_string}"},
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": "fr-BJ"
+    }
+  ]
   </script>
 </head>
 <body>
@@ -589,7 +504,7 @@
       </div>
       
       <div class="about-img-container">
-        <img class="about-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="Équipe BSH sur chantier au Bénin">
+        <img loading="lazy" decoding="async" class="about-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="Équipe BSH sur chantier au Bénin">
         <div class="about-badge">
           <span>14+</span>
           Ans de Savoir-Faire
@@ -620,7 +535,7 @@
       <div class="portfolio-grid" id="portfolio-container">
         <div class="portfolio-card">
           <div class="portfolio-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Villa moderne">
+            <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Villa moderne">
             <span class="portfolio-category-badge">Construction</span>
           </div>
           <div class="portfolio-info">
@@ -866,7 +781,7 @@
   </a>
 
   <!-- Core Javascript -->
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 
   <!-- CALCULATE DYNAMIC DIAGNOSTIC PRICE -->
   <script>

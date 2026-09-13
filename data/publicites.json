@@ -18,7 +18,7 @@
       "lien": "/services/construction-batiment.html",
       "description": "BSH réalise votre villa, immeuble ou bureau de A à Z. Devis gratuit sous 48h.",
       "cta": "Demander un devis",
-      "actif": true
+      "actif": false
     },
     {
       "id": "pub3",

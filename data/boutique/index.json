@@ -1,0 +1,33 @@
+{
+  "generated": "2026-09-22T00:00:00Z",
+  "count": 3,
+  "products": [
+    "fiche-etancheite-pro",
+    "guide-construction-benin",
+    "logiciel-gestion-stock"
+  ],
+  "summary": [
+    {
+      "id": "fiche-etancheite-pro",
+      "title": "Pack Fiches Techniques Étanchéité Professionnelles",
+      "category": "Article / PDF",
+      "price": 8000,
+      "published": true
+    },
+    {
+      "id": "guide-construction-benin",
+      "title": "Guide Pratique de la Construction au Bénin 2026",
+      "category": "Article / PDF",
+      "price": 5000,
+      "published": true
+    },
+    {
+      "id": "logiciel-gestion-stock",
+      "title": "Logiciel de Gestion de Stock BSH",
+      "category": "Logiciel",
+      "price": 15000,
+      "published": true
+    }
+  ],
+  "_info": "Ajoutez l'ID de chaque nouveau produit dans \"products\" pour qu'il apparaisse sur le site."
+}

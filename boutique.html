@@ -2,10 +2,31 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boutique BSH — Logiciels & Articles Professionnels</title>
-  <meta name="description" content="Achetez nos logiciels, guides techniques et articles professionnels BSH. Paiement sécurisé KkiaPay — Téléchargement immédiat.">
+
+  <title>Boutique BSH | Logiciels & Guides BTP Bénin — Téléchargement Immédiat</title>
+  <meta name="description" content="Achetez nos logiciels de gestion, guides techniques BTP et fiches professionnelles. Paiement KkiaPay sécurisé. Téléchargement immédiat après confirmation.">
+  <meta name="keywords" content="logiciel gestion BTP Bénin, guide construction PDF Bénin, boutique BTP Cotonou, achat en ligne Bénin">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="BSH - Best Services and House">
   <link rel="canonical" href="https://www.bestservicesandhouse.site/boutique.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.bestservicesandhouse.site/boutique.html">
+  <meta property="og:title" content="Boutique BSH | Logiciels & Guides BTP Bénin — Téléchargement Immédiat">
+  <meta property="og:description" content="Achetez nos logiciels de gestion, guides techniques BTP et fiches professionnelles. Paiement KkiaPay sécurisé. Téléchargement immédiat après confirmation.">
+  <meta property="og:image" content="https://www.bestservicesandhouse.site/assets/images/uploads/logo-de-bsh.png">
+  <meta property="og:locale" content="fr_BJ">
+  <meta property="og:site_name" content="BSH - Best Services and House">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Boutique BSH | Logiciels & Guides BTP Bénin — Téléchargement Immédiat">
+  <meta name="twitter:description" content="Achetez nos logiciels de gestion, guides techniques BTP et fiches professionnelles. Paiement KkiaPay sécurisé. Téléchargement immédiat après confirmation.">
+  <meta name="twitter:image" content="https://www.bestservicesandhouse.site/assets/images/uploads/logo-de-bsh.png">
+  <meta name="geo.region" content="BJ-AQ">
+  <meta name="geo.placename" content="Abomey-Calavi, Cotonou, Benin">
+  <meta name="theme-color" content="#0F2640">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%230F2640'/><text x='50' y='66' text-anchor='middle' font-size='48' font-weight='900' fill='white' font-family='Arial'>BSH</text></svg>">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Achetez nos logiciels, guides techniques et articles professionnels BSH. Paiement sécurisé KkiaPay — Téléchargement immédiat.">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -198,18 +219,61 @@
     let activeProd= null;
     const KKIA_KEY = '3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f';
 
-    // ── Charger les produits depuis data/boutique/ ───────────────────────────
-    const prodIds=['logiciel-gestion-stock','guide-construction-benin','fiche-etancheite-pro'];
+    // ── Chargement DYNAMIQUE de tous les produits depuis data/boutique/index.json ──
+    // L'index.json est mis à jour automatiquement par le script build-boutique-index.js
+    // côté Vercel, ou manuellement via l'Admin.
+    async function loadProducts() {
+      try {
+        // 1. Charger l'index des produits (liste des IDs)
+        const cb = '?v=' + Date.now();
+        const idxResp = await fetch('/data/boutique/index.json' + cb);
+        if (!idxResp.ok) throw new Error('Index non disponible');
+        const idx = await idxResp.json();
+        const ids = idx.products || [];
 
-    Promise.all(prodIds.map(id=>
-      fetch('/data/boutique/'+id+'.json?v='+Date.now())
-        .then(r=>r.json()).catch(()=>null)
-    )).then(prods=>{
-      allProds = prods.filter(Boolean).filter(p=>p.published!==false);
-      renderGrid(allProds);
-    }).catch(()=>{
-      grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#64748b;">Boutique temporairement indisponible. Revenez bientôt.</p>';
-    });
+        if (!ids.length) {
+          grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">Aucun produit disponible pour le moment.</p>';
+          return;
+        }
+
+        // 2. Charger chaque produit en parallèle
+        const results = await Promise.all(
+          ids.map(id =>
+            fetch('/data/boutique/' + id + '.json' + cb)
+              .then(r => r.ok ? r.json() : null)
+              .catch(() => null)
+          )
+        );
+
+        allProds = results
+          .filter(Boolean)
+          .filter(p => p.published !== false);
+
+        renderGrid(allProds);
+
+      } catch(err) {
+        // Fallback : essayer de charger directement les fichiers JSON connus
+        console.warn('Index boutique indisponible, fallback sur scan direct:', err);
+        try {
+          const knownFiles = await fetch('/data/boutique/' + '?list' + Date.now())
+            .then(() => null).catch(() => null);
+
+          // Dernier recours : afficher message avec lien contact
+          grid.innerHTML = `
+            <div style="grid-column:1/-1;text-align:center;padding:60px 20px;">
+              <div style="font-size:3rem;margin-bottom:16px;">🛒</div>
+              <h3 style="color:#0f2640;margin-bottom:8px;">Boutique en cours de mise à jour</h3>
+              <p style="color:#64748b;margin-bottom:20px;">Nos produits seront disponibles très bientôt.</p>
+              <a href="https://wa.me/2290148524590?text=Bonjour%20BSH,%20je%20voudrais%20commander%20un%20produit%20de%20votre%20boutique."
+                 style="background:#25D366;color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;display:inline-block;">
+                📱 Commander par WhatsApp
+              </a>
+            </div>`;
+        } catch(e2) {}
+      }
+    }
+
+    loadProducts();
 
     function fmt(n){ return Number(n||0).toLocaleString('fr-FR')+' FCFA'; }
 

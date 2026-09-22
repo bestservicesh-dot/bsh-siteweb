@@ -191,11 +191,13 @@ collections:
 
   - name: "boutique"
     label: "🛒 Boutique — Logiciels & Articles"
+    description: "Après avoir ajouté ou modifié un produit, allez dans la collection BOUTIQUE INDEX et ajoutez l'ID du produit dans la liste."
     folder: "data/boutique"
     extension: "json"
     format: "json"
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.id}}"
+    identifier_field: "id"
     editor:
       preview: false
     fields:
@@ -239,3 +241,27 @@ collections:
               - { label: "Texte descriptif", name: "description", widget: "text", required: false }
               - { label: "Texte du bouton (CTA)", name: "cta", widget: "string", required: false }
               - { label: "Publicité active", name: "actif", widget: "boolean", default: true }
+
+  - name: "boutique_index"
+    label: "🗂️ Boutique — Index Produits (OBLIGATOIRE)"
+    description: "⚠️ IMPORTANT : Après avoir ajouté un produit dans Boutique, ajoutez son ID ici pour qu'il s'affiche sur le site."
+    delete: false
+    editor:
+      preview: false
+    files:
+      - file: "data/boutique/index.json"
+        label: "📋 Liste des produits publiés sur le site"
+        name: "boutique_index_file"
+        fields:
+          - label: "🆔 IDs des produits à afficher (un par ligne)"
+            name: "products"
+            widget: "list"
+            field:
+              label: "ID du produit (ex: mon-produit)"
+              name: "item"
+              widget: "string"
+          - label: "ℹ️ Note (ne pas modifier)"
+            name: "_info"
+            widget: "string"
+            required: false
+            hint: "Ce fichier contrôle quels produits apparaissent dans la boutique du site."

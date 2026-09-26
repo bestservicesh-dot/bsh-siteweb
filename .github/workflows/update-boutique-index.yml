@@ -1,0 +1,29 @@
+name: Mise à jour index boutique
+
+on:
+  push:
+    paths:
+      - 'data/boutique/**.json'  # Se déclenche uniquement quand un produit boutique change
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Générer data/boutique/index.json
+        run: node build-boutique-index.js
+
+      - name: Committer et pousser l'index mis à jour
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/boutique/index.json
+          git diff --staged --quiet || git commit -m "auto: mise à jour index boutique [skip ci]"
+          git push

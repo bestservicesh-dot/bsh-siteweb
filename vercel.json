@@ -63,5 +63,7 @@
       ]
     }
   ],
-  "buildCommand": "node build-boutique-index.js"
+  "buildCommand": "node build-boutique-index.js",
+  "outputDirectory": ".",
+  "installCommand": "npm install --ignore-scripts"
 }

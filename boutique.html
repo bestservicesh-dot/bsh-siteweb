@@ -198,18 +198,41 @@
     let activeProd= null;
     const KKIA_KEY = '3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f';
 
-    // ── Charger les produits depuis data/boutique/ ───────────────────────────
-    const prodIds=['logiciel-gestion-stock','guide-construction-benin','fiche-etancheite-pro'];
+    // ── Chargement DYNAMIQUE depuis data/boutique/index.json ─────────────
+    // L'index.json est auto-généré par build-boutique-index.js à chaque déploiement Vercel.
+    // Quand tu ajoutes un produit dans l'Admin, Vercel redéploie et l'index est mis à jour.
+    (async function loadBoutique() {
+      try {
+        const cb = '?nc=' + Date.now();
 
-    Promise.all(prodIds.map(id=>
-      fetch('/data/boutique/'+id+'.json?v='+Date.now())
-        .then(r=>r.json()).catch(()=>null)
-    )).then(prods=>{
-      allProds = prods.filter(Boolean).filter(p=>p.published!==false);
-      renderGrid(allProds);
-    }).catch(()=>{
-      grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#64748b;">Boutique temporairement indisponible. Revenez bientôt.</p>';
-    });
+        // 1. Lire l'index qui liste tous les IDs de produits
+        const idxRes = await fetch('/data/boutique/index.json' + cb);
+        if (!idxRes.ok) throw new Error('index.json introuvable');
+        const idx = await idxRes.json();
+        const ids = idx.products || [];
+
+        if (!ids.length) {
+          grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px 20px;">Aucun produit disponible pour le moment.</p>';
+          return;
+        }
+
+        // 2. Charger chaque produit en parallèle
+        const results = await Promise.all(
+          ids.map(id =>
+            fetch('/data/boutique/' + id + '.json' + cb)
+              .then(r => r.ok ? r.json() : null)
+              .catch(() => null)
+          )
+        );
+
+        allProds = results.filter(Boolean).filter(p => p.published !== false);
+        renderGrid(allProds);
+
+      } catch (err) {
+        console.warn('[BSH Boutique] Chargement index échoué:', err);
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px 20px;">Boutique temporairement indisponible.<br>Contactez-nous au +229 01 48 52 45 90</p>';
+      }
+    })();
 
     function fmt(n){ return Number(n||0).toLocaleString('fr-FR')+' FCFA'; }
 

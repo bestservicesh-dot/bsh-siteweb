@@ -2,7 +2,7 @@ backend:
   name: github
   repo: bestservicesh-dot/bsh-siteweb # Votre dépôt GitHub réel
   branch: main
-  base_url: https://www.bestservicesandhouse.site
+  base_url: https://bsh-siteweb.vercel.app # Remplacez par votre domaine final si vous le liez
   auth_endpoint: api/auth
 
 media_folder: "assets/images/uploads"

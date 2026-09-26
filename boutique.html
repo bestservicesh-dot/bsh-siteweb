@@ -198,39 +198,20 @@
     let activeProd= null;
     const KKIA_KEY = '3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f';
 
-    // ── Chargement DYNAMIQUE depuis data/boutique/index.json ─────────────
-    // L'index.json est auto-généré par build-boutique-index.js à chaque déploiement Vercel.
-    // Quand tu ajoutes un produit dans l'Admin, Vercel redéploie et l'index est mis à jour.
-    (async function loadBoutique() {
+    // ── Chargement dynamique depuis data/boutique/index.json ─────────────────
+    // index.json est auto-généré à chaque déploiement Vercel par build-boutique-index.js
+    // Tout nouveau produit ajouté dans l'Admin apparaît automatiquement ici.
+    (async function loadBoutique(){
       try {
-        const cb = '?nc=' + Date.now();
-
-        // 1. Lire l'index qui liste tous les IDs de produits
-        const idxRes = await fetch('/data/boutique/index.json' + cb);
-        if (!idxRes.ok) throw new Error('index.json introuvable');
-        const idx = await idxRes.json();
+        const cb = '?nc='+Date.now();
+        const idx = await fetch('/data/boutique/index.json'+cb).then(r=>{ if(!r.ok) throw new Error(); return r.json(); });
         const ids = idx.products || [];
-
-        if (!ids.length) {
-          grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px 20px;">Aucun produit disponible pour le moment.</p>';
-          return;
-        }
-
-        // 2. Charger chaque produit en parallèle
-        const results = await Promise.all(
-          ids.map(id =>
-            fetch('/data/boutique/' + id + '.json' + cb)
-              .then(r => r.ok ? r.json() : null)
-              .catch(() => null)
-          )
-        );
-
-        allProds = results.filter(Boolean).filter(p => p.published !== false);
+        if(!ids.length){ grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">Aucun produit disponible pour le moment.</p>'; return; }
+        const prods = await Promise.all(ids.map(id=>fetch('/data/boutique/'+id+'.json'+cb).then(r=>r.ok?r.json():null).catch(()=>null)));
+        allProds = prods.filter(Boolean).filter(p=>p.published!==false);
         renderGrid(allProds);
-
-      } catch (err) {
-        console.warn('[BSH Boutique] Chargement index échoué:', err);
-        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px 20px;">Boutique temporairement indisponible.<br>Contactez-nous au +229 01 48 52 45 90</p>';
+      } catch(e){
+        grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">Boutique temporairement indisponible. Revenez bientôt.</p>';
       }
     })();
 

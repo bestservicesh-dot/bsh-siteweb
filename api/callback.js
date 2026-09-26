@@ -1,77 +1,92 @@
 // api/callback.js
-// Échange du code OAuth GitHub contre un access_token pour Decap CMS
+// Retour d'autorisation de GitHub et échange du code contre un Access Token
 export default async function handler(req, res) {
-  const code          = req.query.code;
-  const client_id     = process.env.OAUTH_CLIENT_ID;
+  const code = req.query.code;
+  const client_id = process.env.OAUTH_CLIENT_ID;
   const client_secret = process.env.OAUTH_CLIENT_SECRET;
 
-  // ── Erreur : code manquant ──────────────────────────────────────
   if (!code) {
-    return res.status(400).send(buildScript('error', "Code d'autorisation manquant"));
-  }
-
-  if (!client_id || !client_secret) {
-    return res.status(500).send(buildScript('error', 'Variables OAUTH_CLIENT_ID / OAUTH_CLIENT_SECRET manquantes sur Vercel'));
+    res.setHeader('Content-Type', 'text/html');
+    return res.status(400).send(`
+      <html>
+        <body>
+          <script>
+            window.opener.postMessage("authorization:github:error:Code d'autorisation manquant", "*");
+            window.close();
+          </script>
+        </body>
+      </html>
+    `);
   }
 
   try {
-    // ── Échange code → access_token ─────────────────────────────────
-    const ghRes = await fetch('https://github.com/login/oauth/access_token', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body:    JSON.stringify({ client_id, client_secret, code }),
+    // Échanger le code temporaire contre un jeton d'accès (access_token)
+    const response = await fetch('https://github.com/login/oauth/access_token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        client_id,
+        client_secret,
+        code
+      })
     });
 
-    const data = await ghRes.json();
+    const data = await response.json();
 
-    if (data.error || !data.access_token) {
-      const msg = data.error_description || data.error || 'Erreur GitHub inconnue';
-      return res.status(400).send(buildScript('error', msg));
+    if (data.error) {
+      res.setHeader('Content-Type', 'text/html');
+      return res.status(400).send(`
+        <html>
+          <body>
+            <script>
+              window.opener.postMessage('authorization:github:error:' + '${data.error_description || 'Erreur GitHub'}', '*');
+              window.close();
+            </script>
+          </body>
+        </html>
+      `);
     }
 
-    // ── Succès : envoyer le token à Decap CMS ───────────────────────
-    // On sérialise proprement puis on encode en base64 pour éviter
-    // tout conflit de guillemets dans le JS généré
-    const payload = Buffer.from(JSON.stringify({
-      token:    data.access_token,
-      provider: 'github',
-    })).toString('base64');
+    const token = data.access_token;
+    const content = JSON.stringify({
+      token: token,
+      provider: 'github'
+    });
 
-    return res.status(200).send(buildScript('success', payload, true));
+    // Envoyer le jeton d'accès sécurisé à l'interface d'administration
+    // Correction de la syntaxe JS pour éviter la collision de guillemets
+    res.setHeader('Content-Type', 'text/html');
+    return res.status(200).send(`
+      <html>
+        <body>
+          <script>
+            (function() {
+              function receiveMessage(e) {
+                // Envoyer les infos d'autorisation à l'onglet parent (Decap CMS)
+                window.opener.postMessage('authorization:github:success:' + '${content}', e.origin);
+              }
+              window.addEventListener("message", receiveMessage, false);
+              window.opener.postMessage("authorizing:github", "*");
+            })();
+          </script>
+        </body>
+      </html>
+    `);
 
-  } catch (err) {
-    return res.status(500).send(buildScript('error', err.message || 'Erreur serveur'));
+  } catch (error) {
+    res.setHeader('Content-Type', 'text/html');
+    return res.status(500).send(`
+      <html>
+        <body>
+          <script>
+            window.opener.postMessage('authorization:github:error:' + '${error.message}', '*');
+            window.close();
+          </script>
+        </body>
+      </html>
+    `);
   }
-}
-
-// ── Helper : génère la page HTML qui postMessage vers Decap CMS ──
-function buildScript(status, payloadOrMsg, isBase64 = false) {
-  let jsCode;
-
-  if (status === 'success') {
-    // Décoder le base64 côté client pour reconstruire le JSON proprement
-    jsCode = `
-      (function() {
-        var raw     = atob(${JSON.stringify(payloadOrMsg)});
-        var content = JSON.parse(raw);
-        var msg     = 'authorization:github:success:' + JSON.stringify(content);
-        function send(e) {
-          window.opener.postMessage(msg, e.origin);
-        }
-        window.addEventListener('message', send, false);
-        window.opener.postMessage('authorizing:github', '*');
-      })();
-    `;
-  } else {
-    jsCode = `
-      (function() {
-        var msg = 'authorization:github:error:' + ${JSON.stringify(payloadOrMsg)};
-        window.opener.postMessage(msg, '*');
-        window.close();
-      })();
-    `;
-  }
-
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"></head>
-<body><script>${jsCode}<\/script></body></html>`;
 }

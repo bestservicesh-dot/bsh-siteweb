@@ -6,8 +6,5 @@
   "dependencies": {
     "nodemailer": "^6.9.13",
     "multiparty": "^4.2.3"
-  },
-  "scripts": {
-    "build": "node build-boutique-index.js"
   }
 }

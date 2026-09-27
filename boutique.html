@@ -198,23 +198,70 @@
     let activeProd= null;
     const KKIA_KEY = '3a7f16430a2ffd945e8bf2c8f532b2f490a66a0f';
 
-    // ── Chargement dynamique depuis data/boutique/index.json ─────────────────
-    // index.json est auto-généré à chaque déploiement Vercel par build-boutique-index.js
-    // Tout nouveau produit ajouté dans l'Admin apparaît automatiquement ici.
+    // ── Chargement 100% dynamique via API GitHub Contents ──────────────────
+    // Liste tous les fichiers data/boutique/*.json directement depuis GitHub.
+    // Chaque nouveau produit ajouté via l'Admin apparaît IMMÉDIATEMENT.
+    // Aucun fichier index, aucun build, aucun déploiement supplémentaire requis.
     (async function loadBoutique(){
+      const GITHUB_REPO   = 'bestservicesh-dot/bsh-siteweb';
+      const GITHUB_BRANCH = 'main';
+      const BOUTIQUE_PATH = 'data/boutique';
+      const API_URL = 'https://api.github.com/repos/' + GITHUB_REPO
+                    + '/contents/' + BOUTIQUE_PATH
+                    + '?ref=' + GITHUB_BRANCH
+                    + '&t=' + Date.now(); // cache-bust
+
       try {
-        const cb = '?nc='+Date.now();
-        const idx = await fetch('/data/boutique/index.json'+cb).then(r=>{ if(!r.ok) throw new Error(); return r.json(); });
-        const ids = idx.products || [];
-        if(!ids.length){ grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">Aucun produit disponible pour le moment.</p>'; return; }
-        const prods = await Promise.all(ids.map(id=>fetch('/data/boutique/'+id+'.json'+cb).then(r=>r.ok?r.json():null).catch(()=>null)));
-        allProds = prods.filter(Boolean).filter(p=>p.published!==false);
+        // 1. Lister tous les fichiers du dossier via l'API GitHub
+        const listRes = await fetch(API_URL, {
+          headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+
+        if (!listRes.ok) throw new Error('GitHub API ' + listRes.status);
+        const files = await listRes.json();
+
+        // 2. Garder uniquement les .json (pas index.json)
+        const jsonFiles = files.filter(f =>
+          f.type === 'file' &&
+          f.name.endsWith('.json') &&
+          f.name !== 'index.json'
+        );
+
+        if (!jsonFiles.length) {
+          grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">Aucun produit disponible pour le moment.</p>';
+          return;
+        }
+
+        // 3. Charger chaque produit en parallèle depuis le site
+        const cb = '?nc=' + Date.now();
+        const prods = await Promise.all(
+          jsonFiles.map(f =>
+            fetch('/' + BOUTIQUE_PATH + '/' + f.name + cb)
+              .then(r => r.ok ? r.json() : null)
+              .catch(() => null)
+          )
+        );
+
+        allProds = prods.filter(Boolean).filter(p => p.published !== false);
         renderGrid(allProds);
-      } catch(e){
-        grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">Boutique temporairement indisponible. Revenez bientôt.</p>';
+
+      } catch(err) {
+        console.warn('[BSH Boutique] Erreur chargement:', err);
+        // Fallback : charger les produits connus directement
+        const fallbackIds = ['logiciel-gestion-stock','guide-construction-benin','fiche-etancheite-pro'];
+        const cb = '?nc=' + Date.now();
+        const prods = await Promise.all(
+          fallbackIds.map(id =>
+            fetch('/data/boutique/' + id + '.json' + cb)
+              .then(r => r.ok ? r.json() : null)
+              .catch(() => null)
+          )
+        );
+        allProds = prods.filter(Boolean).filter(p => p.published !== false);
+        if (allProds.length) renderGrid(allProds);
+        else grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">Boutique temporairement indisponible.<br>Contactez-nous au +229 01 48 52 45 90</p>';
       }
     })();
-
     function fmt(n){ return Number(n||0).toLocaleString('fr-FR')+' FCFA'; }
 
     function renderGrid(prods){

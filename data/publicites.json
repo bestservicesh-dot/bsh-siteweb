@@ -3,25 +3,25 @@
   "interval": 5,
   "items": [
     {
-      "id": "pub1",
+      "id": "Etanchéité",
       "title": "Opération Zéro Goutte — Étanchéité",
-      "image": "/assets/images/uploads/whatsapp-image-2026-07-05-at-20.40.27.jpeg",
+      "image": "/assets/images/uploads/campagne-d-étanchéité-opération-zéro-goutte-d-eau-zero-infiltration-d-eau.jpeg",
       "lien": "/services/etancheite.html",
-      "description": "Protégez votre bâtiment avant les pluies ! Diagnostic gratuit avec toute intervention.",
+      "description": "Protégez votre bâtiment avant les pluies ! Demandez un diagnostic maintenant! Intervention rapide et efficace",
       "cta": "Profiter de l'offre",
       "actif": true
     },
     {
-      "id": "pub2",
+      "id": "Construction",
       "title": "Construction clé en main au Bénin",
-      "image": "/assets/images/uploads/whatsapp-image-2024-07-22-at-13.03.10.jpeg",
+      "image": "/assets/images/uploads/bsh-plan.png",
       "lien": "/services/construction-batiment.html",
       "description": "BSH réalise votre villa, immeuble ou bureau de A à Z. Devis gratuit sous 48h.",
       "cta": "Demander un devis",
       "actif": true
     },
     {
-      "id": "pub3",
+      "id": "Boutique BSH",
       "title": "Boutique BSH — Logiciels & Guides",
       "image": "/assets/images/uploads/site-web-bsh.png",
       "lien": "/boutique.html",

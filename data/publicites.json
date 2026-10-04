@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "interval": 5,
+  "interval": 15,
   "items": [
     {
       "id": "Etanchéité",
@@ -28,6 +28,42 @@
       "description": "Achetez nos logiciels et guides professionnels. Téléchargement immédiat après paiement.",
       "cta": "Voir la boutique",
       "actif": true
+    },
+    {
+      "actif": true,
+      "id": "Afrikonekt",
+      "title": "Faites-vous connaître dans tous les pays d'Afrique!",
+      "image": "/assets/images/uploads/afrikonkt-10.jpg",
+      "lien": "https://afrikonekt.vercel.app",
+      "description": "Faites des rencontres amicales et professionnelles dans toute l'Afrique grâce à Afrikonekt.",
+      "cta": "Je visite"
+    },
+    {
+      "actif": true,
+      "id": "Formation-EXCEL-WORD-POWERPOINT-PUBLISHER",
+      "title": "Devenez expert en EXCEL, WORD, POWERPOINT, PUBLISHER en quelques jours grâce à cette formation en ligne",
+      "image": "/assets/images/uploads/capture-d’écran_29-8-2026_25947_localhost.jpeg",
+      "lien": "https://bsh-excel-formation-vercel.vercel.app",
+      "description": "Suivez la formation en ligne depuis chez vous et devenez expert en Excel, Word, PowerPoint et Publisher. Facile, rapide et pratique",
+      "cta": "Je me forme"
+    },
+    {
+      "actif": true,
+      "id": "Fruits-Légumes",
+      "title": "Faites-vous livrer vos préférés de fruits et légumes en un temps record.",
+      "image": "/assets/images/uploads/8850_poivron-vert.png",
+      "lien": "https://fruleg.vercel.app",
+      "description": "Faites vos choix, commandez et soyez livrés en temps réel",
+      "cta": "Je passe ma commande"
+    },
+    {
+      "actif": true,
+      "id": "Afrikonekt",
+      "title": "Découvrez l'Afrique!",
+      "image": "/assets/images/uploads/afrikonekt-9.jpg",
+      "lien": "https://afrikonekt.vercel.app",
+      "description": "Découvrez tous les pays de l'Afrique grâce à Afrikonekt.",
+      "cta": "Je découvre"
     }
   ]
 }

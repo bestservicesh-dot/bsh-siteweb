@@ -52,7 +52,7 @@
       "id": "Fruits-Légumes",
       "title": "Faites-vous livrer vos préférés de fruits et légumes en un temps record.",
       "image": "/assets/images/uploads/8850_poivron-vert.png",
-      "lien": "https://fruleg.vercel.app",
+      "lien": "https://bsh-fruleg.vercel.app",
       "description": "Faites vos choix, commandez et soyez livrés en temps réel",
       "cta": "Je passe ma commande"
     },

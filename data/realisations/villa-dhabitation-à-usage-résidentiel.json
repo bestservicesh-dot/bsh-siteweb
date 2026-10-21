@@ -1,8 +1,15 @@
 {
-  "id": "VILLA",
-  "title": "Villa d'habitation à usage résidentiel",
-  "category": "Construction",
+  "id": "PAVAGE-ASSAINISSEMENTS",
+  "title": "DIVERS TRAVAUX DE PAVAGE ET D'ASSAINISSEMENT",
+  "category": "Pavage",
   "city": "Abomey-Calavi",
-  "main_image": "/assets/images/uploads/bsh-plan.png",
-  "description": "Villa d'habitation"
+  "main_image": "/assets/images/uploads/whatsapp-image-2026-10-21-at-03.17.15-4-.jpeg",
+  "images": [
+    "/assets/images/uploads/whatsapp-image-2026-10-21-at-03.17.13-1-.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-10-21-at-03.17.17-1-.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-10-21-at-03.17.16-1-.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-10-21-at-03.17.17-3-.jpeg",
+    "/assets/images/uploads/whatsapp-image-2026-10-21-at-03.17.13.jpeg"
+  ],
+  "description": "Pavage de cours aux particuliers + Assainissement"
 }

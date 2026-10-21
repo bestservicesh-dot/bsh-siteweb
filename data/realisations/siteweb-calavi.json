@@ -1,12 +1,12 @@
 {
   "id": "siteweb-calavi",
-  "title": "Création du site web BSH",
+  "title": "Création de site web BSH",
   "category": "Numérique",
   "city": "Abomey-Calavi",
   "main_image": "/assets/images/uploads/site-web-bsh.png",
-  "description": "Conception et développement du site web institutionnel de BSH. Site vitrine multi-pages, responsive, avec SEO optimisé et espace admin intégré.",
+  "description": "Conception et développement du site web institutionnel de BSH et de certaines entités. Site vitrine multi-pages, responsive, avec SEO optimisé et espace admin intégré.",
   "images": [
     "/assets/images/uploads/site-web-bsh.png",
-    "/assets/images/uploads/logo-de-bsh.png"
+    "www.csbmarie-hortenseschool.com"
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "summary": "Logiciel de montage complet de Dossier d'Appel d'Offres et de Plan d'Affaires.\n100% hors internet\nFacile et rapide\nUtilisable dans tous les pays",
+  "price": 150000,
+  "fichier": "/assets/images/uploads/lien-de-telechargement.docx",
+  "published": true,
+  "title": "DEFACT-PRO Plan d'Affaires et Appel d'Offres",
+  "tags": [
+    "DAO",
+    "PA"
+  ],
+  "id": "DEFACT-PRO",
+  "image": "/assets/images/uploads/affiche_defact_pro.png",
+  "description": "Montage de DAO complet\nPlan d'Affaires complet\nSous licence ",
+  "category": "Logiciel"
+}
